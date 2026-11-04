@@ -1,13 +1,13 @@
 {
-  "id": "./Index%20(5).html",
-  "name": "Bakery & Catering",
-  "short_name": "Bakery",
-  "description": "Bakery sales, orders, and receipts",
-  "start_url": "./Index%20(5).html",
+  "id": "./shop.html",
+  "name": "Tasty Base",
+  "short_name": "Tasty Base",
+  "description": "Browse and order cakes, cupcakes, pastries and catering from Tasty Base.",
+  "start_url": "./shop.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#FFF7FA",
-  "theme_color": "#FFF7FA",
+  "background_color": "#FFFAFB",
+  "theme_color": "#FFFAFB",
   "icons": [
     {
       "src": "./icon.svg",

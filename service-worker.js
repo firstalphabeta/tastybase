@@ -1,7 +1,7 @@
-const CACHE_NAME = 'bakery-shell-v10';
+const CACHE_NAME = 'tasty-base-shop-v15';
 const APP_FILES = [
   './index.html',
-  './Index%20(5).html',
+  './shop.html',
   './manifest.webmanifest',
   './icon.svg'
 ];
@@ -30,7 +30,7 @@ self.addEventListener('fetch', event => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
         return response;
-      }).catch(async () => (await caches.match(request)) || caches.match('./Index%20(5).html'))
+      }).catch(async () => (await caches.match(request)) || caches.match('./shop.html'))
     );
     return;
   }

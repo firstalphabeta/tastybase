@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFAFB">
+  <meta name="description" content="Custom cakes, cupcakes, pastries and catering, made to order by Tasty Base.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tasty Base | Sweet moments, baked fresh">
+  <meta property="og:description" content="Custom cakes, cupcakes, pastries and catering, made to order.">
+  <meta property="og:image" content="./icon.svg">
+  <title>Tasty Base | Sweet moments, baked fresh</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json" id="business-schema">{"@context":"https://schema.org","@type":"Bakery","name":"Tasty Base","description":"Custom cakes, cupcakes, pastries and catering, made to order."}</script>
+  <style>
+    :root{color-scheme:light;--white:#FFFAFB;--logo-pink:#C2456B;--rose:#C2336B;--blush:#FDE8EF;--gold:#E0A458;--cocoa:#2B2320;--pistachio:#6FB28F;--success:var(--pistachio);--page:var(--white);--band:var(--blush);--card:#FFFFFF;--text:var(--cocoa);--muted:#674D56;--border:#E8D6DE;--primary-text:#FFFFFF;--on-dark:#FFFAFB;--badge-border:rgba(43,35,32,.15);--overlay-shadow:rgba(43,35,32,.4);--shimmer:rgba(255,250,251,.55);--footer-line:rgba(255,250,251,.24);--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;--radius-sm:12px;--radius:16px;--shadow:0 12px 32px rgba(43,35,32,.08);--font-body:"DM Sans",sans-serif;--font-display:Fraunces,serif}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    html{scroll-behavior:smooth;scroll-padding-top:86px}
+    body{margin:0;background:var(--page);color:var(--text);font:16px var(--font-body);overflow-x:hidden}
+    button,input,textarea{font:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{cursor:pointer}
+    a{color:var(--rose)}
+    img{display:block;max-width:100%}
+    h1,h2,h3,p{margin-top:0}
+    h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.035em}
+    h1{font-size:clamp(2.7rem,7vw,5.8rem);line-height:.98;margin-bottom:20px}
+    h2{font-size:clamp(2rem,4vw,3.3rem);line-height:1.04;margin-bottom:12px}
+    h3{font-size:1.35rem;line-height:1.14}
+    .wrap{width:min(1160px,calc(100% - var(--space-5)));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:var(--page);border-bottom:1px solid var(--border)}
+    .shop-sidebar{position:fixed;inset:0 auto 0 0;z-index:30;width:240px;padding:24px 14px;overflow-y:auto;border-right:1px solid var(--border);background:var(--card)}
+    .sidebar-brand{display:flex;align-items:center;gap:10px;padding:4px 10px 24px;color:var(--text);font:700 21px var(--font-display);text-decoration:none}
+    .sidebar-brand img{width:38px;height:38px;border-radius:11px}
+    .sidebar-label{margin:12px 10px 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+    .sidebar-list{display:grid;gap:4px}
+    .sidebar-list button,.sidebar-list a{display:flex;align-items:center;width:100%;min-height:46px;padding:11px 12px;border:0;border-radius:var(--radius-sm);background:transparent;color:var(--text);font:600 14px var(--font-body);text-align:left;text-decoration:none}
+    .sidebar-list button:hover,.sidebar-list a:hover{background:var(--band)}
+    .sidebar-list button[aria-pressed=true]{background:var(--rose);color:var(--primary-text)}
+    .sidebar-divider{height:1px;margin:16px 8px;background:var(--border)}
+    .sidebar-close,.sidebar-overlay{display:none}
+    body.sidebar-open{overflow:hidden}
+    .sidebar-close:focus-visible,.sidebar-list button:focus-visible,.sidebar-list a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+    @media(min-width:860px){.topbar-inner{width:min(1160px,calc(100% - var(--space-5)))}#top>.wrap{width:min(1160px,calc(100% - var(--space-5)))}}
+    @media(max-width:859px){.shop-sidebar{width:min(300px,calc(100vw - 52px));transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s ease}.shop-sidebar.open{transform:translateX(0);visibility:visible}.sidebar-close{position:absolute;top:18px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text);font-size:24px}.sidebar-overlay{position:fixed;inset:0;z-index:29;display:block;border:0;background:rgba(43,35,32,.52);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.sidebar-overlay.visible{opacity:1;visibility:visible}.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.sidebar-brand{padding-right:48px}.topbar-inner{min-height:66px}body{padding-bottom:78px}}
+    .topbar{margin-left:240px}
+    .topbar-inner{width:min(1160px,calc(100% - var(--space-5)));margin-inline:auto}
+    #top,.footer{margin-left:240px}
+    #top>.wrap{width:min(1160px,calc(100% - var(--space-5)))}
+    .menu-toggle{display:none}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);min-height:76px}
+    .brand{display:inline-flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 22px var(--font-display)}
+    .brand img{width:42px;height:42px;border-radius:12px}
+    .header-actions{display:flex;align-items:center;gap:10px}
+    .menu-toggle{display:inline-grid;place-items:center;min-width:44px;min-height:44px;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text)}
+    .menu-toggle{display:none}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border:1px solid transparent;border-radius:var(--radius-sm);background:var(--rose);color:var(--primary-text);font-weight:700;text-decoration:none;transition:transform .2s ease,background-color .2s ease,border-color .2s ease}
+    .btn:hover{transform:translateY(-2px)}
+    .btn:disabled{opacity:.62;cursor:wait;transform:none}
+    .btn.outline{border-color:var(--rose);background:transparent;color:var(--rose)}
+    .btn.small{min-height:44px;padding:10px 14px}
+    :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .hero{position:relative;display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;gap:clamp(var(--space-4),6vw,78px);min-height:min(820px,calc(100svh - 76px));padding-block:clamp(44px,8vw,100px)}
+    .hero-copy{position:relative;z-index:2;max-width:580px}
+    .eyebrow{margin-bottom:16px;color:var(--rose);font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+    .hero-copy>p:not(.eyebrow){max-width:490px;margin-bottom:28px;font-size:clamp(1.05rem,2vw,1.25rem);line-height:1.65}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-visual{position:relative;min-height:clamp(360px,54vw,650px);background:var(--blush);border-radius:48% 48% 16px 16px;overflow:hidden}
+    .hero-visual img{width:100%;height:100%;min-height:inherit;position:absolute;inset:0;object-fit:cover}
+    .hero-visual.no-photo{background:var(--blush);border:1px solid var(--border)}
+    .hero-photo-note{position:absolute;inset:auto 20px 20px;padding:12px 16px;border-radius:var(--radius-sm);background:var(--white);color:var(--cocoa);font-size:13px}
+    .baked-badge{position:absolute;z-index:3;top:13%;left:-24px;display:grid;place-items:center;width:118px;height:118px;padding:18px;border:1px solid var(--badge-border);border-radius:50%;background:var(--gold);color:var(--cocoa);font-size:14px;font-weight:700;line-height:1.15;text-align:center;transform:rotate(-12deg);box-shadow:var(--shadow)}
+    .sprinkles{position:absolute;top:0;right:5%;width:92px;height:92px;opacity:.5;background:radial-gradient(ellipse 2px 6px at 12px 14px,var(--gold) 98%,transparent),radial-gradient(ellipse 2px 6px at 44px 25px,var(--rose) 98%,transparent),radial-gradient(ellipse 2px 6px at 68px 11px,var(--cocoa) 98%,transparent),radial-gradient(ellipse 2px 6px at 28px 59px,var(--rose) 98%,transparent),radial-gradient(ellipse 2px 6px at 72px 70px,var(--gold) 98%,transparent);pointer-events:none}
+    .section{position:relative;padding-block:clamp(var(--space-5),9vw,112px)}
+    .section.blush{background:var(--band)}
+    .section-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}
+    .section-heading p{max-width:430px;margin:0;color:var(--muted);line-height:1.6}
+    .scallop{position:absolute;top:-12px;left:0;width:100%;height:16px;background:radial-gradient(circle at 8px 0,var(--band) 12px,transparent 12.5px) 0 0/24px 16px repeat-x}
+    .scallop.white{background-image:radial-gradient(circle at 8px 0,var(--white) 12px,transparent 12.5px)}
+    .category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-2)}
+    .category-tile{position:relative;display:flex;align-items:end;min-height:210px;padding:20px;overflow:hidden;border:0;border-radius:var(--radius);background:var(--card);color:var(--text);text-align:left;text-decoration:none;box-shadow:var(--shadow);isolation:isolate}
+    .category-tile img{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}
+    .category-tile:hover img{transform:scale(1.04)}
+    .category-tile span{padding:8px 10px;border-radius:var(--radius-sm);background:var(--cocoa);color:var(--on-dark);font:600 clamp(1.2rem,2vw,1.7rem) var(--font-display);text-shadow:0 2px 8px var(--overlay-shadow)}
+    .menu-section{padding-bottom:clamp(70px,8vw,104px)}
+    .catalog-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 20px}
+    .catalog-heading h2{margin:0}
+    .view-more-wrap{display:flex;justify-content:center;margin-top:24px}
+    .view-more{min-width:160px}
+    .chip{flex:0 0 auto;min-height:44px;padding:10px 16px;border:1px solid var(--border);border-radius:30px;background:var(--card);color:var(--text);white-space:nowrap}
+    .chip[aria-pressed=true]{border-color:var(--rose);background:var(--rose);color:var(--primary-text)}
+    .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-2)}
+    .product{display:flex;min-width:0;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .product-photo{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--blush)}
+    .photo-placeholder{display:grid;place-items:center;width:100%;aspect-ratio:4/3;background:var(--blush);color:var(--muted);font-size:13px;text-align:center}
+    .product-body{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:16px}
+    .product-category{margin-bottom:6px;color:var(--muted);font-size:12px}
+    .product h3{margin-bottom:9px;font-size:clamp(1.1rem,1.5vw,1.35rem)}
+    .product-price{margin:0 0 16px;color:var(--rose);font-weight:700}
+    .product .btn{width:100%;margin-top:auto}
+    .skeleton{overflow:hidden;background:var(--blush);border-radius:var(--radius);min-height:330px;position:relative}
+    .skeleton:after{content:"";position:absolute;inset:0;background:var(--shimmer);opacity:0;animation:shimmer 1.5s ease-in-out infinite}
+    @keyframes shimmer{50%{opacity:.55}}
+    .how-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-2)}
+    .how-step{position:relative;padding:14px 14px 14px 58px;border-top:1px solid var(--gold)}
+    .how-step b{position:absolute;top:12px;left:0;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--cocoa);font-size:14px}
+    .how-step h3{margin:4px 0 6px}
+    .how-step p{margin:0;color:var(--muted);font-size:14px}
+    .custom-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:clamp(var(--space-4),8vw,110px);align-items:start}
+    .custom-intro{position:sticky;top:120px}
+    .custom-intro>p:not(.eyebrow){max-width:400px;color:var(--muted);font-size:18px;line-height:1.65}
+    .order-form{padding:clamp(20px,4vw,34px);border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+    .field{min-width:0}
+    .field.full{grid-column:1/-1}
+    label{display:block;margin:12px 0 6px;font-size:13px;font-weight:700}
+    input,textarea{width:100%;min-height:48px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text)}
+    textarea{min-height:118px;resize:vertical}
+    .form-help{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+    .form-status{min-height:0;margin-top:12px;padding:0;color:var(--text);font-size:14px;line-height:1.55}
+    .form-status:not(:empty){padding:12px 14px;border-radius:var(--radius-sm);background:var(--band)}
+    .form-status.error{border:1px solid var(--rose)}
+    .form-status.success{position:relative;overflow:hidden;background:var(--success)}
+    .success-burst:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,var(--gold) 2px,transparent 3px) 10% 25%/36px 36px,radial-gradient(circle,var(--rose) 2px,transparent 3px) 75% 15%/42px 38px;animation:burst .7s ease-out both}
+    @keyframes burst{0%{opacity:0;transform:scale(.3)}45%{opacity:1}100%{opacity:0;transform:scale(1.35)}}
+    .catering-band{position:relative;overflow:hidden;background:var(--cocoa);color:var(--on-dark)}
+    .catering-content{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-block:clamp(54px,8vw,92px)}
+    .catering-band h2{max-width:700px;margin:0;color:var(--on-dark);font-size:clamp(2.5rem,6vw,5rem)}
+    .catering-band p{margin:12px 0 0;color:var(--on-dark)}
+    .review-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .review-card{padding:22px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card)}
+    .review-card blockquote{margin:0 0 16px;font:500 1.2rem/1.5 var(--font-display)}
+    .review-card cite{color:var(--muted);font-size:13px;font-style:normal;font-weight:700}
+    .empty-note{padding:22px;border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)}
+    .instagram-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
+    .instagram-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .instagram-grid img,.instagram-empty{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--blush)}
+    .instagram-empty{display:grid;place-items:center;padding:18px;color:var(--muted);font-size:14px;text-align:center}
+    .footer{position:relative;background:var(--cocoa);color:var(--on-dark);padding-block:56px 36px}
+    .footer .scallop{top:-12px}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--space-5)}
+    .footer p{color:var(--on-dark);line-height:1.6}
+    .footer h2,.footer h3{color:var(--on-dark)}
+    .footer h2{font-size:clamp(1.7rem,3vw,2.4rem)}
+    .footer-links{display:grid;gap:9px}
+    .footer a{color:var(--on-dark);text-underline-offset:3px}
+    .footer-meta{margin-top:32px;padding-top:18px;border-top:1px solid var(--footer-line);color:var(--on-dark);font-size:12px}
+    .mobile-order-cta{display:none}
+    .cart-panel{position:fixed;right:20px;bottom:20px;z-index:22;width:min(380px,calc(100vw - 40px));max-height:calc(100vh - 40px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transform:translateY(calc(100% + 28px));transition:transform .22s ease}
+    .cart-panel.open{transform:translateY(0)}
+    .cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .cart-head h2{font-size:24px}
+    .cart-close{min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text)}
+    .cart-empty{padding:12px 0;color:var(--muted)}
+    .cart-lines{display:grid;gap:10px;margin:12px 0}
+    .cart-line{display:grid;grid-template-columns:1fr auto;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    .quantity{display:flex;align-items:center;gap:7px}
+    .quantity button{min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:9px;background:var(--page);color:var(--text)}
+    .total-row{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);font-weight:700}
+    .cart-form{border-top:1px solid var(--border);padding-top:12px}
+    .fulfillment{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;padding:0;border:0}
+    .fulfillment legend{margin-bottom:8px;font-size:13px;font-weight:700}
+    .fulfillment label{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);font-size:13px}
+    .fulfillment input,.confirm input{width:auto;min-height:0;accent-color:var(--rose)}
+    .confirm{display:flex;align-items:flex-start;gap:9px;line-height:1.45}
+    .confirm input{margin-top:3px}
+    .honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,minmax(0,1fr))}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-tile{min-height:185px}.custom-layout{grid-template-columns:.75fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
+    @media(max-width:700px){.shop-sidebar{width:min(300px,calc(100vw - 52px));transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s ease}.shop-sidebar.open{transform:translateX(0);visibility:visible}.sidebar-close{position:absolute;top:18px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text);font-size:24px}.sidebar-overlay{position:fixed;inset:0;z-index:29;display:block;border:0;background:rgba(43,35,32,.52);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.sidebar-overlay.visible{opacity:1;visibility:visible}.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.sidebar-brand{padding-right:48px}.topbar-inner{min-height:66px}.hero{grid-template-columns:1fr;gap:28px;min-height:auto;padding-block:54px 60px}.hero-copy>p:not(.eyebrow){font-size:16px}.hero-visual{min-height:clamp(300px,92vw,470px);margin:0 12px 0 18px}.baked-badge{left:-18px;width:98px;height:98px;font-size:12px}.section{padding-block:62px}.section-heading{display:block;margin-bottom:22px}.section-heading p{margin-top:8px}.category-grid{gap:10px}.category-tile{min-height:150px;padding:14px}.products{gap:10px}.product-body{padding:12px}.product h3{font-size:17px}.product .btn{padding-inline:8px;font-size:13px}.how-grid{grid-template-columns:1fr 1fr;gap:12px}.custom-layout{grid-template-columns:1fr;gap:24px}.custom-intro{position:static}.custom-intro>p:not(.eyebrow){font-size:16px}.catering-content{display:block}.catering-content .btn{margin-top:22px}.review-grid{grid-template-columns:1fr}.instagram-head{align-items:flex-start;flex-direction:column}.instagram-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-grid>div:first-child{grid-column:auto}.mobile-order-cta{position:fixed;z-index:18;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 20px;border:0;border-radius:999px;background:var(--rose);color:var(--primary-text);font-weight:700;box-shadow:var(--shadow)}.cart-panel{right:10px;bottom:calc(74px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 100px)}}
+    @media(max-width:380px){.hero-actions{display:grid}.hero-actions .btn{width:100%}.category-tile{min-height:132px}.product-body{padding:10px}.product h3{font-size:15px}.product .btn{font-size:12px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.how-grid{gap:8px}.how-step{padding-left:52px}}
+    @media(max-width:640px){body{padding-bottom:78px}}
+    @media(min-width:701px) and (max-width:859px){.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.topbar-inner{min-height:66px}body{padding-bottom:78px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="Tasty Base home"><img src="./icon.svg" width="42" height="42" alt="Tasty Base cake logo"><span id="brand">Tasty Base</span></a>
+      <div class="header-actions">
+        <button class="menu-toggle" type="button" aria-controls="shop-sidebar" aria-expanded="false" aria-label="Open shop menu" onclick="toggleSidebar()">☰</button>
+        <a class="btn small header-order" href="#custom-order">Order</a>
+      </div>
+    </div>
+  </header>
+  <button class="sidebar-overlay" id="sidebar-overlay" type="button" aria-label="Close shop menu" onclick="setSidebar(false)"></button>
+  <aside class="shop-sidebar" id="shop-sidebar" aria-label="Shop navigation" aria-hidden="true" inert>
+    <a class="sidebar-brand" href="#top"><img src="./icon.svg" width="38" height="38" alt=""><span id="sidebar-brand">Tasty Base</span></a>
+    <button class="sidebar-close" type="button" aria-label="Close shop menu" onclick="setSidebar(false)">×</button>
+    <div class="sidebar-list">
+      <a href="#top" onclick="setSidebar(false)">Home</a>
+    </div>
+    <p class="sidebar-label">Menu</p>
+    <div class="sidebar-list" id="sidebar-categories"><button type="button" data-category="All" aria-pressed="true">All</button></div>
+    <div class="sidebar-divider"></div>
+    <p class="sidebar-label">Explore</p>
+    <div class="sidebar-list">
+      <a href="#how-it-works" onclick="setSidebar(false)">How it works</a>
+      <a href="#catering" onclick="setSidebar(false)">Catering</a>
+      <a href="#sweet-words" onclick="setSidebar(false)">Sweet words</a>
+    </div>
+  </aside>
+  <main id="top">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <span class="sprinkles" aria-hidden="true"></span>
+      <div class="hero-copy">
+        <p class="eyebrow">Made for your moments</p>
+        <h1 id="hero-title">Sweet moments, baked fresh.</h1>
+        <p>Custom cakes, cupcakes, pastries and catering, made to order.</p>
+        <div class="hero-actions"><a class="btn" href="#custom-order">Order a cake</a><a class="btn outline" href="#menu-section">See the menu</a></div>
+      </div>
+      <div class="hero-visual no-photo" id="hero-visual">
+        <img id="hero-photo" alt="" width="1200" height="900" fetchpriority="high" hidden>
+        <span class="hero-photo-note" id="hero-photo-note">A little sweetness for your day.</span>
+        <span class="baked-badge">Baked to order</span>
+      </div>
+    </section>
+    <section class="section blush" id="categories">
+      <div class="scallop white" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">A little something for everyone</p><h2>Find your treat</h2></div><p>Made fresh for birthdays, big days and the little moments worth celebrating.</p></div>
+        <div class="category-grid" id="category-grid">
+          <a class="category-tile" href="#menu-section" data-category="cake"><span>Cakes</span></a>
+          <a class="category-tile" href="#menu-section" data-category="cupcake"><span>Cupcakes and pastries</span></a>
+          <a class="category-tile" href="#catering" data-category="catering"><span>Catering</span></a>
+          <a class="category-tile" href="#menu-section" data-category="drink"><span>Drinks</span></a>
+        </div>
+      </div>
+    </section>
+    <section class="section menu-section" id="menu-section">
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">Fresh from our kitchen</p><h2>Our menu</h2></div><p>Choose a category from the side menu to see what's baking.</p></div>
+        <div id="catalog" role="status" aria-live="polite">
+          <div class="products" aria-hidden="true"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+        </div>
+        <div class="cart-panel" id="cart-panel" role="region" aria-label="Your order" aria-hidden="true" inert>
+          <div class="cart-head"><h2>Your order <span class="cart-count" id="cart-count">0</span></h2><button class="cart-close" type="button" aria-label="Close order" onclick="toggleCart(false)">×</button></div>
+          <div id="cart-content"></div>
+          <form id="checkout" class="cart-form" onsubmit="submitCartOrder(event)">
+            <label for="customer">Your name</label><input id="customer" name="customer" autocomplete="name" maxlength="100" required>
+            <label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="25" required>
+            <label for="pickup">Date needed</label><input id="pickup" name="pickup" type="date" required>
+            <fieldset class="fulfillment"><legend>Pickup or delivery</legend><label><input type="radio" name="fulfillment" value="pickup" checked onchange="toggleAddress()"> Pickup</label><label><input type="radio" name="fulfillment" value="delivery" onchange="toggleAddress()"> Delivery</label></fieldset>
+            <div id="address-wrap" hidden><label for="address">Delivery address</label><textarea id="address" name="address" maxlength="300" placeholder="Area, street, landmark"></textarea><p class="form-help">Delivery availability and any fee will be confirmed with you.</p></div>
+            <label for="cart-notes">Anything else? (optional)</label><textarea id="cart-notes" name="notes" maxlength="1000"></textarea>
+            <label class="honeypot" aria-hidden="true">Leave this field empty<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="confirm"><input id="confirm" type="checkbox" required><span>This is a request. We'll confirm the price and availability with you.</span></label>
+            <button id="submit-button" class="btn" type="submit" style="width:100%">Send order request</button>
+            <div class="form-status" id="cart-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="section blush" id="how-it-works">
+      <div class="scallop white" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="section-heading"><div><p class="eyebrow">Easy as cake</p><h2>How it works</h2></div></div>
+        <div class="how-grid">
+          <article class="how-step"><b>1</b><h3>Choose</h3><p>Pick a favourite or dream up something new.</p></article>
+          <article class="how-step"><b>2</b><h3>Tell us the date</h3><p>Give us a little notice and the big details.</p></article>
+          <article class="how-step"><b>3</b><h3>We bake</h3><p>We make it fresh, just for your occasion.</p></article>
+          <article class="how-step"><b>4</b><h3>You collect</h3><p>Pick it up and make the moment sweeter.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="custom-order">
+      <div class="wrap custom-layout">
+        <div class="custom-intro"><p class="eyebrow">A one-of-a-kind treat</p><h2>Let's make it yours.</h2><p>Tell us the occasion, the date and the vibe. We'll reply with a price and a plan.</p></div>
+        <form class="order-form" id="custom-form" onsubmit="submitCustomOrder(event)" novalidate>
+          <div class="form-grid">
+            <div class="field"><label for="custom-name">Your name</label><input id="custom-name" name="customer" autocomplete="name" maxlength="100" required></div>
+            <div class="field"><label for="custom-phone">Phone</label><input id="custom-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" required></div>
+            <div class="field"><label for="custom-date">Date needed</label><input id="custom-date" name="pickup" type="date" required></div>
+            <div class="field"><label for="custom-budget">Budget (optional)</label><input id="custom-budget" name="budget" inputmode="decimal" maxlength="40" placeholder="e.g. GH₵ 500"></div>
+            <div class="field full"><label for="custom-what">What are we making?</label><textarea id="custom-what" name="what" maxlength="1000" required placeholder="Tell us what you're celebrating, flavours you love, colours or little details."></textarea></div>
+          </div>
+          <button class="btn" id="custom-submit" type="submit" style="width:100%;margin-top:20px">Send my order request</button>
+          <p class="form-help">We'll save your request and open WhatsApp with the details ready to send.</p>
+          <div class="form-status" id="custom-status" role="status" aria-live="polite"></div>
+          <div id="whatsapp-fallback" hidden></div>
+        </form>
+      </div>
+    </section>
+    <section class="catering-band" id="catering">
+      <div class="scallop white" aria-hidden="true"></div>
+      <div class="wrap catering-content"><div><p class="eyebrow" style="color:var(--gold)">For the whole table</p><h2>Feeding a crowd? We've got you.</h2><p>Good food, thoughtful portions and something sweet to finish.</p></div><a class="btn" href="#custom-order">Get a catering quote</a></div>
+    </section>
+    <section class="section blush" id="sweet-words">
+      <div class="scallop white" aria-hidden="true"></div>
+      <div class="wrap"><div class="section-heading"><div><p class="eyebrow">From our lovely customers</p><h2>Sweet words</h2></div></div><div class="review-grid" id="review-grid"><p class="empty-note">Your kind words could be next. Leave us a note after your order.</p></div></div>
+    </section>
+    <section class="section" id="instagram">
+      <div class="wrap">
+        <div class="instagram-head"><div><p class="eyebrow">A peek at what's baking</p><h2>Fresh from the kitchen</h2></div><a id="instagram-link" class="btn outline small" href="#custom-order" hidden>Find us on Instagram</a></div>
+        <div class="instagram-grid" id="instagram-grid"><div class="instagram-empty">Our latest bakes will show here.</div></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="scallop" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><h2>Made with butter, sugar and a lot of love.</h2><p>Sweet moments, baked fresh at Tasty Base.</p></div>
+        <div><h3>Come by</h3><div class="footer-links"><span id="hours">Hours: details coming soon</span><span id="location">Location: details coming soon</span></div></div>
+        <div><h3>Say hello</h3><div class="footer-links"><a id="phone-link" href="#custom-order">Phone: details coming soon</a><a id="whatsapp-link" href="#custom-order">WhatsApp: send an order request</a><a id="footer-instagram" href="#instagram">Instagram: see our bakes</a></div></div>
+      </div>
+      <div class="footer-meta">Tasty Base · Baked to order</div>
+    </div>
+  </footer>
+  <button class="mobile-order-cta" type="button" onclick="document.getElementById('custom-order').scrollIntoView({behavior:'smooth'})">Order now</button>
+  <script>
+    const API='https://script.google.com/macros/s/AKfycbwtlIfluSW-AXo9Q5d_4YDeKDV4P0rsAyWMBD0nRqUxwbZ4KYc4hzwd--id2-KQSiQRSw/exec';
+    const $=selector=>document.querySelector(selector);
+    const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
+    let store={businessName:'Tasty Base',currency:'GH₵ ',categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false;
+    const money=value=>store.currency+Number(value||0).toLocaleString(undefined,{maximumFractionDigits:2});
+    async function api(fn,...args){
+      let response;
+      try{response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fn,args})})}
+      catch(error){throw new Error('Could not connect. Please check your internet connection and try again.')}
+      if(!response.ok)throw new Error('The shop is temporarily unavailable. Please try again later.');
+      let result;
+      try{result=await response.json()}catch(error){throw new Error('The shop could not read the server response. Please try again later.')}
+      if(!result.ok)throw new Error(result.error==='Unknown action'?'The live Apps Script is out of date. Deploy the workspace Code.gs to connect the customer shop.':result.error||'The request could not be completed.');
+      return result.data;
+    }
+    function setSidebar(open){
+      const sidebar=$('#shop-sidebar'),button=$('.menu-toggle');
+      sidebar.classList.toggle('open',open);sidebar.setAttribute('aria-hidden',String(!open&&innerWidth<860));sidebar.inert=!open&&innerWidth<860;
+      $('#sidebar-overlay').classList.toggle('visible',open&&innerWidth<860);
+      document.body.classList.toggle('sidebar-open',open&&innerWidth<860);
+      button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close shop menu':'Open shop menu');
+      if(open&&innerWidth<860)sidebar.querySelector('button[aria-pressed=true]')?.focus();
+      if(!open&&innerWidth<860)button.focus();
+    }
+    function toggleSidebar(){setSidebar(!$('#shop-sidebar').classList.contains('open'))}
+    function renderSidebar(){
+      const categories=['All',...store.categories.filter(category=>category.toLowerCase()!=='all')];
+      $('#sidebar-categories').innerHTML=categories.map(category=>`<button type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join('');
+      $('#sidebar-brand').textContent=store.businessName;
+      $('#shop-sidebar').inert=innerWidth<860;
+      $('#shop-sidebar').setAttribute('aria-hidden',String(innerWidth<860));
+    }
+    $('#sidebar-categories').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-category]');
+      if(button)setCategory(button.dataset.category);
+    });
+    $('#shop-sidebar').querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>setSidebar(false)));
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('#shop-sidebar').classList.contains('open'))setSidebar(false)});
+    window.addEventListener('resize',()=>{if(innerWidth>=860)setSidebar(false);else if(!$('#shop-sidebar').classList.contains('open')){const sidebar=$('#shop-sidebar');sidebar.inert=true;sidebar.setAttribute('aria-hidden','true')}});
+    function categoryFor(key){
+      const needle=key.toLowerCase();
+      return store.categories.find(category=>{
+        const name=category.toLowerCase();
+        return name.includes(needle)||(needle==='drink'&&/(juice|smoothie|drink)/.test(name))||(needle==='cake'&&name.includes('cake'))||(needle==='cupcake'&&/(cupcake|pastr|bento)/.test(name));
+      })||'All';
+    }
+    function categoryPhoto(key){
+      const needle=key.toLowerCase();
+      const item=store.items.find(entry=>entry.category.toLowerCase().includes(needle)&&safeImage(entry.image));
+      return item?safeImage(item.image):'';
+    }
+    function updatePhotos(){
+      const image=store.items.find(item=>/cake/i.test(item.category)&&safeImage(item.image))||store.items.find(item=>safeImage(item.image));
+      if(image){
+        const photo=$('#hero-photo');photo.src=safeImage(image.image);photo.alt=`Freshly baked ${image.name}`;photo.hidden=false;
+        $('#hero-photo-note').hidden=true;$('#hero-visual').classList.remove('no-photo');
+      }
+      document.querySelectorAll('.category-tile').forEach(tile=>{
+        const source=categoryPhoto(tile.dataset.category);
+        if(source){const photo=document.createElement('img');photo.src=source;photo.alt='';photo.width=640;photo.height=480;photo.loading='lazy';tile.prepend(photo)}
+      });
+      const instagramPhotos=store.items.map(item=>({item,image:safeImage(item.image)})).filter(entry=>entry.image).slice(0,4);
+      $('#instagram-grid').innerHTML=instagramPhotos.length?instagramPhotos.map(({item,image})=>`<img src="${esc(image)}" alt="${esc(item.name)}" width="600" height="600" loading="lazy">`).join(''):'<div class="instagram-empty">Our latest bakes will show here.</div>';
+    }
+    function updateBusinessDetails(){
+      const phone=String(store.phone||'').trim(),whatsapp=String(store.whatsapp||'').replace(/\D/g,''),instagram=String(store.instagram||'').trim();
+      $('#hours').textContent=store.hours?`Hours: ${store.hours}`:'Hours: details coming soon';
+      $('#location').textContent=store.location?`Location: ${store.location}`:'Location: details coming soon';
+      const phoneLink=$('#phone-link');
+      if(phone){phoneLink.href=`tel:${phone.replace(/[^\d+]/g,'')}`;phoneLink.textContent=`Phone: ${phone}`}else{phoneLink.href='#custom-order';phoneLink.textContent='Phone: details coming soon'}
+      const whatsappLink=$('#whatsapp-link');
+      if(whatsapp){whatsappLink.href=`https://wa.me/${whatsapp}`;whatsappLink.target='_blank';whatsappLink.rel='noopener noreferrer';whatsappLink.textContent='WhatsApp us'}
+      else{whatsappLink.href='#custom-order';whatsappLink.textContent='WhatsApp: send an order request'}
+      const instagramUrl=/^https:\/\/(www\.)?instagram\.com\//i.test(instagram)?instagram:'';
+      if(instagramUrl){$('#instagram-link').href=instagramUrl;$('#instagram-link').target='_blank';$('#instagram-link').rel='noopener noreferrer';$('#instagram-link').hidden=false;$('#footer-instagram').href=instagramUrl;$('#footer-instagram').target='_blank';$('#footer-instagram').rel='noopener noreferrer';$('#footer-instagram').textContent='Instagram: see our bakes'}
+      const schema=JSON.parse($('#business-schema').textContent);
+      if(phone)schema.telephone=phone;
+      if(store.location)schema.address={ '@type':'PostalAddress',streetAddress:store.location };
+      if(store.hours)schema.openingHours=store.hours;
+      if(instagramUrl)schema.sameAs=[instagramUrl];
+      $('#business-schema').textContent=JSON.stringify(schema);
+    }
+    function updateReviews(){
+      const reviews=String(store.reviews||'').split(/\r?\n/).map(line=>line.trim()).filter(Boolean).map(line=>{
+        const split=line.indexOf('|');return split<1?null:{name:line.slice(0,split).trim(),quote:line.slice(split+1).trim()};
+      }).filter(review=>review&&review.name&&review.quote).slice(0,3);
+      $('#review-grid').innerHTML=reviews.length?reviews.map(review=>`<article class="review-card"><blockquote>“${esc(review.quote)}”</blockquote><cite>${esc(review.name)}</cite></article>`).join(''):'<p class="empty-note">Your kind words could be next. Leave us a note after your order.</p>';
+    }
+    function renderCatalog(){
+      const categories=['All',...store.categories.filter(category=>category.toLowerCase()!=='all')];
+      if(!categories.includes(selectedCategory))selectedCategory='All';
+      const items=store.items.filter(item=>selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory);
+      const visibleItems=selectedCategory==='All'&&!catalogExpanded?items.slice(0,8):items;
+      const productCard=item=>{
+        const image=safeImage(item.image),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
+        return `<article class="product">${image?`<img class="product-photo" src="${esc(image)}" alt="${esc(item.name)}" width="640" height="480" loading="lazy">`:'<div class="photo-placeholder" aria-hidden="true">A fresh bake, made to order</div>'}<div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Order':'Request a quote'}</button></div></article>`;
+      };
+      const heading=selectedCategory==='All'?'All treats':selectedCategory;
+      const moreButton=selectedCategory==='All'&&items.length>8?`<div class="view-more-wrap"><button class="btn outline view-more" type="button" aria-expanded="${catalogExpanded}" onclick="toggleCatalogExpanded()">${catalogExpanded?'Show less':'View more'}</button></div>`:'';
+      $('#catalog').innerHTML=`<div class="catalog-heading"><h2>${esc(heading)}</h2>${selectedCategory==='All'?`<span class="muted">${items.length} treats</span>`:''}</div><div class="products">${visibleItems.map(productCard).join('')||'<p class="empty-note">Nothing in this category just yet. Send us a note about what you would love.</p>'}</div>${moreButton}`;
+      document.querySelectorAll('#sidebar-categories button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.category===selectedCategory)));
+    }
+    function setCategory(category){
+      selectedCategory=category;catalogExpanded=false;renderCatalog();setSidebar(false);
+      $('#menu-section').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    function toggleCatalogExpanded(){catalogExpanded=!catalogExpanded;renderCatalog()}
+    document.querySelectorAll('.category-tile').forEach(tile=>tile.addEventListener('click',()=>{
+      const category=categoryFor(tile.dataset.category);
+      if(category!=='All'){setCategory(category)}
+    }));
+    function cartItems(){return store.items.filter(item=>(cart[item.id]||0)>0)}
+    function changeQuantity(id,amount){
+      const item=store.items.find(candidate=>candidate.id===id);if(!item)return;
+      cart[id]=Math.max(0,Math.min(99,(cart[id]||0)+amount));if(!cart[id])delete cart[id];
+      renderCart();if(amount>0)toggleCart(true);
+    }
+    function orderTotal(){return cartItems().reduce((total,item)=>total+(Number(item.price)>0?Number(item.price)*(cart[item.id]||0):0),0)}
+    function renderCart(){
+      const items=cartItems(),count=items.reduce((total,item)=>total+cart[item.id],0);
+      $('#cart-count').textContent=count;
+      $('#cart-content').innerHTML=items.length?`<div class="cart-lines">${items.map(item=>`<div class="cart-line"><span><b>${esc(item.name)}</b><br><span class="form-help">${Number(item.price)>0?money(Number(item.price)*cart[item.id]):'Price to be confirmed'}</span></span><span class="quantity"><button type="button" aria-label="Remove one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',-1)">−</button><span>${cart[item.id]}</span><button type="button" aria-label="Add one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',1)">+</button></span></div>`).join('')}</div><div class="total-row"><span>Estimated total</span><span>${money(orderTotal())}</span></div>`:'<p class="cart-empty">Your basket is empty. The oven is warm.</p>';
+      $('#submit-button').disabled=!items.length;
+    }
+    function toggleCart(open){
+      const panel=$('#cart-panel');panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));panel.inert=!open;
+      if(open)panel.querySelector('input')?.focus();
+    }
+    function toggleAddress(){
+      const delivery=$('input[name="fulfillment"]:checked').value==='delivery';
+      $('#address-wrap').hidden=!delivery;$('#address').required=delivery;
+    }
+    function showStatus(target,message,isError=false,success=false){
+      const status=$(target);status.className=`form-status${message?(isError?' error':success?' success':''):''}`;
+      status.textContent=message;
+      if(success){status.classList.add('success-burst');setTimeout(()=>status.classList.remove('success-burst'),800)}
+    }
+    function minDates(){
+      const min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
+      $('#custom-date').min=min;$('#pickup').min=min;
+    }
+    function validateForm(form){
+      if(!form.reportValidity())return false;
+      const phone=form.elements.phone.value.trim();
+      if(phone.replace(/\D/g,'').length<7){form.elements.phone.setCustomValidity('Enter a valid phone number.');form.elements.phone.reportValidity();form.elements.phone.setCustomValidity('');return false}
+      return true;
+    }
+    async function submitCustomOrder(event){
+      event.preventDefault();
+      const form=$('#custom-form'),button=$('#custom-submit');
+      $('#whatsapp-fallback').replaceChildren();$('#whatsapp-fallback').hidden=true;
+      showStatus('#custom-status','');
+      if(!validateForm(form))return;
+      const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:'pickup',items:[],customRequest:true,what:form.elements.what.value.trim(),budget:form.elements.budget.value.trim()};
+      if(!payload.what){form.elements.what.focus();form.elements.what.setCustomValidity('Tell us what we are making.');form.elements.what.reportValidity();form.elements.what.setCustomValidity('');return}
+      const whatsappText=`Hello Tasty Base! I'd like to request a custom order.\n\nName: ${payload.customer}\nPhone: ${payload.phone}\nDate needed: ${payload.pickup}\nWhat we're making: ${payload.what}${payload.budget?`\nBudget: ${payload.budget}`:''}`;
+      const waNumber=String(store.whatsapp||'').replace(/\D/g,'');
+      const waUrl=`https://wa.me/${waNumber}?text=${encodeURIComponent(whatsappText)}`;
+      const whatsappWindow=window.open('about:blank','_blank');
+      if(whatsappWindow)whatsappWindow.document.write('<title>Tasty Base</title><p style="font:16px sans-serif;padding:24px">Saving your order request…</p>');
+      button.disabled=true;button.textContent='Sending…';
+      try{
+        const result=await api('submitPublicOrder',payload);
+        form.reset();showStatus('#custom-status',"Got it! We'll message you shortly.",false,true);
+        if(whatsappWindow){whatsappWindow.location.href=waUrl;whatsappWindow.opener=null}
+        else{
+          const link=document.createElement('a');link.href=waUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open WhatsApp to send your message';link.className='btn outline small';link.style.marginTop='8px';$('#whatsapp-fallback').append(link);$('#whatsapp-fallback').hidden=false;
+        }
+        $('#custom-status').dataset.reference=result.reference||'';
+      }catch(error){if(whatsappWindow)whatsappWindow.close();showStatus('#custom-status',error.message,true)}
+      finally{button.disabled=false;button.textContent='Send my order request'}
+    }
+    async function submitCartOrder(event){
+      event.preventDefault();
+      const form=$('#checkout'),button=$('#submit-button'),items=cartItems();
+      showStatus('#cart-status','');
+      if(!items.length){showStatus('#cart-status','Add at least one item to your order.',true);return}
+      if(!validateForm(form))return;
+      const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:form.elements.fulfillment.value,address:form.elements.address.value.trim(),notes:form.elements.notes.value.trim(),website:form.elements.website.value,items:items.map(item=>({id:item.id,quantity:cart[item.id]}))};
+      button.disabled=true;button.textContent='Sending…';
+      try{
+        const result=await api('submitPublicOrder',payload);
+        cart={};renderCart();form.reset();toggleAddress();showStatus('#cart-status',`Got it! We'll message you shortly. Request ${result.reference} is saved.`,false,true);
+      }catch(error){showStatus('#cart-status',error.message,true)}
+      finally{button.disabled=!cartItems().length;button.textContent='Send order request'}
+    }
+    async function start(){
+      minDates();renderCart();
+      try{
+        const data=await api('getPublicStore');
+        store={...store,...data,items:Array.isArray(data.items)?data.items:[],categories:Array.isArray(data.categories)?data.categories:[]};
+        $('#brand').textContent=store.businessName;
+        renderSidebar();
+        document.title=`${store.businessName} | Sweet moments, baked fresh`;
+        updateBusinessDetails();updateReviews();updatePhotos();renderCatalog();renderCart();
+      }catch(error){$('#catalog').setAttribute('role','alert');$('#catalog').innerHTML=`<p class="empty-note">${esc(error.message)}</p>`}
+    }
+    start();
+    if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(error=>console.error('Service worker registration failed:',error)));
+  </script>
+</body>
+</html>
