@@ -34,8 +34,9 @@
     h3{font-size:1.35rem;line-height:1.14}
     .wrap{width:min(1160px,calc(100% - var(--space-5)));margin-inline:auto}
     .topbar{position:sticky;top:0;z-index:20;background:var(--page);border-bottom:1px solid var(--border)}
-    .shop-sidebar{position:fixed;inset:0 auto 0 0;z-index:30;width:240px;padding:24px 14px;overflow-y:auto;border-right:1px solid var(--border);background:var(--card)}
-    .sidebar-brand{display:flex;align-items:center;gap:10px;padding:4px 10px 24px;color:var(--text);font:700 21px var(--font-display);text-decoration:none}
+    .shop-sidebar{position:fixed;inset:0 auto 0 0;z-index:30;width:min(300px,calc(100vw - 52px));padding:24px 14px;overflow-y:auto;border-right:1px solid var(--border);background:var(--card);transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s ease}
+    .shop-sidebar.open{transform:translateX(0);visibility:visible}
+    .sidebar-brand{display:flex;align-items:center;gap:10px;padding:4px 58px 24px 10px;color:var(--text);font:700 21px var(--font-display);text-decoration:none}
     .sidebar-brand img{width:38px;height:38px;border-radius:11px}
     .sidebar-label{margin:12px 10px 8px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
     .sidebar-list{display:grid;gap:4px}
@@ -43,22 +44,27 @@
     .sidebar-list button:hover,.sidebar-list a:hover{background:var(--band)}
     .sidebar-list button[aria-pressed=true]{background:var(--rose);color:var(--primary-text)}
     .sidebar-divider{height:1px;margin:16px 8px;background:var(--border)}
-    .sidebar-close,.sidebar-overlay{display:none}
+    .sidebar-close{position:absolute;top:18px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text);font-size:24px}
+    .sidebar-overlay{position:fixed;inset:0;z-index:29;display:block;border:0;background:rgba(43,35,32,.52);opacity:0;visibility:hidden;transition:opacity .22s ease,visibility .22s ease}
+    .sidebar-overlay.visible{opacity:1;visibility:visible}
     body.sidebar-open{overflow:hidden}
     .sidebar-close:focus-visible,.sidebar-list button:focus-visible,.sidebar-list a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-    @media(min-width:860px){.topbar-inner{width:min(1160px,calc(100% - var(--space-5)))}#top>.wrap{width:min(1160px,calc(100% - var(--space-5)))}}
-    @media(max-width:859px){.shop-sidebar{width:min(300px,calc(100vw - 52px));transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s ease}.shop-sidebar.open{transform:translateX(0);visibility:visible}.sidebar-close{position:absolute;top:18px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text);font-size:24px}.sidebar-overlay{position:fixed;inset:0;z-index:29;display:block;border:0;background:rgba(43,35,32,.52);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.sidebar-overlay.visible{opacity:1;visibility:visible}.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.sidebar-brand{padding-right:48px}.topbar-inner{min-height:66px}body{padding-bottom:78px}}
-    .topbar{margin-left:240px}
+    .topbar,#top,.footer{margin-left:0}
     .topbar-inner{width:min(1160px,calc(100% - var(--space-5)));margin-inline:auto}
-    #top,.footer{margin-left:240px}
     #top>.wrap{width:min(1160px,calc(100% - var(--space-5)))}
-    .menu-toggle{display:none}
     .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);min-height:76px}
     .brand{display:inline-flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font:700 22px var(--font-display)}
     .brand img{width:42px;height:42px;border-radius:12px}
     .header-actions{display:flex;align-items:center;gap:10px}
-    .menu-toggle{display:inline-grid;place-items:center;min-width:44px;min-height:44px;padding:8px 11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text)}
-    .menu-toggle{display:none}
+    .menu-toggle{display:inline-grid;place-items:center;width:48px;height:48px;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card);color:var(--text)}
+    .hamburger-icon,.hamburger-icon:before,.hamburger-icon:after{display:block;width:22px;height:2px;border-radius:2px;background:currentColor}
+    .hamburger-icon{position:relative}
+    .hamburger-icon:before,.hamburger-icon:after{position:absolute;left:0;content:""}
+    .hamburger-icon:before{top:-7px}
+    .hamburger-icon:after{top:7px}
+    .menu-toggle[aria-expanded=true] .hamburger-icon{background:transparent}
+    .menu-toggle[aria-expanded=true] .hamburger-icon:before{top:0;transform:rotate(45deg)}
+    .menu-toggle[aria-expanded=true] .hamburger-icon:after{top:0;transform:rotate(-45deg)}
     .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 20px;border:1px solid transparent;border-radius:var(--radius-sm);background:var(--rose);color:var(--primary-text);font-weight:700;text-decoration:none;transition:transform .2s ease,background-color .2s ease,border-color .2s ease}
     .btn:hover{transform:translateY(-2px)}
     .btn:disabled{opacity:.62;cursor:wait;transform:none}
@@ -174,7 +180,6 @@
     @media(max-width:700px){.shop-sidebar{width:min(300px,calc(100vw - 52px));transform:translateX(-105%);visibility:hidden;transition:transform .22s ease,visibility .22s ease}.shop-sidebar.open{transform:translateX(0);visibility:visible}.sidebar-close{position:absolute;top:18px;right:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text);font-size:24px}.sidebar-overlay{position:fixed;inset:0;z-index:29;display:block;border:0;background:rgba(43,35,32,.52);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}.sidebar-overlay.visible{opacity:1;visibility:visible}.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.sidebar-brand{padding-right:48px}.topbar-inner{min-height:66px}.hero{grid-template-columns:1fr;gap:28px;min-height:auto;padding-block:54px 60px}.hero-copy>p:not(.eyebrow){font-size:16px}.hero-visual{min-height:clamp(300px,92vw,470px);margin:0 12px 0 18px}.baked-badge{left:-18px;width:98px;height:98px;font-size:12px}.section{padding-block:62px}.section-heading{display:block;margin-bottom:22px}.section-heading p{margin-top:8px}.category-grid{gap:10px}.category-tile{min-height:150px;padding:14px}.products{gap:10px}.product-body{padding:12px}.product h3{font-size:17px}.product .btn{padding-inline:8px;font-size:13px}.how-grid{grid-template-columns:1fr 1fr;gap:12px}.custom-layout{grid-template-columns:1fr;gap:24px}.custom-intro{position:static}.custom-intro>p:not(.eyebrow){font-size:16px}.catering-content{display:block}.catering-content .btn{margin-top:22px}.review-grid{grid-template-columns:1fr}.instagram-head{align-items:flex-start;flex-direction:column}.instagram-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-grid>div:first-child{grid-column:auto}.mobile-order-cta{position:fixed;z-index:18;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 20px;border:0;border-radius:999px;background:var(--rose);color:var(--primary-text);font-weight:700;box-shadow:var(--shadow)}.cart-panel{right:10px;bottom:calc(74px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 100px)}}
     @media(max-width:380px){.hero-actions{display:grid}.hero-actions .btn{width:100%}.category-tile{min-height:132px}.product-body{padding:10px}.product h3{font-size:15px}.product .btn{font-size:12px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.how-grid{gap:8px}.how-step{padding-left:52px}}
     @media(max-width:640px){body{padding-bottom:78px}}
-    @media(min-width:701px) and (max-width:859px){.topbar,#top,.footer{margin-left:0}.topbar-inner,#top>.wrap{width:min(100% - 28px,1160px)}.menu-toggle{display:inline-grid}.header-actions>.header-order{display:none}.topbar-inner{min-height:66px}body{padding-bottom:78px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -183,7 +188,7 @@
     <div class="wrap topbar-inner">
       <a class="brand" href="#top" aria-label="Tasty Base home"><img src="./icon.svg" width="42" height="42" alt="Tasty Base cake logo"><span id="brand">Tasty Base</span></a>
       <div class="header-actions">
-        <button class="menu-toggle" type="button" aria-controls="shop-sidebar" aria-expanded="false" aria-label="Open shop menu" onclick="toggleSidebar()">☰</button>
+        <button class="menu-toggle" type="button" aria-controls="shop-sidebar" aria-expanded="false" aria-label="Open shop menu" onclick="toggleSidebar()"><span class="hamburger-icon" aria-hidden="true"></span></button>
         <a class="btn small header-order" href="#custom-order">Order</a>
       </div>
     </div>
@@ -332,20 +337,20 @@
     }
     function setSidebar(open){
       const sidebar=$('#shop-sidebar'),button=$('.menu-toggle');
-      sidebar.classList.toggle('open',open);sidebar.setAttribute('aria-hidden',String(!open&&innerWidth<860));sidebar.inert=!open&&innerWidth<860;
-      $('#sidebar-overlay').classList.toggle('visible',open&&innerWidth<860);
-      document.body.classList.toggle('sidebar-open',open&&innerWidth<860);
+      sidebar.classList.toggle('open',open);sidebar.setAttribute('aria-hidden',String(!open));sidebar.inert=!open;
+      $('#sidebar-overlay').classList.toggle('visible',open);
+      document.body.classList.toggle('sidebar-open',open);
       button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close shop menu':'Open shop menu');
-      if(open&&innerWidth<860)sidebar.querySelector('button[aria-pressed=true]')?.focus();
-      if(!open&&innerWidth<860)button.focus();
+      if(open)sidebar.querySelector('button[aria-pressed=true]')?.focus();
+      if(!open)button.focus();
     }
     function toggleSidebar(){setSidebar(!$('#shop-sidebar').classList.contains('open'))}
     function renderSidebar(){
       const categories=['All',...store.categories.filter(category=>category.toLowerCase()!=='all')];
       $('#sidebar-categories').innerHTML=categories.map(category=>`<button type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join('');
       $('#sidebar-brand').textContent=store.businessName;
-      $('#shop-sidebar').inert=innerWidth<860;
-      $('#shop-sidebar').setAttribute('aria-hidden',String(innerWidth<860));
+      $('#shop-sidebar').inert=true;
+      $('#shop-sidebar').setAttribute('aria-hidden','true');
     }
     $('#sidebar-categories').addEventListener('click',event=>{
       const button=event.target.closest('button[data-category]');
@@ -353,7 +358,6 @@
     });
     $('#shop-sidebar').querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>setSidebar(false)));
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('#shop-sidebar').classList.contains('open'))setSidebar(false)});
-    window.addEventListener('resize',()=>{if(innerWidth>=860)setSidebar(false);else if(!$('#shop-sidebar').classList.contains('open')){const sidebar=$('#shop-sidebar');sidebar.inert=true;sidebar.setAttribute('aria-hidden','true')}});
     function categoryFor(key){
       const needle=key.toLowerCase();
       return store.categories.find(category=>{
