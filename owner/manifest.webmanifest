@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Tasty Base Owner Workspace",
+  "short_name": "Tasty Base Owner",
+  "description": "Private Tasty Base workspace for managing orders, sales, products and bakery insights.",
+  "start_url": "./login.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f2e9",
+  "theme_color": "#f6f2e9",
+  "icons": [
+    {
+      "src": "../icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
