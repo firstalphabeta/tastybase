@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tasty-base-shop-v15';
+const CACHE_NAME = 'tasty-base-shop-v21';
 const APP_FILES = [
   './index.html',
   './shop.html',
@@ -7,7 +7,9 @@ const APP_FILES = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(
+    APP_FILES.map(file => new Request(file, { cache: 'reload' }))
+  )));
   self.skipWaiting();
 });
 
@@ -30,7 +32,7 @@ self.addEventListener('fetch', event => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
         return response;
-      }).catch(async () => (await caches.match(request)) || caches.match('./shop.html'))
+      }            ).catch(async () => (await caches.match(request)) || caches.match('./shop.html'))
     );
     return;
   }

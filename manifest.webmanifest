@@ -1,13 +1,13 @@
 {
-  "id": "./shop.html",
+  "id": "./",
   "name": "Tasty Base",
   "short_name": "Tasty Base",
-  "description": "Browse and order cakes, cupcakes, pastries and catering from Tasty Base.",
+  "description": "Order custom cakes, cupcakes, pastries and more from Tasty Base.",
   "start_url": "./shop.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#FFFAFB",
-  "theme_color": "#FFFAFB",
+  "background_color": "#f6f2e9",
+  "theme_color": "#f6f2e9",
   "icons": [
     {
       "src": "./icon.svg",

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#FFFAFB">
+  <meta name="theme-color" content="#fbf8f2">
   <meta name="description" content="Custom cakes, cupcakes, pastries and catering, made to order by Tasty Base.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tasty Base | Sweet moments, baked fresh">
@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
   <script type="application/ld+json" id="business-schema">{"@context":"https://schema.org","@type":"Bakery","name":"Tasty Base","description":"Custom cakes, cupcakes, pastries and catering, made to order."}</script>
   <style>
-    :root{color-scheme:light;--white:#FFFAFB;--logo-pink:#C2456B;--rose:#C2336B;--blush:#FDE8EF;--gold:#E0A458;--cocoa:#2B2320;--pistachio:#6FB28F;--success:var(--pistachio);--page:var(--white);--band:var(--blush);--card:#FFFFFF;--text:var(--cocoa);--muted:#674D56;--border:#E8D6DE;--primary-text:#FFFFFF;--on-dark:#FFFAFB;--badge-border:rgba(43,35,32,.15);--overlay-shadow:rgba(43,35,32,.4);--shimmer:rgba(255,250,251,.55);--footer-line:rgba(255,250,251,.24);--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;--radius-sm:12px;--radius:16px;--shadow:0 12px 32px rgba(43,35,32,.08);--font-body:"DM Sans",sans-serif;--font-display:Fraunces,serif}
+    :root{color-scheme:light;--white:#fbf8f2;--logo-pink:#a43d31;--rose:#a43d31;--blush:#efe8d9;--gold:#d8aa55;--cocoa:#282521;--pistachio:#77917a;--success:var(--pistachio);--page:var(--white);--band:#f0eadc;--card:#fffdf8;--text:var(--cocoa);--muted:#71675c;--border:#e4ddd0;--primary-text:#fffdf8;--on-dark:#fffdf8;--badge-border:rgba(40,37,33,.15);--overlay-shadow:rgba(40,37,33,.4);--shimmer:rgba(255,253,248,.55);--footer-line:rgba(255,253,248,.24);--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;--radius-sm:10px;--radius:14px;--shadow:0 12px 32px rgba(40,37,33,.08);--font-body:"DM Sans",sans-serif;--font-display:Fraunces,serif}
     *{box-sizing:border-box}
     [hidden]{display:none!important}
     html{scroll-behavior:smooth;scroll-padding-top:86px}
@@ -157,8 +157,18 @@
     .footer a{color:var(--on-dark);text-underline-offset:3px}
     .footer-meta{margin-top:32px;padding-top:18px;border-top:1px solid var(--footer-line);color:var(--on-dark);font-size:12px}
     .mobile-order-cta{display:none}
-    .cart-panel{position:fixed;right:20px;bottom:20px;z-index:22;width:min(380px,calc(100vw - 40px));max-height:calc(100vh - 40px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transform:translateY(calc(100% + 28px));transition:transform .22s ease}
+    .cart-panel{position:fixed;right:20px;bottom:100px;z-index:22;width:min(380px,calc(100vw - 40px));max-height:calc(100vh - 120px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transform:translateY(calc(100% + 28px));transition:transform .22s ease}
     .cart-panel.open{transform:translateY(0)}
+    .basket-fab{position:fixed;left:20px;bottom:22px;z-index:23;display:inline-flex;align-items:center;gap:9px;min-height:56px;padding:8px 16px;border:0;border-radius:999px;background:var(--cocoa);color:white;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(40,37,33,.22);transition:transform .18s ease,box-shadow .18s ease}
+    .basket-fab:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(40,37,33,.26)}
+    .basket-fab:focus-visible,.whatsapp-fab:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .basket-count{display:grid;place-items:center;min-width:28px;height:28px;padding:0 7px;border-radius:999px;background:var(--gold);color:var(--cocoa);font-size:12px}
+    .whatsapp-fab{position:fixed;right:22px;bottom:22px;z-index:24;display:grid;place-items:center;width:60px;height:60px;border:0;border-radius:50%;background:#25d366;color:white;box-shadow:0 8px 24px rgba(20,90,48,.3);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+    .whatsapp-fab:hover{transform:translateY(-3px) scale(1.04);background:#1ebe5d;box-shadow:0 12px 28px rgba(20,90,48,.36)}
+    .whatsapp-fab svg{width:31px;height:31px}
+    .whatsapp-fab-label{position:absolute;right:70px;padding:8px 11px;border-radius:8px;background:#1f2933;color:white;font-size:12px;font-weight:700;white-space:nowrap;opacity:0;transform:translateX(5px);pointer-events:none;transition:opacity .16s ease,transform .16s ease}
+    .whatsapp-fab:hover .whatsapp-fab-label,.whatsapp-fab:focus-visible .whatsapp-fab-label{opacity:1;transform:translateX(0)}
+    .cart-whatsapp-fallback{display:inline-flex;margin-top:8px}
     .cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .cart-head h2{font-size:24px}
     .cart-close{min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text)}
@@ -181,6 +191,29 @@
     @media(max-width:380px){.hero-actions{display:grid}.hero-actions .btn{width:100%}.category-tile{min-height:132px}.product-body{padding:10px}.product h3{font-size:15px}.product .btn{font-size:12px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.how-grid{gap:8px}.how-step{padding-left:52px}}
     @media(max-width:640px){body{padding-bottom:78px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    .hero-visual{background:#efe8d9;border-radius:48% 48% 14px 14px}
+    .hero-photo-note{background:rgba(255,253,248,.94);color:var(--text);backdrop-filter:blur(8px)}
+    .section-heading .eyebrow,.eyebrow{color:var(--rose)}
+    .catalog-tools{display:grid;gap:14px;margin:0 0 24px}
+    .catalog-search{position:relative;display:flex;align-items:center;gap:10px;max-width:560px;margin:0;padding:0 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--muted)}
+    .catalog-search>span{font-size:20px}
+    .catalog-search input{min-height:48px;padding:8px 0;border:0;border-radius:0;background:transparent;outline:0}
+    .catalog-search input:focus-visible{outline:0}
+    .quick-filters{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:thin}
+    .quick-filter{flex:0 0 auto;min-height:42px;padding:9px 14px;border:1px solid var(--border);border-radius:999px;background:transparent;color:var(--text);font:600 13px var(--font-body)}
+    .quick-filter[aria-pressed=true]{border-color:var(--cocoa);background:var(--cocoa);color:var(--on-dark)}
+    .baked-badge{left:16px}
+    .product{border-color:transparent;border-radius:12px;background:var(--card);box-shadow:0 5px 20px rgba(40,37,33,.055);transition:transform .2s ease,box-shadow .2s ease}
+    .product:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(40,37,33,.1)}
+    .product-photo{aspect-ratio:4/3;background:#efe8d9}
+    .product-category{letter-spacing:.04em;text-transform:uppercase;font-size:10px;font-weight:700}
+    .product-price{font-size:15px}
+    .category-tile{border-radius:12px;box-shadow:none;background:var(--cocoa)}
+    .category-tile:after{position:absolute;inset:30% 0 0;z-index:-1;background:linear-gradient(transparent,rgba(0,0,0,.62));content:""}
+    .category-tile span{background:transparent}
+    @media(max-width:700px){.cart-panel{right:10px;bottom:calc(90px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 112px)}.basket-fab{left:12px;bottom:calc(14px + env(safe-area-inset-bottom));min-height:52px;padding:7px 12px;font-size:13px}.whatsapp-fab{right:12px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px}.whatsapp-fab svg{width:28px;height:28px}.whatsapp-fab-label{display:none}.mobile-order-cta{display:none}}
+    .cart-panel{border-radius:16px}
+    @media(max-width:700px){.catalog-tools{gap:10px}.catalog-search{max-width:none}.quick-filters{margin-inline:-2px}.baked-badge{left:12px}.product{box-shadow:0 3px 14px rgba(40,37,33,.06)}}
   </style>
 </head>
 <body>
@@ -217,11 +250,11 @@
         <p class="eyebrow">Made for your moments</p>
         <h1 id="hero-title">Sweet moments, baked fresh.</h1>
         <p>Custom cakes, cupcakes, pastries and catering, made to order.</p>
-        <div class="hero-actions"><a class="btn" href="#custom-order">Order a cake</a><a class="btn outline" href="#menu-section">See the menu</a></div>
+        <div class="hero-actions"><a class="btn" href="#custom-order">Request a custom order</a><a class="btn outline" href="#menu-section">See the menu</a></div>
       </div>
       <div class="hero-visual no-photo" id="hero-visual">
         <img id="hero-photo" alt="" width="1200" height="900" fetchpriority="high" hidden>
-        <span class="hero-photo-note" id="hero-photo-note">A little sweetness for your day.</span>
+        <span class="hero-photo-note" id="hero-photo-note">Illustrative menu photography · made fresh for your moments.</span>
         <span class="baked-badge">Baked to order</span>
       </div>
     </section>
@@ -243,8 +276,8 @@
         <div id="catalog" role="status" aria-live="polite">
           <div class="products" aria-hidden="true"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
         </div>
-        <div class="cart-panel" id="cart-panel" role="region" aria-label="Your order" aria-hidden="true" inert>
-          <div class="cart-head"><h2>Your order <span class="cart-count" id="cart-count">0</span></h2><button class="cart-close" type="button" aria-label="Close order" onclick="toggleCart(false)">×</button></div>
+        <div class="cart-panel" id="cart-panel" role="region" aria-label="Your catering basket" aria-hidden="true" inert>
+          <div class="cart-head"><h2>Catering basket <span class="cart-count" id="cart-count">0</span></h2><button class="cart-close" type="button" aria-label="Close catering basket" onclick="toggleCart(false)">×</button></div>
           <div id="cart-content"></div>
           <form id="checkout" class="cart-form" onsubmit="submitCartOrder(event)">
             <label for="customer">Your name</label><input id="customer" name="customer" autocomplete="name" maxlength="100" required>
@@ -255,7 +288,7 @@
             <label for="cart-notes">Anything else? (optional)</label><textarea id="cart-notes" name="notes" maxlength="1000"></textarea>
             <label class="honeypot" aria-hidden="true">Leave this field empty<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
             <label class="confirm"><input id="confirm" type="checkbox" required><span>This is a request. We'll confirm the price and availability with you.</span></label>
-            <button id="submit-button" class="btn" type="submit" style="width:100%">Send order request</button>
+            <button id="submit-button" class="btn" type="submit" style="width:100%">Continue to WhatsApp</button>
             <div class="form-status" id="cart-status" aria-live="polite"></div>
           </form>
         </div>
@@ -311,20 +344,43 @@
     <div class="wrap">
       <div class="footer-grid">
         <div><h2>Made with butter, sugar and a lot of love.</h2><p>Sweet moments, baked fresh at Tasty Base.</p></div>
-        <div><h3>Come by</h3><div class="footer-links"><span id="hours">Hours: details coming soon</span><span id="location">Location: details coming soon</span></div></div>
-        <div><h3>Say hello</h3><div class="footer-links"><a id="phone-link" href="#custom-order">Phone: details coming soon</a><a id="whatsapp-link" href="#custom-order">WhatsApp: send an order request</a><a id="footer-instagram" href="#instagram">Instagram: see our bakes</a></div></div>
+        <div><h3>Come by</h3><div class="footer-links"><span id="hours">Hours: details coming soon</span><span id="location">Location: Adenta</span></div></div>
+        <div><h3>Say hello</h3><div class="footer-links"><a id="phone-link" href="tel:0201814174">Phone: 0201814174</a><a id="whatsapp-link" href="https://wa.me/233249567102" target="_blank" rel="noopener noreferrer">WhatsApp: 0249567102</a><span id="footer-instagram">Instagram: Tasty Base</span><span id="footer-tiktok">TikTok: Tasty.Base</span></div></div>
       </div>
-      <div class="footer-meta">Tasty Base · Baked to order</div>
+      <div class="footer-meta">Tasty Base · Baked to order · Menu photos are illustrative previews. · <a href="./owner/">Owner sign in</a></div>
     </div>
   </footer>
-  <button class="mobile-order-cta" type="button" onclick="document.getElementById('custom-order').scrollIntoView({behavior:'smooth'})">Order now</button>
+  <button class="basket-fab" type="button" aria-controls="cart-panel" aria-expanded="false" onclick="toggleCart()"><span>Catering basket</span><span class="basket-count" id="basket-fab-count">0</span></button>
+  <a class="whatsapp-fab" id="whatsapp-fab" href="https://wa.me/233249567102" target="_blank" rel="noopener noreferrer" aria-label="Chat with Tasty Base on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.02 3.2a12.68 12.68 0 0 0-10.9 19.17L3.5 28.8l6.58-1.72A12.68 12.68 0 1 0 16.02 3.2Zm0 22.97c-1.99 0-3.94-.53-5.65-1.54l-.4-.24-3.9 1.02 1.04-3.8-.26-.4a10.33 10.33 0 1 1 9.17 4.96Zm5.67-7.75c-.31-.16-1.84-.91-2.13-1.01-.29-.1-.5-.16-.71.16-.21.31-.82 1.01-1.01 1.22-.18.21-.37.23-.68.08-.31-.16-1.31-.48-2.5-1.52-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.61-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.62s1.13 3.04 1.29 3.25c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.51 1.8.65.76.24 1.45.2 1.99.12.61-.09 1.84-.75 2.1-1.48.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37Z"/></svg>
+    <span class="whatsapp-fab-label">Chat on WhatsApp</span>
+  </a>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbwtlIfluSW-AXo9Q5d_4YDeKDV4P0rsAyWMBD0nRqUxwbZ4KYc4hzwd--id2-KQSiQRSw/exec';
+    const API='https://script.google.com/macros/s/AKfycbxPuQRZ5HV95-QudpoQ6vee8oXBkxaw1sIx91-Gr67UQhBp38s_MutlYBK4KimEEr_VLw/exec';
     const $=selector=>document.querySelector(selector);
     const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
-    let store={businessName:'Tasty Base',currency:'GH₵ ',categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false;
+    const demoPhotos={
+      cake:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=960&q=82',
+      cupcake:'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=960&q=82',
+      pastry:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=960&q=82',
+      juice:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=960&q=82',
+      snack:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=960&q=82'
+    };
+    let store={businessName:'Tasty Base',currency:'GH₵ ',phone:'0201814174',whatsapp:'0249567102',location:'Adenta',instagram:'',instagramName:'Tasty Base',tiktok:'Tasty.Base',categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false,productSearch='';
     const money=value=>store.currency+Number(value||0).toLocaleString(undefined,{maximumFractionDigits:2});
+    function whatsappNumber(){
+      const digits=String(store.whatsapp||'').replace(/\D/g,'');
+      return digits.startsWith('0')?'233'+digits.slice(1):digits;
+    }
+    function demoPhoto(item){
+      const description=`${item.category||''} ${item.name||''}`.toLowerCase();
+      if(/juice|drink|smoothie|yogurt/.test(description))return demoPhotos.juice;
+      if(/cupcake|bento/.test(description))return demoPhotos.cupcake;
+      if(/chip|cookie|groundnut|snack/.test(description))return demoPhotos.snack;
+      if(/pastr|pie|roll|samosa|puff/.test(description))return demoPhotos.pastry;
+      return demoPhotos.cake;
+    }
     async function api(fn,...args){
       let response;
       try{response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fn,args})})}
@@ -346,13 +402,17 @@
     }
     function toggleSidebar(){setSidebar(!$('#shop-sidebar').classList.contains('open'))}
     function renderSidebar(){
-      const categories=['All',...store.categories.filter(category=>category.toLowerCase()!=='all')];
+      const categories=['All',...store.categories.filter(category=>!['all','add-ons'].includes(category.toLowerCase()))];
       $('#sidebar-categories').innerHTML=categories.map(category=>`<button type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join('');
       $('#sidebar-brand').textContent=store.businessName;
       $('#shop-sidebar').inert=true;
       $('#shop-sidebar').setAttribute('aria-hidden','true');
     }
     $('#sidebar-categories').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-category]');
+      if(button)setCategory(button.dataset.category);
+    });
+    $('#catalog').addEventListener('click',event=>{
       const button=event.target.closest('button[data-category]');
       if(button)setCategory(button.dataset.category);
     });
@@ -368,14 +428,19 @@
     function categoryPhoto(key){
       const needle=key.toLowerCase();
       const item=store.items.find(entry=>entry.category.toLowerCase().includes(needle)&&safeImage(entry.image));
-      return item?safeImage(item.image):'';
+      if(item)return safeImage(item.image);
+      if(/drink|juice/.test(needle))return demoPhotos.juice;
+      if(/cupcake|pastr/.test(needle))return demoPhotos.cupcake;
+      return demoPhotos.cake;
     }
     function updatePhotos(){
       const image=store.items.find(item=>/cake/i.test(item.category)&&safeImage(item.image))||store.items.find(item=>safeImage(item.image));
-      if(image){
-        const photo=$('#hero-photo');photo.src=safeImage(image.image);photo.alt=`Freshly baked ${image.name}`;photo.hidden=false;
-        $('#hero-photo-note').hidden=true;$('#hero-visual').classList.remove('no-photo');
-      }
+      const photo=$('#hero-photo');
+      photo.src=image?safeImage(image.image):demoPhotos.cake;
+      photo.alt=image?`Freshly baked ${image.name}`:'Illustrative celebration cake photography';
+      photo.hidden=false;
+      photo.onerror=()=>{photo.hidden=true;$('#hero-photo-note').hidden=false};
+      $('#hero-visual').classList.remove('no-photo');
       document.querySelectorAll('.category-tile').forEach(tile=>{
         const source=categoryPhoto(tile.dataset.category);
         if(source){const photo=document.createElement('img');photo.src=source;photo.alt='';photo.width=640;photo.height=480;photo.loading='lazy';tile.prepend(photo)}
@@ -384,21 +449,34 @@
       $('#instagram-grid').innerHTML=instagramPhotos.length?instagramPhotos.map(({item,image})=>`<img src="${esc(image)}" alt="${esc(item.name)}" width="600" height="600" loading="lazy">`).join(''):'<div class="instagram-empty">Our latest bakes will show here.</div>';
     }
     function updateBusinessDetails(){
-      const phone=String(store.phone||'').trim(),whatsapp=String(store.whatsapp||'').replace(/\D/g,''),instagram=String(store.instagram||'').trim();
+      const phone=String(store.phone||'').trim(),whatsappText=String(store.whatsapp||'').trim(),whatsappIntl=whatsappNumber(),instagram=String(store.instagram||'').trim(),instagramName=String(store.instagramName||'Tasty Base').trim(),tiktokName=String(store.tiktok||'').trim().replace(/^@/,'');
       $('#hours').textContent=store.hours?`Hours: ${store.hours}`:'Hours: details coming soon';
-      $('#location').textContent=store.location?`Location: ${store.location}`:'Location: details coming soon';
+      $('#location').textContent=store.location?`Location: ${store.location}`:'Location: Adenta';
       const phoneLink=$('#phone-link');
       if(phone){phoneLink.href=`tel:${phone.replace(/[^\d+]/g,'')}`;phoneLink.textContent=`Phone: ${phone}`}else{phoneLink.href='#custom-order';phoneLink.textContent='Phone: details coming soon'}
       const whatsappLink=$('#whatsapp-link');
-      if(whatsapp){whatsappLink.href=`https://wa.me/${whatsapp}`;whatsappLink.target='_blank';whatsappLink.rel='noopener noreferrer';whatsappLink.textContent='WhatsApp us'}
-      else{whatsappLink.href='#custom-order';whatsappLink.textContent='WhatsApp: send an order request'}
+      const floatingWhatsapp=$('#whatsapp-fab');
+      whatsappLink.hidden=false;floatingWhatsapp.hidden=false;
+      if(whatsappIntl){whatsappLink.href=`https://wa.me/${whatsappIntl}`;whatsappLink.target='_blank';whatsappLink.rel='noopener noreferrer';whatsappLink.textContent=`WhatsApp: ${whatsappText}`;floatingWhatsapp.href=`https://wa.me/${whatsappIntl}?text=${encodeURIComponent('Hello Tasty Base! I have a question about your menu.')}`}
+      else{whatsappLink.href='#custom-order';whatsappLink.textContent='WhatsApp: send an order request';floatingWhatsapp.href='#custom-order'}
       const instagramUrl=/^https:\/\/(www\.)?instagram\.com\//i.test(instagram)?instagram:'';
-      if(instagramUrl){$('#instagram-link').href=instagramUrl;$('#instagram-link').target='_blank';$('#instagram-link').rel='noopener noreferrer';$('#instagram-link').hidden=false;$('#footer-instagram').href=instagramUrl;$('#footer-instagram').target='_blank';$('#footer-instagram').rel='noopener noreferrer';$('#footer-instagram').textContent='Instagram: see our bakes'}
+      const footerInstagram=$('#footer-instagram');
+      footerInstagram.replaceChildren();
+      if(instagramUrl){
+        const instagramFooterLink=document.createElement('a');instagramFooterLink.href=instagramUrl;instagramFooterLink.target='_blank';instagramFooterLink.rel='noopener noreferrer';instagramFooterLink.textContent=`Instagram: ${instagramName||'Tasty Base'}`;footerInstagram.append(instagramFooterLink);
+        $('#instagram-link').href=instagramUrl;$('#instagram-link').target='_blank';$('#instagram-link').rel='noopener noreferrer';$('#instagram-link').hidden=false;
+      }else footerInstagram.textContent=`Instagram: ${instagramName||'Tasty Base'}`;
+      const tiktokUrl=/^[A-Za-z0-9._]{2,24}$/.test(tiktokName)?`https://www.tiktok.com/@${encodeURIComponent(tiktokName)}`:'';
+      const footerTiktok=$('#footer-tiktok');
+      footerTiktok.replaceChildren();
+      if(tiktokUrl){const tiktokFooterLink=document.createElement('a');tiktokFooterLink.href=tiktokUrl;tiktokFooterLink.target='_blank';tiktokFooterLink.rel='noopener noreferrer';tiktokFooterLink.textContent=`TikTok: ${tiktokName}`;footerTiktok.append(tiktokFooterLink)}
+      else footerTiktok.textContent=tiktokName?`TikTok: ${tiktokName}`:'TikTok';
       const schema=JSON.parse($('#business-schema').textContent);
       if(phone)schema.telephone=phone;
       if(store.location)schema.address={ '@type':'PostalAddress',streetAddress:store.location };
       if(store.hours)schema.openingHours=store.hours;
-      if(instagramUrl)schema.sameAs=[instagramUrl];
+      const socialProfiles=[instagramUrl,tiktokUrl].filter(Boolean);
+      if(socialProfiles.length)schema.sameAs=socialProfiles;
       $('#business-schema').textContent=JSON.stringify(schema);
     }
     function updateReviews(){
@@ -408,19 +486,22 @@
       $('#review-grid').innerHTML=reviews.length?reviews.map(review=>`<article class="review-card"><blockquote>“${esc(review.quote)}”</blockquote><cite>${esc(review.name)}</cite></article>`).join(''):'<p class="empty-note">Your kind words could be next. Leave us a note after your order.</p>';
     }
     function renderCatalog(){
-      const categories=['All',...store.categories.filter(category=>category.toLowerCase()!=='all')];
+      const categories=['All',...store.categories.filter(category=>!['all','add-ons'].includes(category.toLowerCase()))];
       if(!categories.includes(selectedCategory))selectedCategory='All';
-      const items=store.items.filter(item=>selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory);
-      const visibleItems=selectedCategory==='All'&&!catalogExpanded?items.slice(0,8):items;
+      const query=productSearch.trim().toLowerCase();
+      const items=store.items.filter(item=>(selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory)&&(!query||`${item.name} ${item.category}`.toLowerCase().includes(query)));
+      const visibleItems=selectedCategory==='All'&&!catalogExpanded&&!query?items.slice(0,8):items;
       const productCard=item=>{
-        const image=safeImage(item.image),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
-        return `<article class="product">${image?`<img class="product-photo" src="${esc(image)}" alt="${esc(item.name)}" width="640" height="480" loading="lazy">`:'<div class="photo-placeholder" aria-hidden="true">A fresh bake, made to order</div>'}<div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Order':'Request a quote'}</button></div></article>`;
+        const image=safeImage(item.image)||demoPhoto(item),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
+        return `<article class="product"><img class="product-photo" src="${esc(image)}" alt="${esc(item.name)} — illustrative menu photo" width="640" height="480" loading="lazy"><div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Add to basket':'Request a quote'}</button></div></article>`;
       };
       const heading=selectedCategory==='All'?'All treats':selectedCategory;
-      const moreButton=selectedCategory==='All'&&items.length>8?`<div class="view-more-wrap"><button class="btn outline view-more" type="button" aria-expanded="${catalogExpanded}" onclick="toggleCatalogExpanded()">${catalogExpanded?'Show less':'View more'}</button></div>`:'';
-      $('#catalog').innerHTML=`<div class="catalog-heading"><h2>${esc(heading)}</h2>${selectedCategory==='All'?`<span class="muted">${items.length} treats</span>`:''}</div><div class="products">${visibleItems.map(productCard).join('')||'<p class="empty-note">Nothing in this category just yet. Send us a note about what you would love.</p>'}</div>${moreButton}`;
+      const moreButton=selectedCategory==='All'&&!query&&items.length>8?`<div class="view-more-wrap"><button class="btn outline view-more" type="button" aria-expanded="${catalogExpanded}" onclick="toggleCatalogExpanded()">${catalogExpanded?'Show less':'View more'}</button></div>`:'';
+      const filters=categories.map(category=>`<button class="quick-filter" type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join('');
+      $('#catalog').innerHTML=`<div class="catalog-tools"><label class="catalog-search"><span aria-hidden="true">⌕</span><input id="menu-search" type="search" aria-label="Search menu" placeholder="Find a cake, juice or treat…" value="${esc(productSearch)}" oninput="searchProducts(this.value,this.selectionStart)"></label><div class="quick-filters" role="group" aria-label="Filter menu categories">${filters}</div></div><div class="catalog-heading"><h2>${esc(heading)}</h2><span class="muted">${items.length} ${items.length===1?'treat':'treats'}</span></div><div class="products">${visibleItems.map(productCard).join('')||'<p class="empty-note">Nothing in this category just yet. Send us a note about what you would love.</p>'}</div>${moreButton}`;
       document.querySelectorAll('#sidebar-categories button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.category===selectedCategory)));
     }
+    function searchProducts(value,position){productSearch=value;renderCatalog();const input=$('#menu-search');if(input){input.focus();const cursor=Number.isInteger(position)?position:input.value.length;input.setSelectionRange(cursor,cursor)}}
     function setCategory(category){
       selectedCategory=category;catalogExpanded=false;renderCatalog();setSidebar(false);
       $('#menu-section').scrollIntoView({behavior:'smooth',block:'start'});
@@ -440,12 +521,16 @@
     function renderCart(){
       const items=cartItems(),count=items.reduce((total,item)=>total+cart[item.id],0);
       $('#cart-count').textContent=count;
-      $('#cart-content').innerHTML=items.length?`<div class="cart-lines">${items.map(item=>`<div class="cart-line"><span><b>${esc(item.name)}</b><br><span class="form-help">${Number(item.price)>0?money(Number(item.price)*cart[item.id]):'Price to be confirmed'}</span></span><span class="quantity"><button type="button" aria-label="Remove one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',-1)">−</button><span>${cart[item.id]}</span><button type="button" aria-label="Add one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',1)">+</button></span></div>`).join('')}</div><div class="total-row"><span>Estimated total</span><span>${money(orderTotal())}</span></div>`:'<p class="cart-empty">Your basket is empty. The oven is warm.</p>';
+      $('#basket-fab-count').textContent=count;
+      $('.basket-fab').setAttribute('aria-label',`Open catering basket with ${count} ${count===1?'item':'items'}`);
+      const needsQuote=items.some(item=>!(Number(item.price)>0));
+      $('#cart-content').innerHTML=items.length?`<div class="cart-lines">${items.map(item=>`<div class="cart-line"><span><b>${esc(item.name)}</b><br><span class="form-help">${Number(item.price)>0?money(Number(item.price)*cart[item.id]):'Price to be confirmed'}</span></span><span class="quantity"><button type="button" aria-label="Remove one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',-1)">−</button><span>${cart[item.id]}</span><button type="button" aria-label="Add one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',1)">+</button></span></div>`).join('')}</div>${needsQuote?'<p class="form-help">Subtotal includes priced items only. We’ll confirm quote-only items in WhatsApp.</p>':''}<div class="total-row"><span>${needsQuote?'Priced items subtotal':'Estimated total'}</span><span>${money(orderTotal())}</span></div>`:'<p class="cart-empty">Your catering basket is empty. Add treats to get started.</p>';
       $('#submit-button').disabled=!items.length;
     }
-    function toggleCart(open){
+    function toggleCart(open=!$('#cart-panel').classList.contains('open')){
       const panel=$('#cart-panel');panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));panel.inert=!open;
-      if(open)panel.querySelector('input')?.focus();
+      $('.basket-fab').setAttribute('aria-expanded',String(open));
+      if(open)panel.querySelector('.cart-close').focus();
     }
     function toggleAddress(){
       const delivery=$('input[name="fulfillment"]:checked').value==='delivery';
@@ -475,7 +560,7 @@
       const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:'pickup',items:[],customRequest:true,what:form.elements.what.value.trim(),budget:form.elements.budget.value.trim()};
       if(!payload.what){form.elements.what.focus();form.elements.what.setCustomValidity('Tell us what we are making.');form.elements.what.reportValidity();form.elements.what.setCustomValidity('');return}
       const whatsappText=`Hello Tasty Base! I'd like to request a custom order.\n\nName: ${payload.customer}\nPhone: ${payload.phone}\nDate needed: ${payload.pickup}\nWhat we're making: ${payload.what}${payload.budget?`\nBudget: ${payload.budget}`:''}`;
-      const waNumber=String(store.whatsapp||'').replace(/\D/g,'');
+      const waNumber=whatsappNumber();
       const waUrl=`https://wa.me/${waNumber}?text=${encodeURIComponent(whatsappText)}`;
       const whatsappWindow=window.open('about:blank','_blank');
       if(whatsappWindow)whatsappWindow.document.write('<title>Tasty Base</title><p style="font:16px sans-serif;padding:24px">Saving your order request…</p>');
@@ -495,21 +580,51 @@
       event.preventDefault();
       const form=$('#checkout'),button=$('#submit-button'),items=cartItems();
       showStatus('#cart-status','');
-      if(!items.length){showStatus('#cart-status','Add at least one item to your order.',true);return}
+      if(!items.length){showStatus('#cart-status','Add at least one item to your catering basket.',true);return}
       if(!validateForm(form))return;
       const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:form.elements.fulfillment.value,address:form.elements.address.value.trim(),notes:form.elements.notes.value.trim(),website:form.elements.website.value,items:items.map(item=>({id:item.id,quantity:cart[item.id]}))};
-      button.disabled=true;button.textContent='Sending…';
+      const recipient=whatsappNumber();
+      if(!recipient){showStatus('#cart-status','The bakery WhatsApp number is not configured. Please contact Tasty Base directly.',true);return}
+      const whatsappWindow=window.open('about:blank','_blank');
+      if(whatsappWindow)whatsappWindow.document.write('<title>Tasty Base</title><p style="font:16px sans-serif;padding:24px">Saving your catering order…</p>');
+      button.disabled=true;button.textContent='Preparing WhatsApp…';
       try{
         const result=await api('submitPublicOrder',payload);
-        cart={};renderCart();form.reset();toggleAddress();showStatus('#cart-status',`Got it! We'll message you shortly. Request ${result.reference} is saved.`,false,true);
-      }catch(error){showStatus('#cart-status',error.message,true)}
-      finally{button.disabled=!cartItems().length;button.textContent='Send order request'}
+        const quoteRequired=items.some(item=>!(Number(item.price)>0));
+        const orderLines=items.map(item=>`• ${item.name} × ${cart[item.id]}${Number(item.price)>0?` — ${money(Number(item.price)*cart[item.id])}`:' — price to confirm'}`);
+        const message=[
+          'Hello Tasty Base! I would like to place this catering order.',
+          `Order reference: ${result.reference||'New order'}`,
+          '',
+          'ORDER',
+          ...orderLines,
+          `Estimated total: ${quoteRequired?`${money(orderTotal())} plus items awaiting a quote`:money(orderTotal())}`,
+          `Fulfilment: ${payload.fulfillment==='delivery'?'Delivery':'Pickup'}`,
+          `Date needed: ${payload.pickup}`,
+          ...(payload.address?[`Delivery address: ${payload.address}`]:[]),
+          '',
+          'CUSTOMER',
+          `Name: ${payload.customer}`,
+          `Phone: ${payload.phone}`,
+          ...(payload.notes?[`Notes: ${payload.notes}`]:[]),
+          '',
+          'Please confirm availability and the final price.'
+        ].join('\n');
+        const whatsappUrl=`https://wa.me/${recipient}?text=${encodeURIComponent(message)}`;
+        cart={};renderCart();form.reset();toggleAddress();
+        showStatus('#cart-status',`Order request saved${result.reference?` (reference ${result.reference})`:''}. WhatsApp is ready; review the message and tap Send to place your order.`,false,true);
+        if(whatsappWindow){whatsappWindow.opener=null;whatsappWindow.location.href=whatsappUrl}
+        else{
+          const link=document.createElement('a');link.href=whatsappUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open WhatsApp and send your order';link.className='btn outline small cart-whatsapp-fallback';$('#cart-status').append(document.createElement('br'),link);
+        }
+      }catch(error){if(whatsappWindow)whatsappWindow.close();showStatus('#cart-status',error.message,true)}
+      finally{button.disabled=!cartItems().length;button.textContent='Continue to WhatsApp'}
     }
     async function start(){
       minDates();renderCart();
       try{
         const data=await api('getPublicStore');
-        store={...store,...data,items:Array.isArray(data.items)?data.items:[],categories:Array.isArray(data.categories)?data.categories:[]};
+        store={...store,...data,phone:data.phone||store.phone,whatsapp:data.whatsapp||store.whatsapp,location:data.location||store.location,instagram:data.instagram||store.instagram,instagramName:data.instagramName||store.instagramName,tiktok:data.tiktok||store.tiktok,items:Array.isArray(data.items)?data.items:[],categories:Array.isArray(data.categories)?data.categories:[]};
         $('#brand').textContent=store.businessName;
         renderSidebar();
         document.title=`${store.businessName} | Sweet moments, baked fresh`;
