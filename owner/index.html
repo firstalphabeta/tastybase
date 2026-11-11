@@ -1,0 +1,449 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Tasty Base | Owner dashboard</title>
+<meta name="description" content="Private Tasty Base owner dashboard for orders, sales, receipts and bakery insights."><meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f6f2e9"><meta property="og:title" content="Tasty Base | Owner workspace"><meta property="og:description" content="Private owner workspace for orders, sales, products and bakery insights."><meta property="og:type" content="website"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Tasty Base">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="../icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="../icon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--white:#fffdf8;--logo-pink:#a43d31;--rose:#a43d31;--blush:#f0eadc;--gold:#d8aa55;--cocoa:#282521;--pistachio:#77917a;--dash:#f6f2e9;--bg:var(--dash);--ink:var(--cocoa);--mut:#71675c;--card:#fffdf8;--line:#e4ddd0;--band:#f0eadc;--b:var(--rose);--berry:#a43d31;--honey:var(--gold);--cream:var(--white);--pk:#f0eadc;--mint:#e1eade;--warn:#f6e8d0;--k1:#415b49;--onink:#fffdf8;--primary-text:#fffdf8;--space-1:8px;--space-2:16px;--space-3:24px;--space-4:32px;--space-5:40px;--radius-sm:10px;--radius:14px;--shadow:0 10px 28px rgba(40,37,33,.06);--overlay:rgba(40,37,33,.5);--overlay-shadow:rgba(40,37,33,.16);--font-body:"DM Sans",sans-serif;--font-display:Fraunces,serif}
+[data-theme=dark]{color-scheme:dark;--bg:#171a17;--ink:#f3f0e8;--mut:#c0bbb0;--card:#222722;--line:#3a4039;--band:#202620;--dash:#171a17;--blush:#202620;--rose:#d67b66;--b:var(--rose);--pk:var(--band);--mint:#29382d;--warn:#443a28;--k1:#405949;--onink:#fffdf8;--primary-text:#fffdf8;--shadow:0 12px 32px rgba(0,0,0,.24)}
+*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{min-height:100vh;min-height:100dvh;margin:0;background:var(--bg);color:var(--ink);font:15px var(--font-body);overflow-x:hidden}
+h1,h2,.brand{font-family:var(--font-display);font-weight:600;margin:0}h1{font-size:clamp(26px,3vw,34px);line-height:1.08}h2{font-size:18px;margin-bottom:8px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;background:var(--card);border-top:1px solid var(--line);z-index:5;padding-bottom:env(safe-area-inset-bottom)}nav::-webkit-scrollbar{display:none}
+nav .brand{display:none}nav .brand:before{content:"";display:inline-block;width:32px;height:32px;margin-right:8px;border-radius:10px;background:url("../icon.svg") center/contain no-repeat;vertical-align:middle}nav button{flex:0 0 auto;min-width:max-content;border:0;background:none;padding:14px 12px;font:inherit;font-size:13px;color:var(--mut);min-height:54px;white-space:nowrap;touch-action:manipulation}
+nav button.on{color:var(--b);font-weight:700}
+.mobile-menu-toggle,.nav-close,.nav-overlay{display:none}
+main{width:100%;padding:14px 16px calc(96px + env(safe-area-inset-bottom));max-width:1200px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-2);margin-bottom:var(--space-1);box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.kpi{border-radius:16px;padding:16px;background:var(--card)}.kpi b{display:block;font-size:26px;margin:8px 0 2px}.kpi small{color:var(--mut)}
+.k1{background:var(--k1);color:var(--primary-text)}.k1 small{color:inherit}.k2{background:var(--pk)}.k3{background:var(--pk)}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:var(--card);color:var(--ink);min-height:46px}
+textarea{min-height:110px;resize:vertical}
+label{font-size:13px;color:var(--mut);display:block;margin:10px 0 4px}
+.btn{background:var(--b);color:var(--primary-text);border:0;border-radius:var(--radius-sm);padding:12px 18px;font:inherit;font-weight:700;min-height:48px;cursor:pointer}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}.btn.sm{min-height:44px;padding:8px 12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.mut{color:var(--mut);font-size:13px}.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:10px 0}
+.chip{border:0;border-radius:20px;padding:10px 16px;background:var(--card);color:var(--ink);font:inherit;white-space:nowrap;min-height:44px}.chip.on{background:var(--ink);color:var(--onink)}
+.step{display:flex;gap:6px;align-items:center}.step button{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:20px}
+.step input{width:64px;text-align:center;padding:8px}
+.tip{border-radius:12px;padding:12px 14px;margin-bottom:10px}.tip b{display:block;margin-bottom:2px}
+.tip.good{background:var(--mint)}.tip.warn{background:var(--warn)}.tip.idea{background:var(--pk)}
+.addon-list{margin:8px 0 0}.addon-list .row{gap:12px}.addon-list .step input{width:58px}.price-missing{color:var(--mut);font-style:italic}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dashboard-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:8px 0 16px}.dashboard-heading p{margin:6px 0 0}
+.period-switch{display:inline-flex;gap:2px;padding:3px;background:var(--card);border:1px solid var(--line);border-radius:10px}.period-switch button{border:0;border-radius:7px;background:transparent;color:var(--mut);font:inherit;padding:8px 12px;min-height:44px;cursor:pointer;touch-action:manipulation}.period-switch button.on{background:var(--b);color:var(--onink)}
+.dashboard-kpis{grid-template-columns:repeat(4,minmax(0,1fr));margin:0 0 16px}.dashboard-kpis .kpi{min-width:0}.dashboard-kpis .kpi b{font-size:clamp(20px,3vw,26px);overflow-wrap:anywhere}
+.dashboard-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.chart-card{min-width:0}.chart-card h2{margin-bottom:4px}.chart-card svg{display:block;margin-top:12px}.chart-legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--mut);font-size:12px;margin-top:6px}.chart-legend span{display:inline-flex;align-items:center;gap:6px}.chart-legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.dashboard-orders .row h2{margin:0}.order-controls{display:flex;align-items:center;gap:6px;flex:0 0 auto}.order-controls select{width:auto;min-width:112px;min-height:44px;padding:8px}.dashboard-order-row>span:first-child,.order-list-row>div:first-child{min-width:0;overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:var(--onink);padding:12px 18px;border-radius:12px;z-index:99}
+#rc{position:fixed;inset:0;background:var(--overlay);z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.rcbox{background:var(--card);border-radius:16px;padding:20px;width:100%;max-width:380px}
+@media(max-width:700px){main{padding:12px 12px calc(88px + env(safe-area-inset-bottom))}.dashboard-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.dashboard-kpis .kpi{padding:12px}.dashboard-kpis .kpi b{font-size:21px}.dashboard-kpis .kpi small{font-size:11px}.dashboard-charts{grid-template-columns:1fr}.dashboard-heading{align-items:flex-start;gap:10px}.dashboard-heading h1{font-size:26px}.period-switch{max-width:100%}.period-switch button{padding:8px 10px}.chart-card{margin-bottom:10px}.card{padding:14px;border-radius:12px}.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.row{min-width:0}.row>span,.row>div{min-width:0;overflow-wrap:anywhere}}
+@media(max-width:360px){main{padding-left:10px;padding-right:10px}.dashboard-kpis{grid-template-columns:1fr 1fr}.dashboard-kpis .kpi{padding:10px}.dashboard-kpis .kpi b{font-size:19px}.two{grid-template-columns:1fr}nav button{padding-left:11px;padding-right:11px}}
+@media(max-width:420px){.two{grid-template-columns:1fr}}
+@media(max-width:700px){.order-list-row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}.order-controls{display:grid;grid-template-columns:minmax(0,1fr) repeat(2,minmax(70px,.55fr));width:100%}.order-controls select{width:100%;min-width:0}}
+@media(max-width:420px){.dashboard-order-row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}.dashboard-order-row .order-controls{grid-template-columns:minmax(0,1fr) auto}}
+@media(max-width:859px){.item-row{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}.item-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:6px}.item-actions .btn{width:100%!important;min-width:0;min-height:44px;padding:8px 4px;font-size:13px;white-space:nowrap}}
+@media(max-width:859px){
+  .mobile-menu-toggle{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;font-size:24px;line-height:1}
+  .nav-overlay{display:block;position:fixed;inset:0;z-index:19;border:0;padding:0;background:var(--overlay);opacity:0;visibility:hidden;transition:opacity .2s ease,visibility .2s ease}
+  .nav-overlay.visible{opacity:1;visibility:visible}
+  nav{top:0;right:auto;bottom:0;left:0;width:min( min(82vw,320px), calc(100vw - 52px));height:100vh;height:100dvh;padding:calc(18px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:6px;overflow-x:hidden;overflow-y:auto;border:0;border-right:1px solid var(--line);box-shadow:12px 0 36px var(--overlay-shadow);transform:translateX(-105%);transition:transform .22s cubic-bezier(.2,.75,.25,1);z-index:20;visibility:hidden}
+  nav.open{transform:translateX(0);visibility:visible}
+  nav .brand{display:block;padding:8px 8px 20px;font-size:22px}
+  nav button{flex:0 0 auto;width:100%;min-width:0;min-height:48px;text-align:left;padding:12px 14px;font-size:15px;border-radius:10px}
+  nav button.on{background:var(--pk);color:var(--b)}
+  nav .nav-close{display:inline-grid;place-items:center;position:absolute;top:calc(12px + env(safe-area-inset-top));right:12px;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:28px;line-height:1}
+  body.nav-open{overflow:hidden}
+}
+@media(prefers-reduced-motion:reduce){nav,.nav-overlay{transition:none}}
+@media print{body *{visibility:hidden}#rcp,#rcp *{visibility:visible}#rc{position:absolute;inset:0;background:none;display:block;padding:0}.rcbox{box-shadow:none;max-width:none;padding:0;background:var(--white);color:var(--cocoa)}#rcp *{color:var(--cocoa)!important}}
+@media(min-width:860px){nav{top:0;bottom:0;right:auto;width:210px;flex-direction:column;justify-content:flex-start;padding:24px 12px;gap:4px;border:0;border-right:1px solid var(--line)}
+nav .brand{display:block;font-size:22px;padding:0 10px 20px}nav button{flex:none;text-align:left;font-size:15px;padding:12px 14px;border-radius:12px;min-height:46px}nav button.on{background:var(--ink);color:var(--onink)}
+main{width:calc(100% - 230px);margin:0 auto 0 230px;padding-bottom:40px}
+.mobile-menu-toggle{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;font-size:24px;line-height:1}
+nav{transition:transform .22s cubic-bezier(.2,.75,.25,1)}nav.collapsed{transform:translateX(-100%)}main.nav-collapsed{width:min(1200px,100%);margin-left:auto}}
+.dashboard-today-kpis .kpi{border:1px solid var(--line);box-shadow:var(--shadow)}
+.dashboard-today-kpis .kpi b{font-size:clamp(20px,3vw,26px)}
+.brand-logo{width:32px;height:32px;margin-right:8px;border-radius:10px;vertical-align:middle}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style><style>
+.btn{color:var(--primary-text)}
+.k1{background:var(--k1);color:var(--primary-text)}
+.k1 small{color:var(--primary-text)}
+.k3{background:var(--pk)}
+.toast{background:var(--cocoa);color:var(--white)}
+:root[data-theme=dark] .chip.on{background:var(--rose);color:var(--cocoa)}
+</style><style>
+[hidden]{display:none!important}
+main h1,main h2,main h3{font-family:var(--font-body);letter-spacing:-.035em}
+main h1{font-size:clamp(28px,3vw,36px);margin:8px 0 6px}
+main h2{font-size:17px;font-weight:700}
+nav .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 24px;color:var(--ink);font-size:18px}
+nav .brand:before{content:none}
+nav .brand-logo{width:36px;height:36px;margin:0}
+nav .nav-group{display:grid;gap:3px;margin:8px 0 13px}
+nav .nav-group-label{margin:8px 12px 5px;color:var(--mut);font-size:10px;font-weight:700;letter-spacing:.13em}
+nav button{display:flex;align-items:center;gap:12px;border-radius:9px}
+nav button.on{background:#e8e3d8;color:var(--ink)}
+nav .nav-glyph{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:var(--card);color:var(--mut);font-size:16px}
+nav button.on .nav-glyph{background:#fffdf8;color:var(--rose)}
+nav .nav-foot{display:grid;gap:5px;margin:auto 10px 0;padding-top:16px;border-top:1px solid var(--line);color:var(--mut);font-size:9px;font-weight:700;letter-spacing:.1em}
+nav .nav-foot small{font-size:11px;font-weight:400;letter-spacing:0}
+.admin-topbar{position:sticky;top:0;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:72px;margin:0 -16px 24px;padding:10px 20px;border-bottom:1px solid var(--line);background:var(--bg)}
+.admin-topbar-start,.admin-topbar-end{display:flex;align-items:center;gap:12px;min-width:0}
+.topbar-page{font-size:15px;font-weight:700}
+.admin-search{display:flex;align-items:center;gap:8px;width:min(34vw,340px);min-height:42px;margin:0;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--mut)}
+.admin-search input{min-width:0;min-height:38px;padding:5px 0;border:0;border-radius:0;background:transparent;color:var(--ink);font-size:13px;outline:0}
+.admin-search input:focus-visible{outline:0}
+.admin-search kbd{flex:0 0 auto;padding:2px 5px;border:1px solid var(--line);border-radius:4px;font:10px var(--font-body)}
+.icon-btn{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font-size:18px;cursor:pointer}
+.user-chip{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:12px;white-space:nowrap}
+.user-avatar{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e8e3d8;color:var(--ink);font-weight:700}
+.logout-btn{min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:600 12px var(--font-body);cursor:pointer}
+.card{border-radius:12px;box-shadow:0 2px 8px rgba(40,37,33,.035)}
+.kpi{border:1px solid var(--line);border-radius:12px}
+.kpi b{font-weight:700;letter-spacing:-.04em}
+.kpi.k1{border-color:transparent;background:#415b49}
+.dashboard-heading{align-items:center}
+.dashboard-heading h1{max-width:760px}
+.dashboard-charts .card{min-height:270px}
+.tip{border:1px solid transparent}
+.row{gap:14px}
+input,select,textarea{border-radius:8px}
+.btn{border-radius:8px}
+.chip{border:1px solid var(--line);border-radius:8px}
+.chip.on{background:#415b49;color:#fff}
+.negative-margin{color:#a43d31!important;font-weight:700}
+@media(min-width:860px){nav{width:248px;padding:24px 14px}main{width:calc(100% - 268px);margin-left:268px;padding-top:0}.admin-topbar{margin-inline:-16px}.dashboard-heading{margin-top:0}}
+@media(max-width:859px){.admin-topbar{min-height:62px;margin:0 -12px 20px;padding:8px 12px}.admin-topbar-end{gap:7px}.admin-search{width:min(38vw,230px)}.admin-search kbd,.user-chip>span:last-child{display:none}.nav-foot{display:none}}
+@media(max-width:520px){.admin-topbar{gap:8px}.admin-topbar-start,.admin-topbar-end{gap:6px}.admin-search{width:min(40vw,180px)}.logout-btn{padding-inline:8px;font-size:11px}.user-avatar{width:28px;height:28px}.theme-toggle{width:36px;height:36px}}
+</style></head><body><div id="app"><p style="padding:24px">Loading…</p></div>
+<script>
+const th0=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=th0;
+let S={Items:[],Categories:[],Sales:[],Expenses:[],Orders:[],Settings:[]},view='home',cat='All',cart={},ed=null,orderEd=null,saleDate='',tt,receiptAfterSave=false,pendingItemImage='',clearItemImage=false,expensesReady=false,ordersFinanceReady=false,dashboardPeriod='week',saleAddonsReviewed=false,orderAddons={},orderAddonsReviewed=false,orderPollTimer=null,dashboardSearch='';
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const countLabel=(count,singular,plural)=>`${count} ${count===1?singular:plural||`${singular}s`}`;
+const pad=n=>String(n).padStart(2,'0'),ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const today=()=>ymd(new Date()),addDays=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return ymd(d)};
+const cfg=(k,d)=>(S.Settings.find(r=>r.key===k)||{}).value||d,money=n=>cfg('currency','GH₵ ')+Number(n||0).toLocaleString(undefined,{maximumFractionDigits:2});
+const rev=r=>r.qty*r.price,hasCost=value=>value!==''&&value!==null&&value!==undefined&&Number.isFinite(Number(value)),saleCost=r=>hasCost(r.cost)?r.cost:S.Items.find(item=>item.id===r.itemId)?.cost,prof=r=>hasCost(saleCost(r))?r.qty*(r.price-num(saleCost(r))):0,sum=(a,f)=>a.reduce((t,r)=>t+f(r),0),num=v=>parseFloat(v)||0,hasOrderCost=o=>hasCost(o.cost);
+const API='https://script.google.com/macros/s/AKfycbxPuQRZ5HV95-QudpoQ6vee8oXBkxaw1sIx91-Gr67UQhBp38s_MutlYBK4KimEEr_VLw/exec';
+const run=async(fn,...args)=>{try{const response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fn,args,token:sessionStorage.getItem('bakerySession')||''})});if(!response.ok)throw new Error('The owner service is unavailable. Try again shortly.');const result=await response.json();if(!result.ok){if(result.error==='AUTH_REQUIRED'){sessionStorage.removeItem('bakerySession');sessionStorage.removeItem('bakeryEmail');window.location.replace('./login.html');throw new Error('Your session expired. Sign in again.')}if(result.error==='OWNER_SETUP_REQUIRED')throw new Error('Owner login is not configured. Run initializeOwnerAccount in the Apps Script editor.');if(result.error==='PIN_REQUIRED'||result.error==='PIN_SETUP_REQUIRED')throw new Error('The live Apps Script still uses PIN access. Deploy the updated Code.gs before using password sign-in.');throw new Error(result.error||'The request could not be completed.')}return result.data}catch(error){if(!/session expired/i.test(error.message))note('Error: '+error.message);throw error}};
+function fileToWebpDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const image=new Image(),url=URL.createObjectURL(file);
+    image.onload=()=>{
+      try{
+        const scale=Math.min(1,960/Math.max(image.naturalWidth,image.naturalHeight)),canvas=document.createElement('canvas');
+        canvas.width=Math.max(1,Math.round(image.naturalWidth*scale));canvas.height=Math.max(1,Math.round(image.naturalHeight*scale));
+        const context=canvas.getContext('2d');
+        if(!context){URL.revokeObjectURL(url);reject(new Error('Could not prepare this photo'));return}
+        context.drawImage(image,0,0,canvas.width,canvas.height);
+        canvas.toBlob(blob=>{
+          URL.revokeObjectURL(url);
+          if(!blob||blob.type!=='image/webp'){reject(new Error('This browser could not convert the photo to WebP'));return}
+          const reader=new FileReader();reader.onload=()=>resolve(String(reader.result||''));reader.onerror=()=>reject(new Error('Could not read the optimized photo'));reader.readAsDataURL(blob);
+        },'image/webp',.72);
+      }catch(error){URL.revokeObjectURL(url);reject(error)}
+    };
+    image.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Could not open this photo'))};
+    image.src=url;
+  });
+}
+async function loadItemImage(input){const file=input&&input.files&&input.files[0];if(!file)return;try{pendingItemImage=await fileToWebpDataUrl(file);clearItemImage=false;renderItemImagePreview()}catch(error){input.value='';note(error.message)}}
+function renderItemImagePreview(){const preview=$('#item-image-preview'),image=clearItemImage?'':pendingItemImage||(ed&&ed.image)||'';if(preview)preview.innerHTML=image?`<img src="${image}" style="max-width:100%;max-height:100px;border-radius:12px;border:1px solid var(--line);object-fit:cover">`:'<span class="mut">No photo yet</span>';const removeButton=$('#remove-item-image');if(removeButton)removeButton.hidden=!image;}
+function removeItemImage(){pendingItemImage='';clearItemImage=true;const input=$('#ii');if(input)input.value='';renderItemImagePreview();}
+async function updateOwnerCredentials(){const email=$('#owner-email').value.trim(),currentPassword=$('#current-password').value,nextPassword=$('#next-password').value;try{await run('changeOwnerCredentials',email,currentPassword,nextPassword);sessionStorage.removeItem('bakerySession');sessionStorage.removeItem('bakeryEmail');window.location.replace('./login.html')}catch(error){note(error.message==='CURRENT_PASSWORD_INCORRECT'?'Current password is incorrect.':error.message==='PASSWORD_LENGTH_INVALID'?'Use a new password with at least 12 characters.':error.message==='INVALID_EMAIL'?'Enter a valid email address.':error.message)}}
+function note(m){clearTimeout(tt);let t=$('.toast');if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}t.textContent=m;tt=setTimeout(()=>t.remove(),2500)}
+let mobileNavOpen=false,desktopNavCollapsed=false;
+const go=v=>{view=v;ed=null;orderEd=null;orderAddons={};orderAddonsReviewed=false;mobileNavOpen=false;render();scrollTo(0,0)};
+function setMobileNav(open){mobileNavOpen=open;document.body.classList.toggle('nav-open',open);const nav=$('#app nav'),overlay=$('.nav-overlay'),toggle=$('.mobile-menu-toggle');if(nav){nav.classList.toggle('open',open);nav.setAttribute('aria-hidden',String(window.innerWidth<860&&!open))}if(overlay)overlay.classList.toggle('visible',open);if(toggle){toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu')}if(open){nav?.querySelector('.nav-close')?.focus()}else if(toggle&&window.innerWidth<860){toggle.focus()}}
+function toggleMobileNav(){if(window.innerWidth>=860){desktopNavCollapsed=!desktopNavCollapsed;const nav=$('#mobile-nav'),main=$('#app main'),toggle=$('.mobile-menu-toggle');nav?.classList.toggle('collapsed',desktopNavCollapsed);main?.classList.toggle('nav-collapsed',desktopNavCollapsed);nav?.setAttribute('aria-hidden',String(desktopNavCollapsed));toggle?.setAttribute('aria-expanded',String(!desktopNavCollapsed));toggle?.setAttribute('aria-label',desktopNavCollapsed?'Expand navigation menu':'Collapse navigation menu');return}setMobileNav(!mobileNavOpen)}
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&mobileNavOpen)setMobileNav(false);if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.admin-search input')?.focus()}});
+window.addEventListener('resize',()=>{const nav=$('#mobile-nav'),main=$('#app main'),toggle=$('.mobile-menu-toggle');if(window.innerWidth>=860){if(mobileNavOpen)setMobileNav(false);nav?.setAttribute('aria-hidden',String(desktopNavCollapsed));main?.classList.toggle('nav-collapsed',desktopNavCollapsed);nav?.classList.toggle('collapsed',desktopNavCollapsed);toggle?.setAttribute('aria-expanded',String(!desktopNavCollapsed));toggle?.setAttribute('aria-label',desktopNavCollapsed?'Expand navigation menu':'Collapse navigation menu')}else{desktopNavCollapsed=false;nav?.classList.remove('collapsed');main?.classList.remove('nav-collapsed');nav?.setAttribute('aria-hidden',String(!mobileNavOpen));toggle?.setAttribute('aria-expanded',String(mobileNavOpen));toggle?.setAttribute('aria-label',mobileNavOpen?'Close navigation menu':'Open navigation menu')}});
+function setDashboardPeriod(period){dashboardPeriod=period;render()}
+const STATUS=['Pending','Baking','Ready','Collected','Cancelled'];
+const MENU_CATEGORIES=['Birthday Cakes','Cupcakes & Bento Boxes','Wedding Cakes & Treats','Savory Pies & Sides','Crunchy Snacks','Juices & Smoothies','Main Food','Proteins','Add-ons'];
+const MENU_PRODUCTS=[
+  ['Birthday Cakes','6-inch Birthday Cake - Short',350],['Birthday Cakes','6-inch Birthday Cake - Medium',500],['Birthday Cakes','6-inch Birthday Cake - Tall',700],
+  ['Birthday Cakes','8-inch Birthday Cake - Short',400],['Birthday Cakes','8-inch Birthday Cake - Medium',600],['Birthday Cakes','8-inch Birthday Cake - Tall',850],
+  ['Birthday Cakes','10-inch Birthday Cake - Short',500],['Birthday Cakes','10-inch Birthday Cake - Medium',750],['Birthday Cakes','10-inch Birthday Cake - Tall',1200],
+  ['Birthday Cakes','12-inch Birthday Cake - Short',600],
+  ['Cupcakes & Bento Boxes','Cupcakes - 4 pieces',60],['Cupcakes & Bento Boxes','Cupcakes - 6 pieces',100],['Cupcakes & Bento Boxes','Cupcakes - 12 pieces',180],['Cupcakes & Bento Boxes','Cupcakes - 24 pieces',380],['Cupcakes & Bento Boxes','Cupcakes - 50 pieces',750],
+  ['Cupcakes & Bento Boxes','Bento Cake Only',135],['Cupcakes & Bento Boxes','Bento with 4 Cupcakes',200],['Cupcakes & Bento Boxes','Bento with 6 Cupcakes',250],
+  ['Wedding Cakes & Treats','Wedding Cake - One Layer',1000],['Wedding Cakes & Treats','Wedding Cake - Two Layers',2000],['Wedding Cakes & Treats','Cake in a Cup',40],['Wedding Cakes & Treats','Cake in a Bowl - No Icing',25],
+  ['Savory Pies & Sides','Meat Pie - each',15],['Savory Pies & Sides','Fish Pie - each',15],['Savory Pies & Sides','Vegetable Pie - each',15],
+  ['Savory Pies & Sides','Spring Rolls - each',null],['Savory Pies & Sides','Spring Rolls - 10 pieces',30],['Savory Pies & Sides','Spring Rolls - 20 pieces',60],['Savory Pies & Sides','Spring Rolls - 30 pieces',90],['Savory Pies & Sides','Samosa - each',null],['Savory Pies & Sides','Samosa - 10 pieces',null],['Savory Pies & Sides','Samosa - 20 pieces',null],['Savory Pies & Sides','Samosa - 30 pieces',null],['Savory Pies & Sides','Puff Puff - one box',30],
+  ['Crunchy Snacks','Onion Chips - Small',30],['Crunchy Snacks','Onion Chips - Medium',50],['Crunchy Snacks','Onion Chips - Large',100],
+  ['Crunchy Snacks','Plantain Chips - Small',20],['Crunchy Snacks','Plantain Chips - Medium',30],['Crunchy Snacks','Plantain Chips - Large',80],
+  ['Crunchy Snacks','Cookies - Small',30],['Crunchy Snacks','Cookies - Medium',60],['Crunchy Snacks','Cookies - Large',110],
+  ['Crunchy Snacks','Baked Chips - Small',30],['Crunchy Snacks','Baked Chips - Medium',50],['Crunchy Snacks','Baked Chips - Large',80],
+  ['Crunchy Snacks','Coated Groundnuts - Small',40],['Crunchy Snacks','Coated Groundnuts - Medium',75],['Crunchy Snacks','Coated Groundnuts - Large',150],
+  ['Juices & Smoothies','Fresh Juice - Pineapple',null],['Juices & Smoothies','Fresh Juice - Pineapple Ginger',null],['Juices & Smoothies','Fresh Juice - Pineapple Mint',null],['Juices & Smoothies','Fresh Juice - Watermelon',null],['Juices & Smoothies','Fresh Juice - Watermelon Ginger',null],['Juices & Smoothies','Fresh Juice - Watermelon Mint',null],['Juices & Smoothies','Fresh Juice - Orange',null],['Juices & Smoothies','Fresh Juice - Orange Ginger',null],['Juices & Smoothies','Fresh Juice - Orange Mint',null],['Juices & Smoothies','Fresh Juice - Pineapple Melon',null],['Juices & Smoothies','Fresh Juice - Orange Melon',null],['Juices & Smoothies','Fresh Juice - Mixed Fruit',null],['Juices & Smoothies','Fresh Juice - Lemon & Ginger',null],['Juices & Smoothies','Fresh Juice - Mango',null],
+  ['Juices & Smoothies','Mango Delight Smoothie',null],['Juices & Smoothies','Local Drink - Sobolo',null],['Juices & Smoothies','Local Drink - Tiger Nut',null],['Juices & Smoothies','Greek Yogurt',null],
+  ['Main Food','Jollof Rice',null],['Main Food','Fried Rice',null],['Main Food','Plain Rice',null],['Main Food','Banku',null],['Main Food','Stew - 1 liter',null],
+  ['Proteins','Grilled Chicken',null],['Proteins','Fried Chicken',null],['Proteins','Gizzard',null],['Proteins','Meat',null],['Proteins','Fish',null],['Proteins','Tilapia',null],
+  ['Add-ons','Extra Cream',null],['Add-ons','Sprinkles',null],['Add-ons','Extra Frosting',null],['Add-ons','Extra Filling',null]
+];
+const MENU_COSTS={
+  'birthday cakes|6-inch birthday cake - short':230,'birthday cakes|6-inch birthday cake - medium':350,'birthday cakes|6-inch birthday cake - tall':460,
+  'cupcakes & bento boxes|cupcakes - 4 pieces':44,'cupcakes & bento boxes|cupcakes - 6 pieces':66,'cupcakes & bento boxes|cupcakes - 12 pieces':132,'cupcakes & bento boxes|cupcakes - 24 pieces':264,'cupcakes & bento boxes|cupcakes - 50 pieces':550,
+  'cupcakes & bento boxes|bento cake only':148,'cupcakes & bento boxes|bento with 4 cupcakes':192,'cupcakes & bento boxes|bento with 6 cupcakes':214,
+  'wedding cakes & treats|wedding cake - one layer':800,'wedding cakes & treats|wedding cake - two layers':1600,
+  'savory pies & sides|spring rolls - each':2,'savory pies & sides|spring rolls - 10 pieces':20,'savory pies & sides|spring rolls - 20 pieces':40,'savory pies & sides|spring rolls - 30 pieces':60,
+  'savory pies & sides|samosa - each':2,'savory pies & sides|samosa - 10 pieces':20,'savory pies & sides|samosa - 20 pieces':40,'savory pies & sides|samosa - 30 pieces':60,
+  'savory pies & sides|puff puff - one box':15,'savory pies & sides|meat pie - each':15,'savory pies & sides|fish pie - each':15,'savory pies & sides|vegetable pie - each':13,
+  'juices & smoothies|fresh juice - pineapple':11.4,'juices & smoothies|fresh juice - pineapple ginger':12.4,'juices & smoothies|fresh juice - pineapple mint':12.4,
+  'juices & smoothies|fresh juice - watermelon':8,'juices & smoothies|fresh juice - watermelon ginger':9,'juices & smoothies|fresh juice - watermelon mint':9,
+  'juices & smoothies|fresh juice - orange':15.4,'juices & smoothies|fresh juice - orange ginger':16.4,'juices & smoothies|fresh juice - orange mint':16.4,
+  'juices & smoothies|fresh juice - pineapple melon':12,'juices & smoothies|fresh juice - orange melon':15,'juices & smoothies|fresh juice - mixed fruit':20
+};
+const itemKey=(category,name)=>`${String(category||'').trim().toLowerCase()}|${String(name||'').trim().toLowerCase()}`;
+const MENU_SELLING_PRICES=new Map(MENU_PRODUCTS.filter(([, ,price])=>price!==null).map(([category,name,price])=>[itemKey(category,name),price]));
+async function ensureMenuProducts(){
+  const existingCategories=new Set(S.Categories.map(category=>(category.name||'').toLowerCase())),categories=MENU_CATEGORIES.filter(name=>!existingCategories.has(name.toLowerCase()));
+  if(categories.length)S.Categories.push(...await run('saveMany','Categories',categories.map(name=>({name}))));
+  const existingItems=new Set(S.Items.map(item=>itemKey(item.category,item.name)));
+  const items=MENU_PRODUCTS.filter(([category,name])=>!existingItems.has(itemKey(category,name))).map(([category,name,price])=>({name,category,price:price??'',cost:MENU_COSTS[itemKey(category,name)]??'',active:true}));
+  if(items.length)S.Items.push(...await run('saveMany','Items',items));
+  const updates=S.Items.flatMap(item=>{
+    const key=itemKey(item.category,item.name),updated={...item};let changed=false;
+    if(MENU_SELLING_PRICES.has(key)&&Number(item.price)!==MENU_SELLING_PRICES.get(key)){updated.price=MENU_SELLING_PRICES.get(key);changed=true}
+    if(!hasCost(item.cost)&&Object.prototype.hasOwnProperty.call(MENU_COSTS,key)){updated.cost=MENU_COSTS[key];changed=true}
+    return changed?[updated]:[];
+  });
+  if(updates.length){const saved=await run('saveMany','Items',updates);saved.forEach(item=>Object.assign(S.Items.find(existing=>existing.id===item.id),item))}
+  const currency=S.Settings.find(setting=>setting.key==='currency');if(!currency||currency.value==='$')await setCfg('currency','GH₵ ');
+}
+
+function dashboardRange(){
+  const now=new Date(),end=today();
+  if(dashboardPeriod==='week'){
+    const start=addDays(end,-6);
+    return{start,end,labels:[...Array(7)].map((_,i)=>{const date=addDays(start,i);return new Date(date+'T12:00').toLocaleDateString(undefined,{weekday:'short'})})};
+  }
+  if(dashboardPeriod==='month'){
+    const first=new Date(now.getFullYear(),now.getMonth(),1),lastDay=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+    return{start:ymd(first),end,labels:[...Array(Math.ceil(lastDay/7))].map((_,i)=>`Week ${i+1}`)};
+  }
+  const quarterStart=Math.floor(now.getMonth()/3)*3,first=new Date(now.getFullYear(),quarterStart,1);
+  return{start:ymd(first),end,labels:[0,1,2].map(i=>new Date(now.getFullYear(),quarterStart+i,1).toLocaleDateString(undefined,{month:'short'}))};
+}
+function rangeIndex(date,range){
+  if(!date||date<range.start||date>range.end)return-1;
+  if(dashboardPeriod==='week')return Math.round((new Date(date+'T12:00')-new Date(range.start+'T12:00'))/86400000);
+  const value=new Date(date+'T12:00');
+  if(dashboardPeriod==='month')return Math.floor((value.getDate()-1)/7);
+  return value.getMonth()-new Date(range.start+'T12:00').getMonth();
+}
+function chartBars(labels,datasets,label){
+  const width=560,height=190,left=34,top=12,bottom=34,plotHeight=height-top-bottom,step=(width-left-8)/Math.max(labels.length,1),groupWidth=Math.min(48,step*.68),barWidth=groupWidth/datasets.length,max=Math.max(1,...datasets.flatMap(dataset=>dataset.values));
+  const bars=datasets.flatMap((dataset,seriesIndex)=>dataset.values.map((value,index)=>{
+    const barHeight=value/max*plotHeight,x=left+index*step+(step-groupWidth)/2+seriesIndex*barWidth,y=top+plotHeight-barHeight;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(3,barWidth-3).toFixed(1)}" height="${barHeight.toFixed(1)}" rx="3" fill="${dataset.color}"><title>${esc(labels[index])} · ${esc(dataset.name)}: ${money(value)}</title></rect>`;
+  })).join('');
+  const ticks=labels.map((text,index)=>`<text x="${(left+index*step+step/2).toFixed(1)}" y="${height-10}" text-anchor="middle" font-size="11" fill="var(--mut)">${esc(text)}</text>`).join('');
+  return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}" style="width:100%;height:auto;overflow:visible"><line x1="${left}" y1="${top+plotHeight}" x2="${width-8}" y2="${top+plotHeight}" stroke="var(--line)"/>${bars}${ticks}</svg>`;
+}
+function chartLegend(datasets){return `<div class="chart-legend">${datasets.map(dataset=>`<span><i style="background:${dataset.color}"></i>${esc(dataset.name)}</span>`).join('')}</div>`}
+
+function insights(){
+  const T=today(),out=[],s30=S.Sales.filter(r=>r.date>=addDays(T,-29));
+  if(!s30.length)return[{c:'idea',t:'Record a few days of sales',d:'Your personal growth tips will appear here once there is some data.'}];
+  const it={};s30.forEach(r=>{const o=it[r.name]=it[r.name]||{n:r.name,q:0,rv:0,pf:0,costKnown:true};o.q+=r.qty;o.rv+=rev(r);o.pf+=prof(r);if(!hasCost(saleCost(r)))o.costKnown=false});
+  const A=Object.values(it).map(o=>({...o,m:o.costKnown&&o.rv?o.pf/o.rv:0})),avgQ=sum(A,o=>o.q)/A.length;
+  const w=a=>{const t=sum(S.Sales.filter(r=>r.date>addDays(T,a-7)&&r.date<=addDays(T,a)),rev);return t},tw=w(0),lw=w(-7);
+  if(lw>0){const p=Math.round((tw-lw)/lw*100);out.push(p>=0?{c:'good',t:`Sales are up ${p}% on last week`,d:'Keep doing what is working. Ask happy customers for a review or referral.'}:{c:'warn',t:`Sales are down ${-p}% on last week`,d:'Try a short special (for example 10% off a slow item) and post it on WhatsApp or Instagram status.'});}
+  const wd=[0,0,0,0,0,0,0],dn=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  s30.forEach(r=>wd[new Date(r.date+'T12:00').getDay()]+=rev(r));
+  const lo=wd.indexOf(Math.min(...wd)),hi=wd.indexOf(Math.max(...wd));
+  if(Math.max(...wd)>0)out.push({c:'idea',t:`${dn[lo]} is your quietest day`,d:`${dn[hi]} is your best day. Run a "${dn[lo]} treat" offer (a discount or free drink with a cake) to fill the gap.`});
+  const gem=A.filter(o=>o.costKnown&&o.m>=.5&&o.q<avgQ).sort((a,b)=>b.m-a.m)[0];
+  if(gem)out.push({c:'idea',t:`Push ${gem.n}`,d:`It earns about ${Math.round(gem.m*100)}% margin but sells less than your average item. Put it first when customers ask, or bundle it.`});
+  const low=A.filter(o=>o.costKnown&&o.m<.3&&o.q>=3).sort((a,b)=>b.rv-a.rv)[0];
+  if(low)out.push({c:'warn',t:`${low.n} has a thin margin (${Math.round(low.m*100)}%)`,d:'Raise the price a little or look at cheaper ingredients or packaging.'});
+  const dead=S.Items.filter(i=>i.active!==false&&!it[i.name]);
+  if(dead.length)out.push({c:'warn',t:`${countLabel(dead.length,'item')} did not sell in 30 days`,d:dead.slice(0,4).map(i=>i.name).join(', ')+'. Bundle them, discount them, or hide them from the list.'});
+  const C={};const add=(n,d,v)=>{n=(n||'').trim();if(!n)return;const k=n.toLowerCase(),c=C[k]=C[k]||{n,d:new Set(),last:''};c.d.add(d);if(d>c.last)c.last=d};
+  S.Sales.forEach(r=>add(r.customer,r.date));S.Orders.forEach(r=>add(r.customer,r.pickup||r.created));
+  const cs=Object.values(C),reg=cs.filter(c=>c.d.size>=3),lap=cs.filter(c=>c.d.size>=2&&c.last<addDays(T,-30));
+  if(reg.length)out.push({c:'good',t:`${countLabel(reg.length,'regular customer')}: ${reg.slice(0,3).map(c=>c.n).join(', ')}`,d:'Start a loyalty card: every 5th order gets a free cupcake or 10% off. Regulars spend more when rewarded.'});
+  if(lap.length)out.push({c:'idea',t:`${countLabel(lap.length,'customer')} ${lap.length===1?'has':'have'} gone quiet`,d:`${lap.slice(0,3).map(c=>c.n).join(', ')}: send a friendly "we miss you" message with a small discount.`});
+  const act=S.Orders.filter(o=>!['Collected','Cancelled'].includes(o.status)),soon=act.filter(o=>o.pickup&&o.pickup<=addDays(T,3)),owed=sum(act,o=>num(o.total)-num(o.deposit));
+  if(soon.length)out.push({c:'warn',t:`${countLabel(soon.length,'order')} due in the next 3 days`,d:'Check ingredients and your baking schedule.'});
+  if(owed>0)out.push({c:'warn',t:`${money(owed)} still to collect on open orders`,d:'Ask for deposits upfront (50% is common) to protect your cash.'});
+  return out;
+}
+
+const views={
+home(){
+  const range=dashboardRange(),sales=S.Sales.filter(r=>r.date>=range.start&&r.date<=range.end),expenses=S.Expenses.filter(r=>r.date>=range.start&&r.date<=range.end),collectedOrders=ordersFinanceReady?S.Orders.filter(o=>o.status==='Collected'&&(o.revenueDate||o.pickup||o.created)>=range.start&&(o.revenueDate||o.pickup||o.created)<=range.end):[],dashboardOrders=[...S.Orders].filter(order=>!['Collected','Cancelled'].includes(order.status)).sort((a,b)=>(a.pickup||'9999-99-99').localeCompare(b.pickup||'9999-99-99')).slice(0,5);
+  const pendingOrderCount=S.Orders.filter(order=>(order.status||'Pending')==='Pending').length;
+  const todayDate=today(),todaySales=S.Sales.filter(row=>row.date===todayDate),todayCollected=ordersFinanceReady?S.Orders.filter(order=>order.status==='Collected'&&(order.revenueDate||order.pickup||order.created)===todayDate):[],todayExpenses=S.Expenses.filter(row=>row.date===todayDate),todayOrders=S.Orders.filter(order=>order.pickup===todayDate&&!['Collected','Cancelled'].includes(order.status)),todayRevenue=sum(todaySales,rev)+sum(todayCollected,order=>num(order.total)),todayProfit=sum(todaySales,prof)+sum(todayCollected.filter(hasOrderCost),order=>num(order.total)-num(order.cost))-sum(todayExpenses,row=>num(row.amount)),todayMissingCosts=todaySales.filter(row=>!hasCost(saleCost(row))).length+todayCollected.filter(order=>!hasOrderCost(order)).length,currentInsights=insights();
+  const hour=new Date().getHours(),greeting=hour<12?'Good morning':hour<17?'Good afternoon':'Good evening',missingPeriodCosts=sales.filter(row=>!hasCost(saleCost(row))).length+collectedOrders.filter(order=>!hasOrderCost(order)).length;
+  const missingCostMessage=count=>`${countLabel(count,'sale or order cost','sale or order costs')} ${count===1?'is':'are'} missing; profit may be overstated.`;
+  const orderRevenue=sum(collectedOrders,o=>num(o.total)),orderProfit=sum(collectedOrders.filter(hasOrderCost),o=>num(o.total)-num(o.cost)),revenue=sum(sales,rev)+orderRevenue,grossProfit=sum(sales,prof)+orderProfit,expenseTotal=sum(expenses,r=>num(r.amount)),netProfit=grossProfit-expenseTotal;
+  const revenueBuckets=range.labels.map(()=>0),profitBuckets=range.labels.map(()=>0);
+  sales.forEach(row=>{const index=rangeIndex(row.date,range);if(index>=0&&index<range.labels.length){revenueBuckets[index]+=rev(row);profitBuckets[index]+=prof(row)}});
+  collectedOrders.forEach(order=>{const index=rangeIndex(order.revenueDate||order.pickup||order.created,range);if(index>=0&&index<range.labels.length){revenueBuckets[index]+=num(order.total);if(hasOrderCost(order))profitBuckets[index]+=num(order.total)-num(order.cost)}});
+  const expenseGroups={},itemProfits={},categoryRevenue={};
+  expenses.forEach(row=>{expenseGroups[row.category||'Other']=(expenseGroups[row.category||'Other']||0)+num(row.amount)});
+  sales.forEach(row=>{itemProfits[row.name]=(itemProfits[row.name]||0)+prof(row);categoryRevenue[row.category||'Other']=(categoryRevenue[row.category||'Other']||0)+rev(row)});
+  if(collectedOrders.some(hasOrderCost))itemProfits['Custom orders']=orderProfit;
+  if(collectedOrders.length)categoryRevenue['Orders']=(categoryRevenue['Orders']||0)+orderRevenue;
+  const topEntries=values=>Object.entries(values).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const expenseEntries=topEntries(expenseGroups),profitEntries=topEntries(itemProfits),categoryEntries=topEntries(categoryRevenue);
+  const expenseLabels=expenseEntries.length?expenseEntries.map(entry=>entry[0]):['No expenses'];
+  const profitLabels=profitEntries.length?profitEntries.map(entry=>entry[0]):['No sales'];
+  const categoryLabels=categoryEntries.length?categoryEntries.map(entry=>entry[0]):['No sales'];
+  const periodName={week:'Last 7 days',month:'This month',quarter:'This quarter'}[dashboardPeriod];
+  const trendSets=[{name:'Revenue',values:revenueBuckets,color:getComputedStyle(document.documentElement).getPropertyValue('--berry').trim()},{name:'Gross profit',values:profitBuckets,color:getComputedStyle(document.documentElement).getPropertyValue('--pistachio').trim()}];
+  const expenseSet=[{name:'Expenses',values:expenseEntries.length?expenseEntries.map(entry=>entry[1]):[0],color:getComputedStyle(document.documentElement).getPropertyValue('--honey').trim()}];
+  const profitSet=[{name:'Gross profit',values:profitEntries.length?profitEntries.map(entry=>entry[1]):[0],color:getComputedStyle(document.documentElement).getPropertyValue('--pistachio').trim()}];
+  const categorySet=[{name:'Revenue',values:categoryEntries.length?categoryEntries.map(entry=>entry[1]):[0],color:getComputedStyle(document.documentElement).getPropertyValue('--honey').trim()}];
+  return `<div class="dashboard-heading"><div><h1>${greeting}, ${esc(cfg('ownerName','Owner'))}. Here's how Tasty Base is doing.</h1><p class="mut">${periodName} at a glance</p></div><div class="period-switch" role="group" aria-label="Chart time period">${[['week','Week'],['month','Month'],['quarter','Quarter']].map(([value,text])=>`<button class="${dashboardPeriod===value?'on':''}" aria-pressed="${dashboardPeriod===value}" onclick="setDashboardPeriod('${value}')">${text}</button>`).join('')}</div></div>
+  <h2>Today's numbers</h2><div class="grid dashboard-kpis dashboard-today-kpis"><div class="kpi k1"><small>Revenue</small><b>${money(todayRevenue)}</b><small>${countLabel(todaySales.length+todayCollected.length,'transaction')} recorded today</small></div><div class="kpi"><small>Profit after expenses (known costs)</small><b>${money(todayProfit)}</b><small>${todayMissingCosts?missingCostMessage(todayMissingCosts):'Based on recorded costs'}</small></div><div class="kpi k2"><small>Expenses</small><b>${money(sum(todayExpenses,row=>num(row.amount)))}</b><small>${todayExpenses.length} recorded today</small></div><div class="kpi k3"><small>Orders due today</small><b>${todayOrders.length}</b><small>${countLabel(pendingOrderCount,'pending request')}</small></div></div>
+  <h2>This period</h2>
+  <div class="grid dashboard-kpis"><div class="kpi k1"><small>Net profit (known costs)</small><b>${money(netProfit)}</b><small>${missingPeriodCosts?missingCostMessage(missingPeriodCosts):`${periodName} · after recorded expenses`}</small></div>
+  <div class="kpi k3"><small>Gross profit (known costs)</small><b>${money(grossProfit)}</b><small>${missingPeriodCosts?`${countLabel(missingPeriodCosts,'sale or order cost','sale or order costs')} not included`:'After item costs'}</small></div>
+  <div class="kpi k2"><small>Expenses</small><b>${money(expenseTotal)}</b><small>${expenses.length} recorded this period</small></div>
+  <div class="kpi"><small>Revenue</small><b>${money(revenue)}</b><small>${countLabel(sales.length,'sale line')} · ${countLabel(collectedOrders.length,'collected order')}</small></div></div>
+  <div class="dashboard-charts"><section class="card chart-card"><div><h2>Revenue and gross profit</h2><p class="mut">See how sales translate into profit over time.</p></div>${chartBars(range.labels,trendSets,'Revenue and gross profit over '+periodName.toLowerCase())}${chartLegend(trendSets)}</section>
+  <section class="card chart-card"><div><h2>Expenses by type</h2><p class="mut">Where operating costs are going.</p></div>${chartBars(expenseLabels,expenseSet,'Expenses by type for '+periodName.toLowerCase())}${chartLegend(expenseSet)}</section>
+  <section class="card chart-card"><div><h2>Profit by item</h2><p class="mut">Products contributing the most gross profit.</p></div>${chartBars(profitLabels,profitSet,'Gross profit by item for '+periodName.toLowerCase())}${chartLegend(profitSet)}</section>
+  <section class="card chart-card"><div><h2>Revenue by category</h2><p class="mut">Compare sales across product categories.</p></div>${chartBars(categoryLabels,categorySet,'Revenue by category for '+periodName.toLowerCase())}${chartLegend(categorySet)}</section></div>
+  <section class="card"><h2>What to do now</h2>${currentInsights.map(insight=>`<div class="tip ${esc(insight.c)}"><b>${esc(insight.t)}</b><span>${esc(insight.d)}</span></div>`).join('')||'<p class="mut">Nothing urgent. Keep the oven warm.</p>'}</section>
+  <section class="card dashboard-orders"><div class="row"><div><h2>Upcoming orders</h2><p class="mut">${countLabel(pendingOrderCount,'pending request')} · updates automatically while this app is open.</p></div><button class="btn ghost sm" onclick="go('orders')">All orders</button></div>${ordersFinanceReady?'':'<p class="tip warn">Order profit tracking needs the updated Code.gs deployed. Statuses show here, but orders are not included in financial totals yet.</p>'}
+  ${dashboardOrders.map(order=>`<div class="row dashboard-order-row"><span><b>${esc(order.customer)}</b><br><span class="mut">${esc(displayOrderDetails(order.details)).replace(/\n/g,' · ')} · Due ${esc(order.pickup||'No date')}</span></span><span class="order-controls"><select aria-label="Status for ${esc(order.customer)}" onchange="setStatus('${order.id}',this.value)">${STATUS.map(status=>`<option ${status===(order.status||'Pending')?'selected':''}>${status}</option>`).join('')}</select><button class="btn ghost sm" onclick="editOrder('${order.id}')">Edit</button></span></div>`).join('')||'<p class="mut">No orders yet today. The oven is warm.</p>'}</section>`;
+},
+sales(){
+  saleDate=saleDate||today();const cats=['All',...S.Categories.filter(c=>c.name.toLowerCase()!=='add-ons').map(c=>c.name)],items=S.Items.filter(i=>i.active!==false&&i.category.toLowerCase()!=='add-ons'&&Number(i.price)>0&&(cat==='All'||i.category===cat)),addons=S.Items.filter(i=>i.active!==false&&i.category.toLowerCase()==='add-ons'),day=S.Sales.filter(r=>r.date===saleDate),G={};day.forEach(r=>(G[r.receipt||r.id]=G[r.receipt||r.id]||[]).push(r));
+  return `<h1>New sale</h1><p class="mut">Pick what the customer is buying (or what you sold today), then get a receipt.</p>
+  <div class="two"><div><label>Date</label><input type="date" id="sd" value="${saleDate}" onchange="saleDate=this.value;render()"></div><div><label>Customer (optional)</label><input id="cu" placeholder="Name"></div></div>
+  <div class="chips">${cats.map(c=>`<button class="chip ${c===cat?'on':''}" onclick="cat='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
+  <div class="card">${items.map(i=>`<div class="row"><div><b>${esc(i.name)}</b><br><span class="mut">${money(i.price)}</span></div><div class="step"><button onclick="qty('${i.id}',-1)" aria-label="less">−</button><input type="number" inputmode="numeric" min="0" id="q${i.id}" value="${cart[i.id]||0}" oninput="setQ('${i.id}',this.value)"><button onclick="qty('${i.id}',1)" aria-label="more">+</button></div></div>`).join('')||'<p class="mut">No priced items in this category yet. Add or price items under Items.</p>'}</div>
+  <div class="card"><h2>Add-ons / additions</h2><p class="mut">Select extras such as cream or sprinkles. Add their selling prices under Items before including them in a sale.</p><div class="addon-list">${addons.map(i=>Number(i.price)>0?`<div class="row"><span><b>${esc(i.name)}</b><br><span class="mut">${money(i.price)}</span></span><div class="step"><button onclick="qty('${i.id}',-1)" aria-label="less ${esc(i.name)}">−</button><input type="number" inputmode="numeric" min="0" id="q${i.id}" value="${cart[i.id]||0}" oninput="setQ('${i.id}',this.value)"><button onclick="qty('${i.id}',1)" aria-label="more ${esc(i.name)}">+</button></div></div>`:`<div class="row"><span>${esc(i.name)}</span><span class="price-missing">Set selling price in Items</span></div>`).join('')||'<p class="mut">No add-ons yet. Add them under Items using the Add-ons category.</p>'}</div></div>
+  <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="sale-addons-reviewed" style="width:auto;min-height:auto" ${saleAddonsReviewed?'checked':''} onchange="saleAddonsReviewed=this.checked"> Add-ons reviewed (including no additions)</label>
+  <div class="two"><div><label>Discount % (optional)</label><input type="number" inputmode="decimal" id="dc" value="0" oninput="tot()"></div><div><label>Total</label><div style="font-size:26px;font-weight:700;padding-top:6px" id="tot">${money(0)}</div></div></div>
+  <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" style="width:auto;min-height:auto" ${receiptAfterSave?'checked':''} onchange="receiptAfterSave=this.checked"> Show receipt after saving</label>
+  <button class="btn" style="width:100%;margin:14px 0" onclick="saveSale()">Save sale</button>
+  <div class="card"><h2>Sold on ${saleDate} · ${money(sum(day,rev))}</h2>${Object.entries(G).map(([k,g])=>`<div class="row" style="flex-wrap:wrap"><span>${g.map(r=>`${r.qty} × ${esc(r.name)}`).join(', ')}<br><span class="mut">${esc(g[0].customer)} ${g[0].receipt?'· #'+esc(g[0].receipt):''}</span></span><span><b>${money(sum(g,rev))}</b> <button class="btn ghost sm" onclick="reprint('${k}')">Receipt</button> <button class="btn ghost sm" onclick="delGroup('${k}')">Delete</button></span></div>`).join('')||'<p class="mut">Nothing recorded for this day.</p>'}</div>`;
+},
+expenses(){
+  const recent=[...S.Expenses].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  if(!expensesReady)return `<h1>Expenses</h1><div class="card"><p class="mut">Expense tracking is ready, but the live Apps Script must be updated and redeployed before entries can be saved.</p></div>`;
+  return `<h1>Expenses</h1><p class="mut">Track costs that are not included in the item cost, such as utilities, transport, wages, or equipment.</p>
+  <div class="card"><h2>Record an expense</h2><div class="two"><div><label>Date</label><input type="date" id="expense-date" value="${today()}"></div><div><label>Expense type</label><select id="expense-category">${['Ingredients','Packaging','Utilities','Transport','Wages','Equipment','Other'].map(category=>`<option>${category}</option>`).join('')}</select></div></div>
+  <div class="two"><div><label>Description</label><input id="expense-description" placeholder="e.g. Electricity bill or delivery fuel"></div><div><label>Amount</label><input type="number" inputmode="decimal" min="0" step="0.01" id="expense-amount" placeholder="0.00"></div></div>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveExpense()">Add expense</button></div>
+  <div class="card"><h2>Expense history</h2>${recent.map(expense=>`<div class="row"><span><b>${esc(expense.description)}</b><br><span class="mut">${esc(expense.date)} · ${esc(expense.category)}</span></span><span style="display:flex;align-items:center;gap:8px"><b>${money(expense.amount)}</b><button class="btn ghost sm" onclick="delRow('Expenses','${expense.id}')" aria-label="Delete expense">Delete</button></span></div>`).join('')||'<p class="mut">No expenses recorded yet.</p>'}</div>`;
+},
+orders(){
+  const o=orderEd||{},L=[...S.Orders].sort((a,b)=>(['Collected','Cancelled'].includes(a.status)-['Collected','Cancelled'].includes(b.status))||(a.pickup||'').localeCompare(b.pickup||'')),addons=S.Items.filter(i=>i.active!==false&&i.category.toLowerCase()==='add-ons'),orderDetails=splitOrderDetails(o.details||''),baseTotal=o.id?Math.max(0,num(o.total)-storedAddonTotal(o.details||'')):0;
+  return `<h1>Orders</h1><p class="mut">Catering and cake orders with pickup dates and deposits.</p>${ordersFinanceReady?'':'<div class="tip warn">Deploy the updated Code.gs before marking orders collected. The live script does not yet save order cost and collection date, which are needed for accurate profit and revenue totals.</div>'}
+  <div class="card"><h2>${o.id?'Edit order':'New order'}</h2><div class="two"><div><label>Customer</label><input id="oc" value="${esc(o.customer||'')}"></div><div><label>Phone</label><input id="op" inputmode="tel" value="${esc(o.phone||'')}"></div></div>
+  <label>What was ordered</label><textarea id="od" placeholder="e.g. 2-tier birthday cake + 50 cupcakes">${esc(orderDetails.description)}</textarea><div class="two"><div><label>Pickup / delivery date</label><input type="date" id="ok" value="${esc(o.pickup||'')}"></div><div><label>Status</label><select id="os">${STATUS.map(status=>`<option ${status===(o.status||'Pending')?'selected':''}>${status}</option>`).join('')}</select></div></div>
+  <div class="card"><h2>Add-ons / additions</h2><p class="mut">Choose extras before saving. Their selling prices are added to the order total.</p><div class="addon-list">${addons.map(i=>Number(i.price)>0?`<div class="row"><span><b>${esc(i.name)}</b><br><span class="mut">${money(i.price)} each</span></span><div class="step"><button onclick="changeOrderAddon('${i.id}',-1)" aria-label="less ${esc(i.name)}">−</button><input type="number" inputmode="numeric" min="0" id="oa${i.id}" value="${orderAddons[i.id]||0}" oninput="setOrderAddon('${i.id}',this.value)"><button onclick="changeOrderAddon('${i.id}',1)" aria-label="more ${esc(i.name)}">+</button></div></div>`:`<div class="row"><span>${esc(i.name)}</span><span class="price-missing">Set selling price in Items</span></div>`).join('')||'<p class="mut">No add-ons yet. Add them under Items using the Add-ons category.</p>'}</div>
+  <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="order-addons-reviewed" style="width:auto;min-height:auto" ${orderAddonsReviewed?'checked':''} onchange="orderAddonsReviewed=this.checked"> Add-ons reviewed (including no additions)</label></div>
+  <div><label>Base order price (before add-ons)</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ot" value="${baseTotal}" oninput="updateOrderTotal()"></div><div class="row"><b>Total including add-ons</b><b id="order-grand-total">${money(baseTotal+selectedOrderAddonsTotal())}</b></div>
+  <div class="two"><div><label>Deposit paid</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ox" value="${o.deposit??''}"></div><div><label>Estimated order cost (optional until collected)</label><input type="number" min="0" step="0.01" inputmode="decimal" id="order-cost" value="${o.cost??''}"></div></div>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveOrder()">${o.id?'Update order':'Save order'}</button>${o.id?'<button class="btn ghost" style="width:100%;margin-top:8px" onclick="cancelOrderEdit()">Cancel editing</button>':''}</div>
+  <div class="card"><div class="row"><h2>All orders</h2><button class="btn ghost sm" onclick="refreshOwnerOrders(true)">Refresh</button></div>${L.map(order=>`<div class="row order-list-row" style="align-items:flex-start"><div><b>${esc(order.customer)}</b> <span class="mut">${esc(order.phone)}</span><br>${esc(displayOrderDetails(order.details)).replace(/\n/g,'<br>')}<br><span class="mut">Due ${esc(order.pickup||'No date')} · Total ${money(order.total)} · Balance ${money(num(order.total)-num(order.deposit))} · Cost ${hasOrderCost(order)?money(order.cost):'not entered'}</span></div>
+  <div class="order-controls"><select aria-label="Status for ${esc(order.customer)}" onchange="setStatus('${order.id}',this.value)">${STATUS.map(status=>`<option ${status===(order.status||'Pending')?'selected':''}>${status}</option>`).join('')}</select><button class="btn ghost sm" onclick="editOrder('${order.id}')">Edit</button><button class="btn ghost sm" onclick="delRow('Orders','${order.id}')">Delete</button></div></div>`).join('')||'<p class="mut">No orders yet.</p>'}</div>`;
+},
+items(){
+  const e=ed||{},image=(e.image||pendingItemImage||'');return `<h1>Products &amp; pricing</h1><p class="mut">Selling prices follow the supplied PDF; typed ingredient/production costs are tracked separately for margins. Your 350g/500g/700g cake costs are provisionally matched to the PDF's 6-inch Short/Medium/Tall cakes—confirm those are equivalent. The Cake in a Bowl cost marked “16?” remains blank until confirmed, and juice selling prices stay unset where the PDF gives none.</p>
+  <div class="card"><h2>${e.id?'Edit item':'Add item'}</h2><label>Name</label><input id="in" value="${esc(e.name)}"><div class="two"><div><label>Category</label><select id="ic">${S.Categories.map(c=>`<option ${c.name==e.category?'selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
+  <div><label>Selling price</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ip" value="${e.price??''}" placeholder="Required before selling"></div></div><label>Cost to make (ingredients, packaging) - optional until known</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ik" value="${e.cost??''}" placeholder="Add later">
+  <div class="two" style="margin-top:12px"><div><label>Item photo</label><input type="file" accept="image/*" id="ii" onchange="loadItemImage(this)"><p class="mut">Recommended: 1200 x 900 px (4:3). No exact source size is required; the app resizes the longest edge to 960 px and converts the image to WebP.</p></div><div><label>Preview</label><div id="item-image-preview" style="min-height:76px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--pk);text-align:center;padding:8px;">${image?`<img src="${image}" style="max-width:100%;max-height:100px;border-radius:12px;border:1px solid var(--line);object-fit:cover">`:'<span class="mut">No photo yet</span>'}</div><button class="btn ghost sm" id="remove-item-image" style="width:100%;margin-top:6px" onclick="removeItemImage()" ${image?'':'hidden'}>Remove photo</button></div></div>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveItem()">${e.id?'Update':'Add'} item</button></div>
+  <div class="card">${S.Items.map(i=>`<div class="row item-row"><div style="display:flex;align-items:center;gap:10px"><div style="width:52px;height:52px;display:grid;place-items:center;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--pk)">${i.image?`<img src="${i.image}" style="width:100%;height:100%;object-fit:cover">`:'<span style="font-size:10px;color:var(--mut)">IMG</span>'}</div><div><b style="${i.active===false?'opacity:.4':''}">${esc(i.name)}</b><br><span class="mut ${hasCost(i.price)&&Number(i.price)>0&&hasCost(i.cost)&&Number(i.cost)>Number(i.price)?'negative-margin':''}">${esc(i.category)} · ${hasCost(i.price)?money(i.price):'price not set'} · cost ${hasCost(i.cost)?money(i.cost):'not set'} · margin ${hasCost(i.price)&&Number(i.price)>0&&hasCost(i.cost)?Math.round((i.price-i.cost)/i.price*100)+'%':'—'}</span></div></div>
+  <div class="step item-actions"><button class="btn ghost sm" style="width:auto" onclick="editItem('${i.id}')">Edit</button><button class="btn ghost sm" style="width:auto" onclick="toggleItem('${i.id}')">${i.active===false?'Show':'Hide'}</button><button class="btn ghost sm" style="width:auto" onclick="deleteItem('${i.id}')" aria-label="Delete ${esc(i.name)}">Delete</button></div></div>`).join('')}</div>`;
+},
+settings(){
+  return `<h1>Settings</h1><div class="card"><label>Business name</label><input id="sb" value="${esc(cfg('businessName',''))}"><label>Owner's name (for the welcome)</label><input id="so" value="${esc(cfg('ownerName',''))}"><label>Currency symbol</label><input id="sc" value="${esc(cfg('currency','GH₵ '))}">
+  <h2 style="margin-top:20px">Shop details</h2><p class="mut">These details appear on the customer shop. Reviews use one first name and quote per line, separated by |.</p>
+  <label>Contact number</label><input id="shop-phone" type="tel" value="${esc(cfg('phone','0201814174'))}">
+  <label>WhatsApp number</label><input id="shop-whatsapp" type="tel" value="${esc(cfg('whatsapp','0249567102'))}">
+  <label>Hours</label><input id="shop-hours" value="${esc(cfg('hours',''))}">
+  <label>Location</label><input id="shop-location" value="${esc(cfg('location','Adenta'))}">
+  <label>Instagram name</label><input id="shop-instagram-name" value="${esc(cfg('instagramName','Tasty Base'))}">
+  <label>Instagram profile URL (optional)</label><input id="shop-instagram" type="url" value="${esc(cfg('instagram',''))}">
+  <label>TikTok username</label><input id="shop-tiktok" value="${esc(cfg('tiktok','Tasty.Base'))}">
+  <label>Customer reviews</label><textarea id="shop-reviews" placeholder="Ama|The cake was lovely.">${esc(cfg('reviews',''))}</textarea>
+  <button class="btn" style="width:100%;margin-top:14px" onclick="saveSettings()">Save</button></div>
+  <div class="card"><h2>Sign-in and security</h2><p class="mut">Current owner account: <strong>${esc(sessionStorage.getItem('bakeryEmail')||'Not available')}</strong></p><p class="mut">Change the email and password used to access your owner workspace. Passwords must be at least 12 characters. Updating them signs out every active session.</p><label>Owner email</label><input id="owner-email" type="email" autocomplete="username" value="${esc(sessionStorage.getItem('bakeryEmail')||'')}"><div class="two"><div><label>Current password</label><input id="current-password" type="password" autocomplete="current-password"></div><div><label>New password</label><input id="next-password" type="password" autocomplete="new-password" minlength="12" maxlength="128"></div></div><button class="btn" style="margin-top:14px" onclick="updateOwnerCredentials()">Update sign-in details</button></div>
+  <div class="card"><h2>Categories</h2>${S.Categories.map(c=>`<div class="row"><span>${esc(c.name)}</span><button class="btn ghost sm" onclick="delRow('Categories','${c.id}')">Remove</button></div>`).join('')}
+  <div class="two" style="margin-top:12px;grid-template-columns:1fr auto"><input id="nc" placeholder="New category"><button class="btn" onclick="addCat()">Add</button></div></div>`;
+}};
+
+function searchAdmin(value){dashboardSearch=value;const query=value.trim().toLowerCase();document.querySelectorAll('main .row').forEach(row=>{row.hidden=Boolean(query)&&!row.textContent.toLowerCase().includes(query)})}
+async function logoutOwner(){const token=sessionStorage.getItem('bakerySession')||'';try{const response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fn:'logoutOwner',token})});if(!response.ok)throw new Error('Server did not confirm sign-out')}catch(error){sessionStorage.setItem('bakeryNotice','Sign-out could not be confirmed by the server. The browser session was cleared; the server token expires within 6 hours.')}finally{sessionStorage.removeItem('bakerySession');sessionStorage.removeItem('bakeryEmail');window.location.replace('./login.html')}}
+function render(){const desktop=window.innerWidth>=860,menuExpanded=desktop?!desktopNavCollapsed:mobileNavOpen,menuLabel=desktop?(desktopNavCollapsed?'Expand navigation menu':'Collapse navigation menu'):(mobileNavOpen?'Close navigation menu':'Open navigation menu'),groups=[['WORKSPACE',[['home','Overview','▦'],['sales','Point of sale','↗']]],['OPERATIONS',[['orders','Orders','▤'],['items','Products','◇'],['expenses','Expenses','↘']]],['CONFIGURATION',[['settings','Settings','⚙']]]],pageTitle={home:'Overview',sales:'Point of sale',orders:'Orders',items:'Products',expenses:'Expenses',settings:'Settings'}[view]||'Workspace';
+  $('#app').innerHTML=`<button class="nav-overlay" aria-label="Close navigation menu" onclick="setMobileNav(false)"></button><nav id="mobile-nav" aria-label="Main navigation" aria-hidden="${desktop?desktopNavCollapsed:!mobileNavOpen}" class="${desktop&&desktopNavCollapsed?'collapsed':''}"><a class="brand" href="../shop.html"><img src="../icon.svg" alt="" class="brand-logo">${esc(cfg('businessName','Tasty Base'))}</a><button class="nav-close" aria-label="Close menu" onclick="setMobileNav(false)">×</button>${groups.map(([group,items])=>`<div class="nav-group"><p class="nav-group-label">${group}</p>${items.map(([key,label,icon])=>`<button class="${view===key?'on':''}" aria-current="${view===key?'page':'false'}" onclick="go('${key}')"><span class="nav-glyph" aria-hidden="true">${icon}</span>${label}</button>`).join('')}</div>`).join('')}<div class="nav-foot"><span>BAKERY WORKSPACE</span><small>Private owner access</small></div></nav><main class="${desktop&&desktopNavCollapsed?'nav-collapsed':''}"><header class="admin-topbar"><div class="admin-topbar-start"><button class="btn ghost sm mobile-menu-toggle" aria-label="${menuLabel}" aria-controls="mobile-nav" aria-expanded="${menuExpanded}" onclick="toggleMobileNav()">☰</button><span class="topbar-page">${pageTitle}</span></div><div class="admin-topbar-end"><label class="admin-search"><span aria-hidden="true">⌕</span><input type="search" aria-label="Search current view" placeholder="Search records…" value="${esc(dashboardSearch)}" oninput="searchAdmin(this.value)"><kbd>${navigator.platform.indexOf('Mac')===0?'⌘':'Ctrl'} K</kbd></label><button class="icon-btn theme-toggle" aria-label="${document.documentElement.dataset.theme==='dark'?'Switch to light theme':'Switch to dark theme'}" onclick="toggleTheme()">${document.documentElement.dataset.theme==='dark'?'☼':'◐'}</button><span class="user-chip"><span class="user-avatar">${esc((sessionStorage.getItem('bakeryEmail')||'O').slice(0,1).toUpperCase())}</span><span>${esc(sessionStorage.getItem('bakeryEmail')||'Owner')}</span></span><button class="logout-btn" onclick="logoutOwner()">Sign out</button></div></header>${views[view]()}</main>`;document.body.classList.toggle('nav-open',mobileNavOpen);searchAdmin(dashboardSearch);tot();}
+function qty(id,n){setQ(id,(cart[id]||0)+n);$('#q'+id).value=cart[id]}
+function setQ(id,v){const item=S.Items.find(candidate=>candidate.id===id);if(item&&(item.category||'').toLowerCase()==='add-ons'){saleAddonsReviewed=false;const review=$('#sale-addons-reviewed');if(review)review.checked=false}cart[id]=Math.max(0,Math.floor(num(v)));tot()}
+function total(){const d=num(($('#dc')||{}).value);return sum(S.Items,i=>(cart[i.id]||0)*num(i.price))*(1-d/100)}
+function tot(){const t=$('#tot');if(t)t.textContent=money(total())}
+async function saveSale(){const rc=Date.now().toString(36).toUpperCase().slice(-6),d=num($('#dc').value),rows=S.Items.filter(i=>cart[i.id]>0).map(i=>({date:saleDate,itemId:i.id,name:i.name,category:i.category,qty:cart[i.id],price:+(i.price*(1-d/100)).toFixed(2),cost:i.cost,customer:$('#cu').value.trim(),discount:d,receipt:rc}));
+  if(!rows.length)return note('Add at least one item');if(d<0||d>100)return note('Discount must be between 0 and 100%');if(rows.some(row=>{const item=S.Items.find(candidate=>candidate.id===row.itemId);return !item||!hasCost(item.price)||num(item.price)<=0}))return note('Set a selling price for every selected item');if(!saleAddonsReviewed)return note('Review the add-ons and confirm whether there are any');const sv=await run('saveMany','Sales',rows);S.Sales.push(...sv);cart={};saleAddonsReviewed=false;render();if(receiptAfterSave)showReceipt(sv);else note('Sale saved')}
+function splitOrderDetails(details){const marker='\n\nAdd-ons: ',index=String(details||'').indexOf(marker);return index<0?{description:String(details||''),addonText:''}:{description:String(details||'').slice(0,index),addonText:String(details||'').slice(index+marker.length)}}
+function storedAddonRecords(details){const addonText=splitOrderDetails(details).addonText;if(!addonText)return[];return addonText.split(';').map(entry=>{const match=entry.trim().match(/^(.*) \[x(\d+) @(\d+(?:\.\d+)?)\]$/);return match?{name:match[1],qty:Number(match[2]),price:Number(match[3])}:null}).filter(Boolean)}
+function storedAddonTotal(details){return sum(storedAddonRecords(details),record=>record.qty*record.price)}
+function displayOrderDetails(details){const split=splitOrderDetails(details),records=storedAddonRecords(details);return split.description+(records.length?'\nAdd-ons: '+records.map(record=>`${record.name} × ${record.qty}`).join(', '):'')}
+function selectedOrderAddonsTotal(){return sum(S.Items.filter(item=>(item.category||'').toLowerCase()==='add-ons'),item=>(orderAddons[item.id]||0)*num(item.price))}
+function updateOrderTotal(){const totalLabel=$('#order-grand-total');if(totalLabel)totalLabel.textContent=money(num($('#ot').value)+selectedOrderAddonsTotal())}
+function setOrderAddon(id,value){orderAddons[id]=Math.max(0,Math.floor(num(value)));orderAddonsReviewed=false;const review=$('#order-addons-reviewed');if(review)review.checked=false;updateOrderTotal()}
+function changeOrderAddon(id,amount){setOrderAddon(id,(orderAddons[id]||0)+amount);const input=$('#oa'+id);if(input)input.value=orderAddons[id]||0}
+async function saveOrder(){const previous=orderEd||{},status=$('#os').value,baseTotal=num($('#ot').value),total=baseTotal+selectedOrderAddonsTotal(),deposit=num($('#ox').value),costValue=$('#order-cost').value.trim(),description=$('#od').value.trim(),selectedAddons=S.Items.filter(item=>(item.category||'').toLowerCase()==='add-ons'&&(orderAddons[item.id]||0)>0),addonRecords=selectedAddons.map(item=>`${item.name} [x${orderAddons[item.id]} @${num(item.price)}]`),details=description+(addonRecords.length?'\n\nAdd-ons: '+addonRecords.join('; '):''),o={...previous,created:previous.created||today(),customer:$('#oc').value.trim(),phone:$('#op').value.trim(),details,pickup:$('#ok').value,total,deposit,cost:costValue===''?'':num(costValue),status,revenueDate:status==='Collected'?(previous.revenueDate||today()):''};
+  if(!orderAddonsReviewed)return note('Review the add-ons and confirm whether there are any');if(selectedAddons.some(item=>!hasCost(item.price)||num(item.price)<=0))return note('Set a selling price for every selected add-on');if(baseTotal<=0)return note('Enter a base order price greater than zero');
+  if(status==='Collected'&&!ordersFinanceReady)return note('Deploy the updated Apps Script before collecting orders');if(costValue!==''&&!ordersFinanceReady)return note('Deploy the updated Apps Script before saving order costs');if(status==='Collected'&&costValue==='')return note('Enter the estimated order cost before collecting');
+  if(!o.customer||!description)return note('Add customer and order details');if(total<0||deposit<0||costValue!==''&&o.cost<0)return note('Prices and costs cannot be negative');const saved=await run('save','Orders',o);const index=S.Orders.findIndex(order=>order.id===saved.id);if(index>=0)S.Orders[index]=saved;else S.Orders.push(saved);orderEd=null;orderAddons={};orderAddonsReviewed=false;note(previous.id?'Order updated':'Order saved');render()}
+async function saveExpense(){if(!expensesReady)return note('Deploy the updated Apps Script to enable expenses');const expense={date:$('#expense-date').value||today(),category:$('#expense-category').value,description:$('#expense-description').value.trim(),amount:num($('#expense-amount').value)};
+  if(!expense.description)return note('Describe the expense');if(expense.amount<=0)return note('Enter an amount greater than zero');S.Expenses.push(await run('save','Expenses',expense));note('Expense saved');render()}
+async function setStatus(id,status){const existing=S.Orders.find(order=>order.id===id);if(!existing)return;if(status==='Collected'&&!ordersFinanceReady){note('Deploy the updated Apps Script before collecting orders');render();return}if(status==='Collected'&&!hasOrderCost(existing)){note('Edit the order and enter its estimated cost first');render();return}const updated={...existing,status,revenueDate:status==='Collected'?(existing.revenueDate||today()):''};const saved=await run('save','Orders',updated);Object.assign(existing,saved);note(status==='Collected'?'Order collected; revenue updated':'Order status updated');render()}
+function editOrder(id){orderEd=S.Orders.find(order=>order.id===id)||null;if(!orderEd)return;const records=storedAddonRecords(orderEd.details);orderAddons={};records.forEach(record=>{const item=S.Items.find(candidate=>candidate.category.toLowerCase()==='add-ons'&&candidate.name===record.name);if(item)orderAddons[item.id]=record.qty});orderAddonsReviewed=false;ed=null;view='orders';mobileNavOpen=false;render();scrollTo(0,0)}
+function cancelOrderEdit(){orderEd=null;orderAddons={};orderAddonsReviewed=false;render()}
+async function saveItem(){const e=ed||{},priceValue=$('#ip').value.trim(),costValue=$('#ik').value.trim(),o={...e,name:$('#in').value.trim(),category:$('#ic').value,price:priceValue===''?'':num(priceValue),cost:costValue===''?'':num(costValue),active:e.active!==false,image:clearItemImage?'':pendingItemImage||(e.image||'')};if(!o.name)return note('Add a name');if(priceValue!==''&&o.price<0||costValue!==''&&o.cost<0)return note('Prices and costs cannot be negative');
+  const r=await run('save','Items',o);if(e.id)Object.assign(S.Items.find(x=>x.id===e.id),r);else S.Items.push(r);ed=null;pendingItemImage='';clearItemImage=false;note('Item saved');render()}
+function editItem(id){ed=S.Items.find(i=>i.id===id);pendingItemImage='';clearItemImage=false;render();scrollTo(0,0)}
+async function deleteItem(id){const item=S.Items.find(i=>i.id===id);if(!item||!confirm(`Delete ${item.name}? Existing sales records will remain.`))return;const removed=await run('remove','Items',id);if(!removed)return note('Item was not found');S.Items=S.Items.filter(i=>i.id!==id);delete cart[id];if(ed&&ed.id===id){ed=null;pendingItemImage='';clearItemImage=false}note('Item deleted');render()}
+async function toggleItem(id){const i=S.Items.find(x=>x.id===id);i.active=i.active===false;await run('save','Items',i);render()}
+async function setCfg(k,v){let r=S.Settings.find(x=>x.key===k);if(!r){r={key:k};S.Settings.push(r)}r.value=v;Object.assign(r,await run('save','Settings',r))}
+async function saveSettings(){await setCfg('businessName',$('#sb').value);await setCfg('ownerName',$('#so').value);await setCfg('currency',$('#sc').value||'GH₵ ');for(const [id,key] of [['shop-phone','phone'],['shop-whatsapp','whatsapp'],['shop-hours','hours'],['shop-location','location'],['shop-instagram-name','instagramName'],['shop-instagram','instagram'],['shop-tiktok','tiktok'],['shop-reviews','reviews']])await setCfg(key,$('#'+id).value.trim());note('Saved');render()}
+async function addCat(){const n=$('#nc').value.trim();if(!n)return;S.Categories.push(await run('save','Categories',{name:n}));render()}
+async function delRow(n,id){if(!confirm('Delete this?'))return;await run('remove',n,id);S[n]=S[n].filter(r=>r.id!==id);render()}
+
+function toggleTheme(){const t=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=t;localStorage.setItem('theme',t);render()}
+let rcT='';
+function showReceipt(g){closeRc();const r0=g[0];rcT=`${cfg('businessName','Tasty Base')}\nReceipt #${r0.receipt||r0.id}\n${r0.date}${r0.customer?'\nCustomer: '+r0.customer:''}\n\n`+g.map(r=>`${r.qty} x ${r.name}  ${money(rev(r))}`).join('\n')+`\n\nTOTAL: ${money(sum(g,rev))}`+(r0.discount>0?` (${r0.discount}% discount applied)`:'')+'\nThank you. See you again!';
+  const d=document.createElement('div');d.id='rc';d.innerHTML=`<div class="rcbox"><div id="rcp"><div class="brand" style="font-size:22px;text-align:center">${esc(cfg('businessName','Tasty Base'))}</div><p class="mut" style="text-align:center">Receipt #${esc(r0.receipt||r0.id)} · ${esc(r0.date)}${r0.customer?'<br>'+esc(r0.customer):''}</p>${g.map(r=>`<div class="row"><span>${r.qty} × ${esc(r.name)}</span><span>${money(rev(r))}</span></div>`).join('')}${r0.discount>0?`<p class="mut">${r0.discount}% discount applied</p>`:''}<div class="row" style="font-size:20px"><b>Total</b><b>${money(sum(g,rev))}</b></div><p class="mut" style="text-align:center">Thank you. See you again!</p></div>
+  <div class="two" style="margin-top:14px"><button class="btn" onclick="print()">Print</button><button class="btn ghost" onclick="shareRc()">Share</button></div><button class="btn ghost" style="width:100%;margin-top:8px" onclick="closeRc()">Close</button></div>`;document.body.appendChild(d)}
+function closeRc(){const d=$('#rc');if(d)d.remove()}
+function shareRc(){if(navigator.share)navigator.share({text:rcT}).catch(()=>{});else open('https://wa.me/?text='+encodeURIComponent(rcT))}
+function reprint(k){showReceipt(S.Sales.filter(r=>(r.receipt||r.id)===k))}
+async function delGroup(k){if(!confirm('Delete this whole sale?'))return;const g=S.Sales.filter(r=>(r.receipt||r.id)===k);for(const r of g)await run('remove','Sales',r.id);S.Sales=S.Sales.filter(r=>!g.includes(r));render()}
+async function refreshOwnerOrders(manual=false){
+  try{
+    const previous=S.Orders,previousIds=new Set(previous.map(order=>order.id)),latest=await run('getOrders');
+    const incoming=latest.filter(order=>!previousIds.has(order.id)&&(order.status||'Pending')==='Pending');
+    const changed=incoming.length>0||latest.length!==previous.length||latest.some(order=>{const old=previous.find(existing=>existing.id===order.id);return !old||old.status!==order.status||old.total!==order.total});
+    S.Orders=latest;
+    if(incoming.length)note(`${incoming.length} new customer order request${incoming.length===1?'':'s'}`);
+    if(manual&&view==='orders'&&!orderEd||changed&&view==='home')render();
+  }catch(error){console.error('Could not refresh customer orders:',error.message)}
+}
+function startOrderUpdates(){if(orderPollTimer)clearInterval(orderPollTimer);orderPollTimer=setInterval(()=>{if(!document.hidden)refreshOwnerOrders()},60000)}
+function start(){
+  localStorage.removeItem('cache');localStorage.removeItem('bakeryPin');
+  if(!sessionStorage.getItem('bakerySession')){window.location.replace('./login.html');return}
+  if(API.includes('PASTE_')){$('#app').innerHTML='<p style="padding:24px">Add the Apps Script /exec URL before opening the owner workspace.</p>';return}
+  $('#app').innerHTML='<main style="padding:32px"><p class="mut">Opening your bakery workspace…</p></main>';
+  run('getAll').then(async d=>{S={...S,...d};if(!d._meta)delete S._meta;expensesReady=Array.isArray(d.Expenses);ordersFinanceReady=d._meta?.orderFinance===true;S.Expenses=S.Expenses||[];await ensureMenuProducts();render();startOrderUpdates()}).catch(error=>{const message=error.message==='PIN_SETUP_REQUIRED'||error.message==='PIN_REQUIRED'?'The live Apps Script still uses PIN access. Replace its Code.gs with the updated file, deploy a new version, and sign in again.':error.message==='OWNER_SETUP_REQUIRED'?'Owner login is not configured. Open the Apps Script editor, run initializeOwnerAccount once, then sign in again.':'Could not open the owner workspace: '+error.message;$('#app').innerHTML=`<main style="padding:32px"><section class="card"><h1>Workspace unavailable</h1><p class="mut">${esc(message)}</p><button class="btn" onclick="start()">Try again</button> <a class="btn ghost" href="./login.html">Return to sign in</a></section></main>`})}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+start();
+</script></body></html>
