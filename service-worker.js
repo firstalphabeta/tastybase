@@ -1,9 +1,10 @@
-const CACHE_NAME = 'tasty-base-shop-v22';
+const CACHE_NAME = 'tasty-base-shop-v23';
 const APP_FILES = [
   './index.html',
   './shop.html',
   './manifest.webmanifest',
-  './icon.svg'
+  './tasty-base-logo.png',
+  './tasty-base-app-icon.png'
 ];
 
 self.addEventListener('install', event => {
