@@ -327,7 +327,7 @@ settings(){
   <label>Location</label><input id="shop-location" value="${esc(cfg('location','Adenta'))}">
   <label>Instagram name</label><input id="shop-instagram-name" value="${esc(cfg('instagramName','Tasty Base'))}">
   <label>Instagram profile URL (optional)</label><input id="shop-instagram" type="url" value="${esc(cfg('instagram',''))}">
-  <label>TikTok username</label><input id="shop-tiktok" value="${esc(cfg('tiktok','Tasty.Base'))}">
+  <label>TikTok username or profile link</label><input id="shop-tiktok" value="${esc(cfg('tiktok','https://vm.tiktok.com/ZS9fvnMVD5RvE-58FDS/'))}">
   <label>Customer reviews</label><textarea id="shop-reviews" placeholder="Ama|The cake was lovely.">${esc(cfg('reviews',''))}</textarea>
   <button class="btn" style="width:100%;margin-top:14px" onclick="saveSettings()">Save</button></div>
   <div class="card"><h2>Sign-in and security</h2><p class="mut">Current owner account: <strong>${esc(sessionStorage.getItem('bakeryEmail')||'Not available')}</strong></p><p class="mut">Change the email and password used to access your owner workspace. Passwords must be at least 12 characters. Updating them signs out every active session.</p><label>Owner email</label><input id="owner-email" type="email" autocomplete="username" value="${esc(sessionStorage.getItem('bakeryEmail')||'')}"><div class="two"><div><label>Current password</label><input id="current-password" type="password" autocomplete="current-password"></div><div><label>New password</label><input id="next-password" type="password" autocomplete="new-password" minlength="12" maxlength="128"></div></div><button class="btn" style="margin-top:14px" onclick="updateOwnerCredentials()">Update sign-in details</button></div>
