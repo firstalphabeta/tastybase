@@ -169,7 +169,7 @@
     .whatsapp-fab-label{position:absolute;right:70px;padding:8px 11px;border-radius:8px;background:#1f2933;color:white;font-size:12px;font-weight:700;white-space:nowrap;opacity:0;transform:translateX(5px);pointer-events:none;transition:opacity .16s ease,transform .16s ease}
     .whatsapp-fab:hover .whatsapp-fab-label,.whatsapp-fab:focus-visible .whatsapp-fab-label{opacity:1;transform:translateX(0)}
     .cart-whatsapp-fallback{display:inline-flex;margin-top:8px}
-    .cart-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .cart-head{position:sticky;top:-20px;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-20px -20px 12px;padding:14px 20px;background:var(--card);border-bottom:1px solid var(--border)}
     .cart-head h2{font-size:24px}
     .cart-close{min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);color:var(--text)}
     .cart-empty{padding:12px 0;color:var(--muted)}
@@ -179,6 +179,19 @@
     .quantity button{min-width:44px;min-height:44px;border:1px solid var(--border);border-radius:9px;background:var(--page);color:var(--text)}
     .total-row{display:flex;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border);font-weight:700}
     .cart-form{border-top:1px solid var(--border);padding-top:12px}
+    .cake-details{margin:14px 0;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page)}
+    .cake-details summary{padding:14px;font-weight:700;cursor:pointer}
+    .cake-details summary .form-help{display:inline;margin:0;font-weight:400}
+    .cake-details[open] summary{border-bottom:1px solid var(--border)}
+    .cake-details-content{padding:0 14px 14px}
+    .cake-preference-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+    .whatsapp-handoff{margin:14px 0;padding:14px;border:1px solid #b7d9c2;border-radius:var(--radius-sm);background:#eff8f1;color:#173b25;font-size:13px;line-height:1.55}
+    .whatsapp-handoff b{display:block;margin-bottom:4px}
+    .whatsapp-handoff p{margin:0}
+    .cart-panel #submit-button{position:sticky;bottom:0;z-index:1;box-shadow:0 -8px 16px rgba(255,253,248,.9)}
+    .catalog-empty{display:grid;justify-items:start;gap:10px;padding:clamp(22px,5vw,36px);border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .catalog-empty .eyebrow{margin:0}
+    .catalog-empty h3,.catalog-empty p{margin:0}
     .fulfillment{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;padding:0;border:0}
     .fulfillment legend{margin-bottom:8px;font-size:13px;font-weight:700}
     .fulfillment label{display:flex;align-items:center;gap:8px;min-height:44px;margin:0;padding:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--page);font-size:13px}
@@ -211,7 +224,7 @@
     .category-tile{border-radius:12px;box-shadow:none;background:var(--cocoa)}
     .category-tile:after{position:absolute;inset:30% 0 0;z-index:-1;background:linear-gradient(transparent,rgba(0,0,0,.62));content:""}
     .category-tile span{background:transparent}
-    @media(max-width:700px){.cart-panel{right:10px;bottom:calc(90px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 112px)}.basket-fab{left:12px;bottom:calc(14px + env(safe-area-inset-bottom));min-height:52px;padding:7px 12px;font-size:13px}.whatsapp-fab{right:12px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px}.whatsapp-fab svg{width:28px;height:28px}.whatsapp-fab-label{display:none}.mobile-order-cta{display:none}}
+    @media(max-width:700px){.cart-panel{right:10px;bottom:calc(90px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 112px)}.cake-preference-grid{grid-template-columns:1fr}.basket-fab{left:12px;bottom:calc(14px + env(safe-area-inset-bottom));min-height:52px;padding:7px 12px;font-size:13px}.whatsapp-fab{right:12px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px}.whatsapp-fab svg{width:28px;height:28px}.whatsapp-fab-label{display:none}.mobile-order-cta{display:none}}
     .cart-panel{border-radius:16px}
     @media(max-width:700px){.catalog-tools{gap:10px}.catalog-search{max-width:none}.quick-filters{margin-inline:-2px}.baked-badge{left:12px}.product{box-shadow:0 3px 14px rgba(40,37,33,.06)}}
   </style>
@@ -283,11 +296,26 @@
             <label for="customer">Your name</label><input id="customer" name="customer" autocomplete="name" maxlength="100" required>
             <label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="25" required>
             <label for="pickup">Date needed</label><input id="pickup" name="pickup" type="date" required>
+            <details class="cake-details" id="cake-preferences" hidden>
+              <summary>Personalise your cake <span class="form-help">(optional—only if ordering a cake)</span></summary>
+              <div class="cake-details-content">
+                <p class="form-help">Share only what you know. We’ll confirm the design and price with you on WhatsApp.</p>
+                <div class="cake-preference-grid">
+                  <div><label for="cake-size">Size or servings</label><input id="cake-size" name="cakeSize" maxlength="60" placeholder="e.g. 8-inch or about 20 servings"></div>
+                  <div><label for="cake-flavour">Flavour or filling</label><input id="cake-flavour" name="cakeFlavour" maxlength="80" placeholder="e.g. vanilla with strawberry filling"></div>
+                  <div><label for="cake-colours">Colours</label><input id="cake-colours" name="cakeColours" maxlength="60" placeholder="e.g. cream, blush and gold"></div>
+                  <div><label for="cake-inscription">Words on the cake</label><input id="cake-inscription" name="cakeInscription" maxlength="80" placeholder="Name, age or short message"></div>
+                  <div class="field full"><label for="cake-design">Occasion or design idea</label><textarea id="cake-design" name="cakeDesign" maxlength="180" placeholder="e.g. a simple floral birthday cake"></textarea></div>
+                  <div class="field full"><label for="cake-allergies">Allergies or dietary needs</label><textarea id="cake-allergies" name="cakeAllergies" maxlength="120"></textarea></div>
+                </div>
+                <p class="form-help">Have an inspiration photo? Attach it in WhatsApp before you tap Send.</p>
+              </div>
+            </details>
             <fieldset class="fulfillment"><legend>Pickup or delivery</legend><label><input type="radio" name="fulfillment" value="pickup" checked onchange="toggleAddress()"> Pickup</label><label><input type="radio" name="fulfillment" value="delivery" onchange="toggleAddress()"> Delivery</label></fieldset>
             <div id="address-wrap" hidden><label for="address">Delivery address</label><textarea id="address" name="address" maxlength="300" placeholder="Area, street, landmark"></textarea><p class="form-help">Delivery availability and any fee will be confirmed with you.</p></div>
-            <label for="cart-notes">Anything else? (optional)</label><textarea id="cart-notes" name="notes" maxlength="1000"></textarea>
+            <label for="cart-notes">Other order notes (optional)</label><textarea id="cart-notes" name="notes" maxlength="120"></textarea>
             <label class="honeypot" aria-hidden="true">Leave this field empty<input id="website" name="website" tabindex="-1" autocomplete="off"></label>
-            <label class="confirm"><input id="confirm" type="checkbox" required><span>This is a request. We'll confirm the price and availability with you.</span></label>
+            <div class="whatsapp-handoff"><b>Cakes are made to your preferences.</b><p>Continue to WhatsApp to review your order draft, attach any design photo, then tap <strong>Send</strong>. We’ll confirm the cake design and final price in that chat. Your WhatsApp message is not sent until you tap Send.</p></div>
             <button id="submit-button" class="btn" type="submit" style="width:100%">Continue to WhatsApp</button>
             <div class="form-status" id="cart-status" aria-live="polite"></div>
           </form>
@@ -315,10 +343,25 @@
             <div class="field"><label for="custom-phone">Phone</label><input id="custom-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" required></div>
             <div class="field"><label for="custom-date">Date needed</label><input id="custom-date" name="pickup" type="date" required></div>
             <div class="field"><label for="custom-budget">Budget (optional)</label><input id="custom-budget" name="budget" inputmode="decimal" maxlength="40" placeholder="e.g. GH₵ 500"></div>
-            <div class="field full"><label for="custom-what">What are we making?</label><textarea id="custom-what" name="what" maxlength="1000" required placeholder="Tell us what you're celebrating, flavours you love, colours or little details."></textarea></div>
+            <div class="field full"><label for="custom-what">What are we making?</label><textarea id="custom-what" name="what" maxlength="350" required placeholder="e.g. a birthday cake for my daughter’s 8th birthday"></textarea></div>
           </div>
+          <details class="cake-details" id="custom-cake-preferences">
+            <summary>Personalise your cake <span class="form-help">(optional—only if ordering a cake)</span></summary>
+            <div class="cake-details-content">
+              <p class="form-help">Share only what you know. We’ll confirm the design and price with you on WhatsApp.</p>
+              <div class="cake-preference-grid">
+                <div><label for="custom-cake-size">Size or servings</label><input id="custom-cake-size" name="customCakeSize" maxlength="40" placeholder="e.g. 8-inch or about 20 servings"></div>
+                <div><label for="custom-cake-flavour">Flavour or filling</label><input id="custom-cake-flavour" name="customCakeFlavour" maxlength="60" placeholder="e.g. vanilla with strawberry filling"></div>
+                <div><label for="custom-cake-colours">Colours</label><input id="custom-cake-colours" name="customCakeColours" maxlength="40" placeholder="e.g. cream, blush and gold"></div>
+                <div><label for="custom-cake-inscription">Words on the cake</label><input id="custom-cake-inscription" name="customCakeInscription" maxlength="60" placeholder="Name, age or short message"></div>
+                <div class="field full"><label for="custom-cake-design">Occasion or design idea</label><textarea id="custom-cake-design" name="customCakeDesign" maxlength="120"></textarea></div>
+                <div class="field full"><label for="custom-cake-allergies">Allergies or dietary needs</label><textarea id="custom-cake-allergies" name="customCakeAllergies" maxlength="100"></textarea></div>
+              </div>
+              <p class="form-help">Have an inspiration photo? Attach it in WhatsApp before you tap Send.</p>
+            </div>
+          </details>
           <button class="btn" id="custom-submit" type="submit" style="width:100%;margin-top:20px">Send my order request</button>
-          <p class="form-help">We'll save your request and open WhatsApp with the details ready to send.</p>
+          <div class="whatsapp-handoff"><b>Finish your cake request in WhatsApp</b><p>We’ll open a message draft with your details. Review it, attach any inspiration photo, and tap <strong>Send</strong>. We’ll confirm the design and final price in that chat.</p></div>
           <div class="form-status" id="custom-status" role="status" aria-live="polite"></div>
           <div id="whatsapp-fallback" hidden></div>
         </form>
@@ -356,7 +399,7 @@
     <span class="whatsapp-fab-label">Chat on WhatsApp</span>
   </a>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbxPuQRZ5HV95-QudpoQ6vee8oXBkxaw1sIx91-Gr67UQhBp38s_MutlYBK4KimEEr_VLw/exec';
+    const API='https://script.google.com/macros/s/AKfycbzlFYFbOvS8inLQfzR0RJrmI0THuFqtSEJH8vKEz_i6c-erPNjRcu6K8mZ6SlYTuIylfw/exec';
     const $=selector=>document.querySelector(selector);
     const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
@@ -402,8 +445,8 @@
     }
     function toggleSidebar(){setSidebar(!$('#shop-sidebar').classList.contains('open'))}
     function renderSidebar(){
-      const categories=['All',...store.categories.filter(category=>!['all','add-ons'].includes(category.toLowerCase()))];
-      $('#sidebar-categories').innerHTML=categories.map(category=>`<button type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join('');
+      const categories=store.items.length?['All',...store.categories.filter(category=>!['all','add-ons'].includes(category.toLowerCase()))]:[];
+      $('#sidebar-categories').innerHTML=categories.length?categories.map(category=>`<button type="button" data-category="${esc(category)}" aria-pressed="${category===selectedCategory}">${esc(category)}</button>`).join(''):'<p class="form-help">Menu items will appear here soon.</p>';
       $('#sidebar-brand').textContent=store.businessName;
       $('#shop-sidebar').inert=true;
       $('#shop-sidebar').setAttribute('aria-hidden','true');
@@ -486,6 +529,10 @@
       $('#review-grid').innerHTML=reviews.length?reviews.map(review=>`<article class="review-card"><blockquote>“${esc(review.quote)}”</blockquote><cite>${esc(review.name)}</cite></article>`).join(''):'<p class="empty-note">Your kind words could be next. Leave us a note after your order.</p>';
     }
     function renderCatalog(){
+      if(!store.items.length){
+        $('#catalog').innerHTML='<div class="catalog-empty"><p class="eyebrow">Menu coming soon</p><h3>We’re preparing the menu.</h3><p>Tell us what cake you have in mind. Share your flavour, colours and design ideas, then continue on WhatsApp to confirm the details.</p><a class="btn small" href="#custom-order">Request a custom cake</a></div>';
+        return;
+      }
       const categories=['All',...store.categories.filter(category=>!['all','add-ons'].includes(category.toLowerCase()))];
       if(!categories.includes(selectedCategory))selectedCategory='All';
       const query=productSearch.trim().toLowerCase();
@@ -512,17 +559,39 @@
       if(category!=='All'){setCategory(category)}
     }));
     function cartItems(){return store.items.filter(item=>(cart[item.id]||0)>0)}
+    function isCakeItem(item){return /cake|bento/i.test(`${item.category||''} ${item.name||''}`)}
     function changeQuantity(id,amount){
       const item=store.items.find(candidate=>candidate.id===id);if(!item)return;
       cart[id]=Math.max(0,Math.min(99,(cart[id]||0)+amount));if(!cart[id])delete cart[id];
       renderCart();if(amount>0)toggleCart(true);
     }
     function orderTotal(){return cartItems().reduce((total,item)=>total+(Number(item.price)>0?Number(item.price)*(cart[item.id]||0):0),0)}
+    function cakePreferenceLines(form,prefix){
+      return [
+        ['Size or servings',form.elements[`${prefix}Size`].value],
+        ['Flavour or filling',form.elements[`${prefix}Flavour`].value],
+        ['Colours',form.elements[`${prefix}Colours`].value],
+        ['Words on the cake',form.elements[`${prefix}Inscription`].value],
+        ['Occasion or design idea',form.elements[`${prefix}Design`].value],
+        ['Allergies or dietary needs',form.elements[`${prefix}Allergies`].value]
+      ].filter(([,value])=>value.trim()).map(([label,value])=>`${label}: ${value.trim()}`);
+    }
+    function collectOrderNotes(form,hasCake){
+      const notes=[];
+      if(hasCake){
+        const preferences=cakePreferenceLines(form,'cake');
+        if(preferences.length)notes.push(`Cake preferences:\n${preferences.join('\n')}`);
+      }
+      const otherNotes=form.elements.notes.value.trim();
+      if(otherNotes)notes.push(`Other notes: ${otherNotes}`);
+      return notes.join('\n');
+    }
     function renderCart(){
       const items=cartItems(),count=items.reduce((total,item)=>total+cart[item.id],0);
       $('#cart-count').textContent=count;
       $('#basket-fab-count').textContent=count;
       $('.basket-fab').setAttribute('aria-label',`Open catering basket with ${count} ${count===1?'item':'items'}`);
+      $('#cake-preferences').hidden=!items.some(isCakeItem);
       const needsQuote=items.some(item=>!(Number(item.price)>0));
       $('#cart-content').innerHTML=items.length?`<div class="cart-lines">${items.map(item=>`<div class="cart-line"><span><b>${esc(item.name)}</b><br><span class="form-help">${Number(item.price)>0?money(Number(item.price)*cart[item.id]):'Price to be confirmed'}</span></span><span class="quantity"><button type="button" aria-label="Remove one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',-1)">−</button><span>${cart[item.id]}</span><button type="button" aria-label="Add one ${esc(item.name)}" onclick="changeQuantity('${esc(item.id)}',1)">+</button></span></div>`).join('')}</div>${needsQuote?'<p class="form-help">Subtotal includes priced items only. We’ll confirm quote-only items in WhatsApp.</p>':''}<div class="total-row"><span>${needsQuote?'Priced items subtotal':'Estimated total'}</span><span>${money(orderTotal())}</span></div>`:'<p class="cart-empty">Your catering basket is empty. Add treats to get started.</p>';
       $('#submit-button').disabled=!items.length;
@@ -557,7 +626,7 @@
       $('#whatsapp-fallback').replaceChildren();$('#whatsapp-fallback').hidden=true;
       showStatus('#custom-status','');
       if(!validateForm(form))return;
-      const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:'pickup',items:[],customRequest:true,what:form.elements.what.value.trim(),budget:form.elements.budget.value.trim()};
+      const description=form.elements.what.value.trim(),preferences=cakePreferenceLines(form,'customCake'),payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:'pickup',items:[],customRequest:true,what:[description,...(preferences.length?['','Cake preferences:',...preferences]:[])].join('\n'),budget:form.elements.budget.value.trim()};
       if(!payload.what){form.elements.what.focus();form.elements.what.setCustomValidity('Tell us what we are making.');form.elements.what.reportValidity();form.elements.what.setCustomValidity('');return}
       const whatsappText=`Hello Tasty Base! I'd like to request a custom order.\n\nName: ${payload.customer}\nPhone: ${payload.phone}\nDate needed: ${payload.pickup}\nWhat we're making: ${payload.what}${payload.budget?`\nBudget: ${payload.budget}`:''}`;
       const waNumber=whatsappNumber();
@@ -567,7 +636,7 @@
       button.disabled=true;button.textContent='Sending…';
       try{
         const result=await api('submitPublicOrder',payload);
-        form.reset();showStatus('#custom-status',"Got it! We'll message you shortly.",false,true);
+        form.reset();$('#custom-cake-preferences').open=false;showStatus('#custom-status','Your request is saved. WhatsApp has opened with a message draft—tap Send so we can confirm your order details and price.',false,true);
         if(whatsappWindow){whatsappWindow.location.href=waUrl;whatsappWindow.opener=null}
         else{
           const link=document.createElement('a');link.href=waUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open WhatsApp to send your message';link.className='btn outline small';link.style.marginTop='8px';$('#whatsapp-fallback').append(link);$('#whatsapp-fallback').hidden=false;
@@ -582,7 +651,7 @@
       showStatus('#cart-status','');
       if(!items.length){showStatus('#cart-status','Add at least one item to your catering basket.',true);return}
       if(!validateForm(form))return;
-      const payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:form.elements.fulfillment.value,address:form.elements.address.value.trim(),notes:form.elements.notes.value.trim(),website:form.elements.website.value,items:items.map(item=>({id:item.id,quantity:cart[item.id]}))};
+      const hasCake=items.some(isCakeItem),payload={customer:form.elements.customer.value.trim(),phone:form.elements.phone.value.trim(),pickup:form.elements.pickup.value,fulfillment:form.elements.fulfillment.value,address:form.elements.address.value.trim(),notes:collectOrderNotes(form,hasCake),website:form.elements.website.value,items:items.map(item=>({id:item.id,quantity:cart[item.id]}))};
       const recipient=whatsappNumber();
       if(!recipient){showStatus('#cart-status','The bakery WhatsApp number is not configured. Please contact Tasty Base directly.',true);return}
       const whatsappWindow=window.open('about:blank','_blank');
@@ -606,13 +675,14 @@
           'CUSTOMER',
           `Name: ${payload.customer}`,
           `Phone: ${payload.phone}`,
-          ...(payload.notes?[`Notes: ${payload.notes}`]:[]),
+          ...(payload.notes?['',payload.notes]:[]),
           '',
-          'Please confirm availability and the final price.'
+          'Please confirm availability, cake design and final price.',
+          ...(hasCake?['I can send an inspiration photo in this chat if helpful.']:[])
         ].join('\n');
         const whatsappUrl=`https://wa.me/${recipient}?text=${encodeURIComponent(message)}`;
-        cart={};renderCart();form.reset();toggleAddress();
-        showStatus('#cart-status',`Order request saved${result.reference?` (reference ${result.reference})`:''}. WhatsApp is ready; review the message and tap Send to place your order.`,false,true);
+        cart={};renderCart();form.reset();$('#cake-preferences').open=false;toggleAddress();
+        showStatus('#cart-status',`Your request is saved${result.reference?` (reference ${result.reference})`:''}. WhatsApp has opened with a draft—review it and tap Send. We’ll confirm cake design and final price there.`,false,true);
         if(whatsappWindow){whatsappWindow.opener=null;whatsappWindow.location.href=whatsappUrl}
         else{
           const link=document.createElement('a');link.href=whatsappUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open WhatsApp and send your order';link.className='btn outline small cart-whatsapp-fallback';$('#cart-status').append(document.createElement('br'),link);

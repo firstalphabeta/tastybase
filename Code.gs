@@ -106,6 +106,22 @@ function getAll() {
   return output;
 }
 
+function clearProductsForManualSetup() {
+  const properties = PropertiesService.getScriptProperties();
+  const resetKey = 'manual_product_catalog_cleared_v1';
+  return locked_(() => {
+    if (properties.getProperty(resetKey)) {
+      throw new Error('The product catalog has already been cleared for manual setup');
+    }
+    const sheet = sheet_('Items');
+    const count = Math.max(0, sheet.getLastRow() - 1);
+    if (count) sheet.deleteRows(2, count);
+    properties.setProperty(resetKey, new Date().toISOString());
+    Logger.log('Removed %s product row(s). Categories and sales/order history were left unchanged.', count);
+    return count;
+  });
+}
+
 function sheetRecords_(name) {
   const sheet = sheet_(name), headers = SHEETS[name], lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];

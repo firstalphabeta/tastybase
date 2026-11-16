@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tasty-base-shop-v21';
+const CACHE_NAME = 'tasty-base-shop-v22';
 const APP_FILES = [
   './index.html',
   './shop.html',
