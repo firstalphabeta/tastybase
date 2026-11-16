@@ -79,7 +79,6 @@
     .hero-visual{position:relative;min-height:clamp(360px,54vw,650px);background:var(--blush);border-radius:48% 48% 16px 16px;overflow:hidden}
     .hero-visual img{width:100%;height:100%;min-height:inherit;position:absolute;inset:0;object-fit:cover}
     .hero-visual.no-photo{background:var(--blush);border:1px solid var(--border)}
-    .hero-photo-note{position:absolute;inset:auto 20px 20px;padding:12px 16px;border-radius:var(--radius-sm);background:var(--white);color:var(--cocoa);font-size:13px}
     .baked-badge{position:absolute;z-index:3;top:13%;left:-24px;display:grid;place-items:center;width:118px;height:118px;padding:18px;border:1px solid var(--badge-border);border-radius:50%;background:var(--gold);color:var(--cocoa);font-size:14px;font-weight:700;line-height:1.15;text-align:center;transform:rotate(-12deg);box-shadow:var(--shadow)}
     .sprinkles{position:absolute;top:0;right:5%;width:92px;height:92px;opacity:.5;background:radial-gradient(ellipse 2px 6px at 12px 14px,var(--gold) 98%,transparent),radial-gradient(ellipse 2px 6px at 44px 25px,var(--rose) 98%,transparent),radial-gradient(ellipse 2px 6px at 68px 11px,var(--cocoa) 98%,transparent),radial-gradient(ellipse 2px 6px at 28px 59px,var(--rose) 98%,transparent),radial-gradient(ellipse 2px 6px at 72px 70px,var(--gold) 98%,transparent);pointer-events:none}
     .section{position:relative;padding-block:clamp(var(--space-5),9vw,112px)}
@@ -145,9 +144,8 @@
     .empty-note{padding:22px;border:1px dashed var(--border);border-radius:var(--radius);color:var(--muted)}
     .instagram-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px}
     .instagram-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .instagram-grid img,.instagram-empty{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--blush)}
-    .instagram-empty{display:grid;place-items:center;padding:18px;color:var(--muted);font-size:14px;text-align:center}
-    .footer{position:relative;background:var(--cocoa);color:var(--on-dark);padding-block:56px 36px}
+    .instagram-grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);background:var(--blush)}
+    .footer{position:relative;background:var(--cocoa);color:var(--on-dark);padding-block:56px calc(112px + env(safe-area-inset-bottom))}
     .footer .scallop{top:-12px}
     .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--space-5)}
     .footer p{color:var(--on-dark);line-height:1.6}
@@ -157,10 +155,11 @@
     .footer a{color:var(--on-dark);text-underline-offset:3px}
     .footer-meta{margin-top:32px;padding-top:18px;border-top:1px solid var(--footer-line);color:var(--on-dark);font-size:12px}
     .mobile-order-cta{display:none}
-    .cart-panel{position:fixed;right:20px;bottom:100px;z-index:22;width:min(380px,calc(100vw - 40px));max-height:calc(100vh - 120px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transform:translateY(calc(100% + 28px));transition:transform .22s ease}
+    .cart-panel{position:fixed;right:20px;bottom:100px;z-index:22;width:min(380px,calc(100vw - 40px));max-height:calc(100vh - 120px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow);transform:translateY(calc(100% + 120px));transition:transform .22s ease}
     .cart-panel.open{transform:translateY(0)}
     .basket-fab{position:fixed;left:20px;bottom:22px;z-index:23;display:inline-flex;align-items:center;gap:9px;min-height:56px;padding:8px 16px;border:0;border-radius:999px;background:var(--cocoa);color:white;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(40,37,33,.22);transition:transform .18s ease,box-shadow .18s ease}
     .basket-fab:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(40,37,33,.26)}
+    .basket-fab[aria-expanded=true]{visibility:hidden}
     .basket-fab:focus-visible,.whatsapp-fab:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
     .basket-count{display:grid;place-items:center;min-width:28px;height:28px;padding:0 7px;border-radius:999px;background:var(--gold);color:var(--cocoa);font-size:12px}
     .whatsapp-fab{position:fixed;right:22px;bottom:22px;z-index:24;display:grid;place-items:center;width:60px;height:60px;border:0;border-radius:50%;background:#25d366;color:white;box-shadow:0 8px 24px rgba(20,90,48,.3);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
@@ -205,7 +204,6 @@
     @media(max-width:640px){body{padding-bottom:78px}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
     .hero-visual{background:#efe8d9;border-radius:48% 48% 14px 14px}
-    .hero-photo-note{background:rgba(255,253,248,.94);color:var(--text);backdrop-filter:blur(8px)}
     .section-heading .eyebrow,.eyebrow{color:var(--rose)}
     .catalog-tools{display:grid;gap:14px;margin:0 0 24px}
     .catalog-search{position:relative;display:flex;align-items:center;gap:10px;max-width:560px;margin:0;padding:0 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--muted)}
@@ -226,6 +224,14 @@
     .category-tile span{background:transparent}
     @media(max-width:700px){.cart-panel{right:10px;bottom:calc(90px + env(safe-area-inset-bottom));width:calc(100vw - 20px);max-height:calc(100dvh - 112px)}.cake-preference-grid{grid-template-columns:1fr}.basket-fab{left:12px;bottom:calc(14px + env(safe-area-inset-bottom));min-height:52px;padding:7px 12px;font-size:13px}.whatsapp-fab{right:12px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px}.whatsapp-fab svg{width:28px;height:28px}.whatsapp-fab-label{display:none}.mobile-order-cta{display:none}}
     .cart-panel{border-radius:16px}
+    .baked-badge{position:absolute;z-index:3;top:20%;left:36px;display:inline-flex;align-items:center;gap:11px;width:auto;height:auto;padding:8px 18px 8px 9px;border:1px solid rgba(164,61,49,.16);border-radius:999px;background:rgba(255,253,248,.96);color:var(--cocoa);font-size:inherit;line-height:normal;text-align:left;transform:none;box-shadow:0 12px 28px rgba(40,37,33,.16);backdrop-filter:blur(8px)}
+    .baked-badge-mark{display:grid;flex:0 0 42px;place-items:center;width:42px;height:42px;border:1px solid var(--border);border-radius:50%;background:var(--blush);color:var(--rose)}
+    .baked-badge-mark svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.6}
+    .baked-badge-mark svg path{fill:currentColor;stroke:none}
+    .baked-badge-text{font:600 16px/1.1 var(--font-display);letter-spacing:-.02em;white-space:nowrap}
+    .baked-badge-copy{display:grid;gap:3px}
+    .baked-badge-kicker{color:var(--rose);font-size:9px;font-weight:700;letter-spacing:.13em;line-height:1;text-transform:uppercase}
+    @media(max-width:700px){.baked-badge{left:36px;width:auto;height:auto;font-size:inherit}}
     @media(max-width:700px){.catalog-tools{gap:10px}.catalog-search{max-width:none}.quick-filters{margin-inline:-2px}.baked-badge{left:12px}.product{box-shadow:0 3px 14px rgba(40,37,33,.06)}}
   </style>
 </head>
@@ -267,8 +273,10 @@
       </div>
       <div class="hero-visual no-photo" id="hero-visual">
         <img id="hero-photo" alt="" width="1200" height="900" fetchpriority="high" hidden>
-        <span class="hero-photo-note" id="hero-photo-note">Illustrative menu photography · made fresh for your moments.</span>
-        <span class="baked-badge">Baked to order</span>
+        <span class="baked-badge">
+          <span class="baked-badge-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 2.3 5.2 5.7.5-4.3 3.8 1.3 5.5-5-3-5 3 1.3-5.5L4 8.7l5.7-.5L12 3Z" fill="currentColor" stroke="none"/></svg></span>
+          <span class="baked-badge-copy"><span class="baked-badge-kicker">Made fresh</span><span class="baked-badge-text">Baked to order</span></span>
+        </span>
       </div>
     </section>
     <section class="section blush" id="categories">
@@ -290,7 +298,7 @@
           <div class="products" aria-hidden="true"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
         </div>
         <div class="cart-panel" id="cart-panel" role="region" aria-label="Your catering basket" aria-hidden="true" inert>
-          <div class="cart-head"><h2>Catering basket <span class="cart-count" id="cart-count">0</span></h2><button class="cart-close" type="button" aria-label="Close catering basket" onclick="toggleCart(false)">×</button></div>
+          <div class="cart-head"><h2>Your basket <span class="cart-count" id="cart-count">0</span></h2><button class="cart-close" type="button" aria-label="Close catering basket" onclick="toggleCart(false)">×</button></div>
           <div id="cart-content"></div>
           <form id="checkout" class="cart-form" onsubmit="submitCartOrder(event)">
             <label for="customer">Your name</label><input id="customer" name="customer" autocomplete="name" maxlength="100" required>
@@ -378,7 +386,7 @@
     <section class="section" id="instagram">
       <div class="wrap">
         <div class="instagram-head"><div><p class="eyebrow">A peek at what's baking</p><h2>Fresh from the kitchen</h2></div><a id="instagram-link" class="btn outline small" href="#custom-order" hidden>Find us on Instagram</a></div>
-        <div class="instagram-grid" id="instagram-grid"><div class="instagram-empty">Our latest bakes will show here.</div></div>
+        <div class="instagram-grid" id="instagram-grid" hidden></div>
       </div>
     </section>
   </main>
@@ -390,7 +398,7 @@
         <div><h3>Come by</h3><div class="footer-links"><span id="hours">Hours: details coming soon</span><span id="location">Location: Adenta</span></div></div>
         <div><h3>Say hello</h3><div class="footer-links"><a id="phone-link" href="tel:0201814174">Phone: 0201814174</a><a id="whatsapp-link" href="https://wa.me/233249567102" target="_blank" rel="noopener noreferrer">WhatsApp: 0249567102</a><span id="footer-instagram">Instagram: Tasty Base</span><span id="footer-tiktok">TikTok: Tasty.Base</span></div></div>
       </div>
-      <div class="footer-meta">Tasty Base · Baked to order · Menu photos are illustrative previews. · <a href="./owner/">Owner sign in</a></div>
+      <div class="footer-meta">Tasty Base · Baked to order · <a href="./owner/">Owner sign in</a></div>
     </div>
   </footer>
   <button class="basket-fab" type="button" aria-controls="cart-panel" aria-expanded="false" onclick="toggleCart()"><span>Catering basket</span><span class="basket-count" id="basket-fab-count">0</span></button>
@@ -403,26 +411,19 @@
     const $=selector=>document.querySelector(selector);
     const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
-    const demoPhotos={
+    const mainPhotos={
       cake:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=960&q=82',
       cupcake:'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=960&q=82',
       pastry:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=960&q=82',
-      juice:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=960&q=82',
-      snack:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=960&q=82'
+      juice:'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?auto=format&fit=crop&w=960&q=82'
     };
-    let store={businessName:'Tasty Base',currency:'GH₵ ',phone:'0201814174',whatsapp:'0249567102',location:'Adenta',instagram:'',instagramName:'Tasty Base',tiktok:'Tasty.Base',categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false,productSearch='';
+    const DEFAULT_INSTAGRAM_URL='https://www.instagram.com/tasty_base/';
+    const DEFAULT_TIKTOK_URL='https://vm.tiktok.com/ZS9fvnMVD5RvE-58FDS/';
+    let store={businessName:'Tasty Base',currency:'GH₵ ',phone:'0201814174',whatsapp:'0249567102',location:'Adenta',instagram:DEFAULT_INSTAGRAM_URL,instagramName:'Tasty Base',tiktok:DEFAULT_TIKTOK_URL,categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false,productSearch='';
     const money=value=>store.currency+Number(value||0).toLocaleString(undefined,{maximumFractionDigits:2});
     function whatsappNumber(){
       const digits=String(store.whatsapp||'').replace(/\D/g,'');
       return digits.startsWith('0')?'233'+digits.slice(1):digits;
-    }
-    function demoPhoto(item){
-      const description=`${item.category||''} ${item.name||''}`.toLowerCase();
-      if(/juice|drink|smoothie|yogurt/.test(description))return demoPhotos.juice;
-      if(/cupcake|bento/.test(description))return demoPhotos.cupcake;
-      if(/chip|cookie|groundnut|snack/.test(description))return demoPhotos.snack;
-      if(/pastr|pie|roll|samosa|puff/.test(description))return demoPhotos.pastry;
-      return demoPhotos.cake;
     }
     async function api(fn,...args){
       let response;
@@ -470,29 +471,30 @@
     }
     function categoryPhoto(key){
       const needle=key.toLowerCase();
-      const item=store.items.find(entry=>entry.category.toLowerCase().includes(needle)&&safeImage(entry.image));
-      if(item)return safeImage(item.image);
-      if(/drink|juice/.test(needle))return demoPhotos.juice;
-      if(/cupcake|pastr/.test(needle))return demoPhotos.cupcake;
-      return demoPhotos.cake;
+      if(/drink|juice/.test(needle))return mainPhotos.juice;
+      if(/cupcake/.test(needle))return mainPhotos.cupcake;
+      if(/pastr/.test(needle))return mainPhotos.pastry;
+      return mainPhotos.cake;
     }
     function updatePhotos(){
-      const image=store.items.find(item=>/cake/i.test(item.category)&&safeImage(item.image))||store.items.find(item=>safeImage(item.image));
-      const photo=$('#hero-photo');
-      photo.src=image?safeImage(image.image):demoPhotos.cake;
-      photo.alt=image?`Freshly baked ${image.name}`:'Illustrative celebration cake photography';
+      const photo=$('#hero-photo'),hero=$('#hero-visual');
+      photo.alt='';
+      photo.onerror=()=>{photo.hidden=true;hero.classList.add('no-photo')};
+      photo.src=mainPhotos.cake;
       photo.hidden=false;
-      photo.onerror=()=>{photo.hidden=true;$('#hero-photo-note').hidden=false};
-      $('#hero-visual').classList.remove('no-photo');
+      hero.classList.remove('no-photo');
       document.querySelectorAll('.category-tile').forEach(tile=>{
+        tile.querySelectorAll('img').forEach(existing=>existing.remove());
         const source=categoryPhoto(tile.dataset.category);
         if(source){const photo=document.createElement('img');photo.src=source;photo.alt='';photo.width=640;photo.height=480;photo.loading='lazy';tile.prepend(photo)}
       });
       const instagramPhotos=store.items.map(item=>({item,image:safeImage(item.image)})).filter(entry=>entry.image).slice(0,4);
-      $('#instagram-grid').innerHTML=instagramPhotos.length?instagramPhotos.map(({item,image})=>`<img src="${esc(image)}" alt="${esc(item.name)}" width="600" height="600" loading="lazy">`).join(''):'<div class="instagram-empty">Our latest bakes will show here.</div>';
+      const instagramGrid=$('#instagram-grid');
+      instagramGrid.hidden=!instagramPhotos.length;
+      instagramGrid.innerHTML=instagramPhotos.map(({item,image})=>`<img src="${esc(image)}" alt="${esc(item.name)}" width="600" height="600" loading="lazy">`).join('');
     }
     function updateBusinessDetails(){
-      const phone=String(store.phone||'').trim(),whatsappText=String(store.whatsapp||'').trim(),whatsappIntl=whatsappNumber(),instagram=String(store.instagram||'').trim(),instagramName=String(store.instagramName||'Tasty Base').trim(),tiktokName=String(store.tiktok||'').trim().replace(/^@/,'');
+      const phone=String(store.phone||'').trim(),whatsappText=String(store.whatsapp||'').trim(),whatsappIntl=whatsappNumber(),instagram=String(store.instagram||'').trim(),instagramName=String(store.instagramName||'Tasty Base').trim(),tiktokValue=String(store.tiktok||'').trim();
       $('#hours').textContent=store.hours?`Hours: ${store.hours}`:'Hours: details coming soon';
       $('#location').textContent=store.location?`Location: ${store.location}`:'Location: Adenta';
       const phoneLink=$('#phone-link');
@@ -502,18 +504,21 @@
       whatsappLink.hidden=false;floatingWhatsapp.hidden=false;
       if(whatsappIntl){whatsappLink.href=`https://wa.me/${whatsappIntl}`;whatsappLink.target='_blank';whatsappLink.rel='noopener noreferrer';whatsappLink.textContent=`WhatsApp: ${whatsappText}`;floatingWhatsapp.href=`https://wa.me/${whatsappIntl}?text=${encodeURIComponent('Hello Tasty Base! I have a question about your menu.')}`}
       else{whatsappLink.href='#custom-order';whatsappLink.textContent='WhatsApp: send an order request';floatingWhatsapp.href='#custom-order'}
-      const instagramUrl=/^https:\/\/(www\.)?instagram\.com\//i.test(instagram)?instagram:'';
+      const instagramMatch=instagram.match(/^https:\/\/(?:www\.)?instagram\.com\/([A-Za-z0-9._]+)\/?(?:[?#].*)?$/i);
+      const instagramUrl=instagramMatch?`https://www.instagram.com/${instagramMatch[1]}/`:DEFAULT_INSTAGRAM_URL;
       const footerInstagram=$('#footer-instagram');
       footerInstagram.replaceChildren();
       if(instagramUrl){
         const instagramFooterLink=document.createElement('a');instagramFooterLink.href=instagramUrl;instagramFooterLink.target='_blank';instagramFooterLink.rel='noopener noreferrer';instagramFooterLink.textContent=`Instagram: ${instagramName||'Tasty Base'}`;footerInstagram.append(instagramFooterLink);
         $('#instagram-link').href=instagramUrl;$('#instagram-link').target='_blank';$('#instagram-link').rel='noopener noreferrer';$('#instagram-link').hidden=false;
       }else footerInstagram.textContent=`Instagram: ${instagramName||'Tasty Base'}`;
-      const tiktokUrl=/^[A-Za-z0-9._]{2,24}$/.test(tiktokName)?`https://www.tiktok.com/@${encodeURIComponent(tiktokName)}`:'';
+      const tiktokShortLink=tiktokValue.match(/^https:\/\/vm\.tiktok\.com\/[A-Za-z0-9_-]+\/?(?:[?#].*)?$/i);
+      const tiktokProfile=tiktokValue.match(/^https:\/\/(?:www\.)?tiktok\.com\/@([A-Za-z0-9._]{2,24})\/?(?:[?#].*)?$/i);
+      const tiktokName=tiktokValue.replace(/^@/,'');
+      const tiktokUrl=tiktokShortLink?tiktokShortLink[0].split(/[?#]/)[0]:tiktokProfile?`https://www.tiktok.com/@${tiktokProfile[1]}`:/^[A-Za-z0-9._]{2,24}$/.test(tiktokName)&&tiktokName.toLowerCase()!=='tasty.base'?`https://www.tiktok.com/@${encodeURIComponent(tiktokName)}`:DEFAULT_TIKTOK_URL;
       const footerTiktok=$('#footer-tiktok');
       footerTiktok.replaceChildren();
-      if(tiktokUrl){const tiktokFooterLink=document.createElement('a');tiktokFooterLink.href=tiktokUrl;tiktokFooterLink.target='_blank';tiktokFooterLink.rel='noopener noreferrer';tiktokFooterLink.textContent=`TikTok: ${tiktokName}`;footerTiktok.append(tiktokFooterLink)}
-      else footerTiktok.textContent=tiktokName?`TikTok: ${tiktokName}`:'TikTok';
+      if(tiktokUrl){const tiktokFooterLink=document.createElement('a');tiktokFooterLink.href=tiktokUrl;tiktokFooterLink.target='_blank';tiktokFooterLink.rel='noopener noreferrer';tiktokFooterLink.textContent=`TikTok: ${tiktokName&&!/^https?:\/\//i.test(tiktokName)&&tiktokName.toLowerCase()!=='tasty.base'?tiktokName:'Tasty Base'}`;footerTiktok.append(tiktokFooterLink)}
       const schema=JSON.parse($('#business-schema').textContent);
       if(phone)schema.telephone=phone;
       if(store.location)schema.address={ '@type':'PostalAddress',streetAddress:store.location };
@@ -539,8 +544,9 @@
       const items=store.items.filter(item=>(selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory)&&(!query||`${item.name} ${item.category}`.toLowerCase().includes(query)));
       const visibleItems=selectedCategory==='All'&&!catalogExpanded&&!query?items.slice(0,8):items;
       const productCard=item=>{
-        const image=safeImage(item.image)||demoPhoto(item),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
-        return `<article class="product"><img class="product-photo" src="${esc(image)}" alt="${esc(item.name)} — illustrative menu photo" width="640" height="480" loading="lazy"><div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Add to basket':'Request a quote'}</button></div></article>`;
+        const image=safeImage(item.image),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
+        const photo=image?`<img class="product-photo" src="${esc(image)}" alt="" width="640" height="480" loading="lazy">`:'<div class="photo-placeholder" aria-hidden="true"></div>';
+        return `<article class="product">${photo}<div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Add to basket':'Request a quote'}</button></div></article>`;
       };
       const heading=selectedCategory==='All'?'All treats':selectedCategory;
       const moreButton=selectedCategory==='All'&&!query&&items.length>8?`<div class="view-more-wrap"><button class="btn outline view-more" type="button" aria-expanded="${catalogExpanded}" onclick="toggleCatalogExpanded()">${catalogExpanded?'Show less':'View more'}</button></div>`:'';
@@ -600,6 +606,7 @@
       const panel=$('#cart-panel');panel.classList.toggle('open',open);panel.setAttribute('aria-hidden',String(!open));panel.inert=!open;
       $('.basket-fab').setAttribute('aria-expanded',String(open));
       if(open)panel.querySelector('.cart-close').focus();
+      else $('.basket-fab').focus({preventScroll:true});
     }
     function toggleAddress(){
       const delivery=$('input[name="fulfillment"]:checked').value==='delivery';
@@ -691,10 +698,11 @@
       finally{button.disabled=!cartItems().length;button.textContent='Continue to WhatsApp'}
     }
     async function start(){
-      minDates();renderCart();
+      minDates();renderCart();updateBusinessDetails();updatePhotos();updateReviews();
       try{
         const data=await api('getPublicStore');
         store={...store,...data,phone:data.phone||store.phone,whatsapp:data.whatsapp||store.whatsapp,location:data.location||store.location,instagram:data.instagram||store.instagram,instagramName:data.instagramName||store.instagramName,tiktok:data.tiktok||store.tiktok,items:Array.isArray(data.items)?data.items:[],categories:Array.isArray(data.categories)?data.categories:[]};
+        if(store.tiktok==='Tasty.Base')store.tiktok=DEFAULT_TIKTOK_URL;
         $('#brand').textContent=store.businessName;
         renderSidebar();
         document.title=`${store.businessName} | Sweet moments, baked fresh`;

@@ -15,9 +15,9 @@ const DEFAULT_SETTINGS_ = {
   phone: '0201814174',
   whatsapp: '0249567102',
   location: 'Adenta',
-  instagram: '',
+  instagram: 'https://www.instagram.com/tasty_base/',
   instagramName: 'Tasty Base',
-  tiktok: 'Tasty.Base'
+  tiktok: 'https://vm.tiktok.com/ZS9fvnMVD5RvE-58FDS/'
 };
 
 function doGet() {
