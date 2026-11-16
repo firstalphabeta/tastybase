@@ -131,7 +131,7 @@ const pad=n=>String(n).padStart(2,'0'),ymd=d=>`${d.getFullYear()}-${pad(d.getMon
 const today=()=>ymd(new Date()),addDays=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+n);return ymd(d)};
 const cfg=(k,d)=>(S.Settings.find(r=>r.key===k)||{}).value||d,money=n=>cfg('currency','GH₵ ')+Number(n||0).toLocaleString(undefined,{maximumFractionDigits:2});
 const rev=r=>r.qty*r.price,hasCost=value=>value!==''&&value!==null&&value!==undefined&&Number.isFinite(Number(value)),saleCost=r=>hasCost(r.cost)?r.cost:S.Items.find(item=>item.id===r.itemId)?.cost,prof=r=>hasCost(saleCost(r))?r.qty*(r.price-num(saleCost(r))):0,sum=(a,f)=>a.reduce((t,r)=>t+f(r),0),num=v=>parseFloat(v)||0,hasOrderCost=o=>hasCost(o.cost);
-const API='https://script.google.com/macros/s/AKfycbxPuQRZ5HV95-QudpoQ6vee8oXBkxaw1sIx91-Gr67UQhBp38s_MutlYBK4KimEEr_VLw/exec';
+const API='https://script.google.com/macros/s/AKfycbzlFYFbOvS8inLQfzR0RJrmI0THuFqtSEJH8vKEz_i6c-erPNjRcu6K8mZ6SlYTuIylfw/exec';
 const run=async(fn,...args)=>{try{const response=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fn,args,token:sessionStorage.getItem('bakerySession')||''})});if(!response.ok)throw new Error('The owner service is unavailable. Try again shortly.');const result=await response.json();if(!result.ok){if(result.error==='AUTH_REQUIRED'){sessionStorage.removeItem('bakerySession');sessionStorage.removeItem('bakeryEmail');window.location.replace('./login.html');throw new Error('Your session expired. Sign in again.')}if(result.error==='OWNER_SETUP_REQUIRED')throw new Error('Owner login is not configured. Run initializeOwnerAccount in the Apps Script editor.');if(result.error==='PIN_REQUIRED'||result.error==='PIN_SETUP_REQUIRED')throw new Error('The live Apps Script still uses PIN access. Deploy the updated Code.gs before using password sign-in.');throw new Error(result.error||'The request could not be completed.')}return result.data}catch(error){if(!/session expired/i.test(error.message))note('Error: '+error.message);throw error}};
 function fileToWebpDataUrl(file){
   return new Promise((resolve,reject)=>{
@@ -168,55 +168,9 @@ window.addEventListener('resize',()=>{const nav=$('#mobile-nav'),main=$('#app ma
 function setDashboardPeriod(period){dashboardPeriod=period;render()}
 const STATUS=['Pending','Baking','Ready','Collected','Cancelled'];
 const MENU_CATEGORIES=['Birthday Cakes','Cupcakes & Bento Boxes','Wedding Cakes & Treats','Savory Pies & Sides','Crunchy Snacks','Juices & Smoothies','Main Food','Proteins','Add-ons'];
-const MENU_PRODUCTS=[
-  ['Birthday Cakes','6-inch Birthday Cake - Short',350],['Birthday Cakes','6-inch Birthday Cake - Medium',500],['Birthday Cakes','6-inch Birthday Cake - Tall',700],
-  ['Birthday Cakes','8-inch Birthday Cake - Short',400],['Birthday Cakes','8-inch Birthday Cake - Medium',600],['Birthday Cakes','8-inch Birthday Cake - Tall',850],
-  ['Birthday Cakes','10-inch Birthday Cake - Short',500],['Birthday Cakes','10-inch Birthday Cake - Medium',750],['Birthday Cakes','10-inch Birthday Cake - Tall',1200],
-  ['Birthday Cakes','12-inch Birthday Cake - Short',600],
-  ['Cupcakes & Bento Boxes','Cupcakes - 4 pieces',60],['Cupcakes & Bento Boxes','Cupcakes - 6 pieces',100],['Cupcakes & Bento Boxes','Cupcakes - 12 pieces',180],['Cupcakes & Bento Boxes','Cupcakes - 24 pieces',380],['Cupcakes & Bento Boxes','Cupcakes - 50 pieces',750],
-  ['Cupcakes & Bento Boxes','Bento Cake Only',135],['Cupcakes & Bento Boxes','Bento with 4 Cupcakes',200],['Cupcakes & Bento Boxes','Bento with 6 Cupcakes',250],
-  ['Wedding Cakes & Treats','Wedding Cake - One Layer',1000],['Wedding Cakes & Treats','Wedding Cake - Two Layers',2000],['Wedding Cakes & Treats','Cake in a Cup',40],['Wedding Cakes & Treats','Cake in a Bowl - No Icing',25],
-  ['Savory Pies & Sides','Meat Pie - each',15],['Savory Pies & Sides','Fish Pie - each',15],['Savory Pies & Sides','Vegetable Pie - each',15],
-  ['Savory Pies & Sides','Spring Rolls - each',null],['Savory Pies & Sides','Spring Rolls - 10 pieces',30],['Savory Pies & Sides','Spring Rolls - 20 pieces',60],['Savory Pies & Sides','Spring Rolls - 30 pieces',90],['Savory Pies & Sides','Samosa - each',null],['Savory Pies & Sides','Samosa - 10 pieces',null],['Savory Pies & Sides','Samosa - 20 pieces',null],['Savory Pies & Sides','Samosa - 30 pieces',null],['Savory Pies & Sides','Puff Puff - one box',30],
-  ['Crunchy Snacks','Onion Chips - Small',30],['Crunchy Snacks','Onion Chips - Medium',50],['Crunchy Snacks','Onion Chips - Large',100],
-  ['Crunchy Snacks','Plantain Chips - Small',20],['Crunchy Snacks','Plantain Chips - Medium',30],['Crunchy Snacks','Plantain Chips - Large',80],
-  ['Crunchy Snacks','Cookies - Small',30],['Crunchy Snacks','Cookies - Medium',60],['Crunchy Snacks','Cookies - Large',110],
-  ['Crunchy Snacks','Baked Chips - Small',30],['Crunchy Snacks','Baked Chips - Medium',50],['Crunchy Snacks','Baked Chips - Large',80],
-  ['Crunchy Snacks','Coated Groundnuts - Small',40],['Crunchy Snacks','Coated Groundnuts - Medium',75],['Crunchy Snacks','Coated Groundnuts - Large',150],
-  ['Juices & Smoothies','Fresh Juice - Pineapple',null],['Juices & Smoothies','Fresh Juice - Pineapple Ginger',null],['Juices & Smoothies','Fresh Juice - Pineapple Mint',null],['Juices & Smoothies','Fresh Juice - Watermelon',null],['Juices & Smoothies','Fresh Juice - Watermelon Ginger',null],['Juices & Smoothies','Fresh Juice - Watermelon Mint',null],['Juices & Smoothies','Fresh Juice - Orange',null],['Juices & Smoothies','Fresh Juice - Orange Ginger',null],['Juices & Smoothies','Fresh Juice - Orange Mint',null],['Juices & Smoothies','Fresh Juice - Pineapple Melon',null],['Juices & Smoothies','Fresh Juice - Orange Melon',null],['Juices & Smoothies','Fresh Juice - Mixed Fruit',null],['Juices & Smoothies','Fresh Juice - Lemon & Ginger',null],['Juices & Smoothies','Fresh Juice - Mango',null],
-  ['Juices & Smoothies','Mango Delight Smoothie',null],['Juices & Smoothies','Local Drink - Sobolo',null],['Juices & Smoothies','Local Drink - Tiger Nut',null],['Juices & Smoothies','Greek Yogurt',null],
-  ['Main Food','Jollof Rice',null],['Main Food','Fried Rice',null],['Main Food','Plain Rice',null],['Main Food','Banku',null],['Main Food','Stew - 1 liter',null],
-  ['Proteins','Grilled Chicken',null],['Proteins','Fried Chicken',null],['Proteins','Gizzard',null],['Proteins','Meat',null],['Proteins','Fish',null],['Proteins','Tilapia',null],
-  ['Add-ons','Extra Cream',null],['Add-ons','Sprinkles',null],['Add-ons','Extra Frosting',null],['Add-ons','Extra Filling',null]
-];
-const MENU_COSTS={
-  'birthday cakes|6-inch birthday cake - short':230,'birthday cakes|6-inch birthday cake - medium':350,'birthday cakes|6-inch birthday cake - tall':460,
-  'cupcakes & bento boxes|cupcakes - 4 pieces':44,'cupcakes & bento boxes|cupcakes - 6 pieces':66,'cupcakes & bento boxes|cupcakes - 12 pieces':132,'cupcakes & bento boxes|cupcakes - 24 pieces':264,'cupcakes & bento boxes|cupcakes - 50 pieces':550,
-  'cupcakes & bento boxes|bento cake only':148,'cupcakes & bento boxes|bento with 4 cupcakes':192,'cupcakes & bento boxes|bento with 6 cupcakes':214,
-  'wedding cakes & treats|wedding cake - one layer':800,'wedding cakes & treats|wedding cake - two layers':1600,
-  'savory pies & sides|spring rolls - each':2,'savory pies & sides|spring rolls - 10 pieces':20,'savory pies & sides|spring rolls - 20 pieces':40,'savory pies & sides|spring rolls - 30 pieces':60,
-  'savory pies & sides|samosa - each':2,'savory pies & sides|samosa - 10 pieces':20,'savory pies & sides|samosa - 20 pieces':40,'savory pies & sides|samosa - 30 pieces':60,
-  'savory pies & sides|puff puff - one box':15,'savory pies & sides|meat pie - each':15,'savory pies & sides|fish pie - each':15,'savory pies & sides|vegetable pie - each':13,
-  'juices & smoothies|fresh juice - pineapple':11.4,'juices & smoothies|fresh juice - pineapple ginger':12.4,'juices & smoothies|fresh juice - pineapple mint':12.4,
-  'juices & smoothies|fresh juice - watermelon':8,'juices & smoothies|fresh juice - watermelon ginger':9,'juices & smoothies|fresh juice - watermelon mint':9,
-  'juices & smoothies|fresh juice - orange':15.4,'juices & smoothies|fresh juice - orange ginger':16.4,'juices & smoothies|fresh juice - orange mint':16.4,
-  'juices & smoothies|fresh juice - pineapple melon':12,'juices & smoothies|fresh juice - orange melon':15,'juices & smoothies|fresh juice - mixed fruit':20
-};
-const itemKey=(category,name)=>`${String(category||'').trim().toLowerCase()}|${String(name||'').trim().toLowerCase()}`;
-const MENU_SELLING_PRICES=new Map(MENU_PRODUCTS.filter(([, ,price])=>price!==null).map(([category,name,price])=>[itemKey(category,name),price]));
-async function ensureMenuProducts(){
+async function ensureWorkspaceDefaults(){
   const existingCategories=new Set(S.Categories.map(category=>(category.name||'').toLowerCase())),categories=MENU_CATEGORIES.filter(name=>!existingCategories.has(name.toLowerCase()));
   if(categories.length)S.Categories.push(...await run('saveMany','Categories',categories.map(name=>({name}))));
-  const existingItems=new Set(S.Items.map(item=>itemKey(item.category,item.name)));
-  const items=MENU_PRODUCTS.filter(([category,name])=>!existingItems.has(itemKey(category,name))).map(([category,name,price])=>({name,category,price:price??'',cost:MENU_COSTS[itemKey(category,name)]??'',active:true}));
-  if(items.length)S.Items.push(...await run('saveMany','Items',items));
-  const updates=S.Items.flatMap(item=>{
-    const key=itemKey(item.category,item.name),updated={...item};let changed=false;
-    if(MENU_SELLING_PRICES.has(key)&&Number(item.price)!==MENU_SELLING_PRICES.get(key)){updated.price=MENU_SELLING_PRICES.get(key);changed=true}
-    if(!hasCost(item.cost)&&Object.prototype.hasOwnProperty.call(MENU_COSTS,key)){updated.cost=MENU_COSTS[key];changed=true}
-    return changed?[updated]:[];
-  });
-  if(updates.length){const saved=await run('saveMany','Items',updates);saved.forEach(item=>Object.assign(S.Items.find(existing=>existing.id===item.id),item))}
   const currency=S.Settings.find(setting=>setting.key==='currency');if(!currency||currency.value==='$')await setCfg('currency','GH₵ ');
 }
 
@@ -356,13 +310,13 @@ orders(){
   <div class="order-controls"><select aria-label="Status for ${esc(order.customer)}" onchange="setStatus('${order.id}',this.value)">${STATUS.map(status=>`<option ${status===(order.status||'Pending')?'selected':''}>${status}</option>`).join('')}</select><button class="btn ghost sm" onclick="editOrder('${order.id}')">Edit</button><button class="btn ghost sm" onclick="delRow('Orders','${order.id}')">Delete</button></div></div>`).join('')||'<p class="mut">No orders yet.</p>'}</div>`;
 },
 items(){
-  const e=ed||{},image=(e.image||pendingItemImage||'');return `<h1>Products &amp; pricing</h1><p class="mut">Selling prices follow the supplied PDF; typed ingredient/production costs are tracked separately for margins. Your 350g/500g/700g cake costs are provisionally matched to the PDF's 6-inch Short/Medium/Tall cakes—confirm those are equivalent. The Cake in a Bowl cost marked “16?” remains blank until confirmed, and juice selling prices stay unset where the PDF gives none.</p>
+  const e=ed||{},image=(e.image||pendingItemImage||'');return `<h1>Products &amp; pricing</h1><p class="mut">Add your menu items here. Selling price is what customers pay; cost to make is private to the owner workspace and helps track margins. Products are not preloaded.</p>
   <div class="card"><h2>${e.id?'Edit item':'Add item'}</h2><label>Name</label><input id="in" value="${esc(e.name)}"><div class="two"><div><label>Category</label><select id="ic">${S.Categories.map(c=>`<option ${c.name==e.category?'selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
   <div><label>Selling price</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ip" value="${e.price??''}" placeholder="Required before selling"></div></div><label>Cost to make (ingredients, packaging) - optional until known</label><input type="number" min="0" step="0.01" inputmode="decimal" id="ik" value="${e.cost??''}" placeholder="Add later">
   <div class="two" style="margin-top:12px"><div><label>Item photo</label><input type="file" accept="image/*" id="ii" onchange="loadItemImage(this)"><p class="mut">Recommended: 1200 x 900 px (4:3). No exact source size is required; the app resizes the longest edge to 960 px and converts the image to WebP.</p></div><div><label>Preview</label><div id="item-image-preview" style="min-height:76px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:var(--pk);text-align:center;padding:8px;">${image?`<img src="${image}" style="max-width:100%;max-height:100px;border-radius:12px;border:1px solid var(--line);object-fit:cover">`:'<span class="mut">No photo yet</span>'}</div><button class="btn ghost sm" id="remove-item-image" style="width:100%;margin-top:6px" onclick="removeItemImage()" ${image?'':'hidden'}>Remove photo</button></div></div>
   <button class="btn" style="width:100%;margin-top:14px" onclick="saveItem()">${e.id?'Update':'Add'} item</button></div>
   <div class="card">${S.Items.map(i=>`<div class="row item-row"><div style="display:flex;align-items:center;gap:10px"><div style="width:52px;height:52px;display:grid;place-items:center;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--pk)">${i.image?`<img src="${i.image}" style="width:100%;height:100%;object-fit:cover">`:'<span style="font-size:10px;color:var(--mut)">IMG</span>'}</div><div><b style="${i.active===false?'opacity:.4':''}">${esc(i.name)}</b><br><span class="mut ${hasCost(i.price)&&Number(i.price)>0&&hasCost(i.cost)&&Number(i.cost)>Number(i.price)?'negative-margin':''}">${esc(i.category)} · ${hasCost(i.price)?money(i.price):'price not set'} · cost ${hasCost(i.cost)?money(i.cost):'not set'} · margin ${hasCost(i.price)&&Number(i.price)>0&&hasCost(i.cost)?Math.round((i.price-i.cost)/i.price*100)+'%':'—'}</span></div></div>
-  <div class="step item-actions"><button class="btn ghost sm" style="width:auto" onclick="editItem('${i.id}')">Edit</button><button class="btn ghost sm" style="width:auto" onclick="toggleItem('${i.id}')">${i.active===false?'Show':'Hide'}</button><button class="btn ghost sm" style="width:auto" onclick="deleteItem('${i.id}')" aria-label="Delete ${esc(i.name)}">Delete</button></div></div>`).join('')}</div>`;
+  <div class="step item-actions"><button class="btn ghost sm" style="width:auto" onclick="editItem('${i.id}')">Edit</button><button class="btn ghost sm" style="width:auto" onclick="toggleItem('${i.id}')">${i.active===false?'Show':'Hide'}</button><button class="btn ghost sm" style="width:auto" onclick="deleteItem('${i.id}')" aria-label="Delete ${esc(i.name)}">Delete</button></div></div>`).join('')||'<p class="mut">No products yet. Add your first product using the form above.</p>'}</div>`;
 },
 settings(){
   return `<h1>Settings</h1><div class="card"><label>Business name</label><input id="sb" value="${esc(cfg('businessName',''))}"><label>Owner's name (for the welcome)</label><input id="so" value="${esc(cfg('ownerName',''))}"><label>Currency symbol</label><input id="sc" value="${esc(cfg('currency','GH₵ '))}">
@@ -443,7 +397,7 @@ function start(){
   if(!sessionStorage.getItem('bakerySession')){window.location.replace('./login.html');return}
   if(API.includes('PASTE_')){$('#app').innerHTML='<p style="padding:24px">Add the Apps Script /exec URL before opening the owner workspace.</p>';return}
   $('#app').innerHTML='<main style="padding:32px"><p class="mut">Opening your bakery workspace…</p></main>';
-  run('getAll').then(async d=>{S={...S,...d};if(!d._meta)delete S._meta;expensesReady=Array.isArray(d.Expenses);ordersFinanceReady=d._meta?.orderFinance===true;S.Expenses=S.Expenses||[];await ensureMenuProducts();render();startOrderUpdates()}).catch(error=>{const message=error.message==='PIN_SETUP_REQUIRED'||error.message==='PIN_REQUIRED'?'The live Apps Script still uses PIN access. Replace its Code.gs with the updated file, deploy a new version, and sign in again.':error.message==='OWNER_SETUP_REQUIRED'?'Owner login is not configured. Open the Apps Script editor, run initializeOwnerAccount once, then sign in again.':'Could not open the owner workspace: '+error.message;$('#app').innerHTML=`<main style="padding:32px"><section class="card"><h1>Workspace unavailable</h1><p class="mut">${esc(message)}</p><button class="btn" onclick="start()">Try again</button> <a class="btn ghost" href="./login.html">Return to sign in</a></section></main>`})}
+  run('getAll').then(async d=>{S={...S,...d};if(!d._meta)delete S._meta;expensesReady=Array.isArray(d.Expenses);ordersFinanceReady=d._meta?.orderFinance===true;S.Expenses=S.Expenses||[];await ensureWorkspaceDefaults();render();startOrderUpdates()}).catch(error=>{const message=error.message==='PIN_SETUP_REQUIRED'||error.message==='PIN_REQUIRED'?'The live Apps Script still uses PIN access. Replace its Code.gs with the updated file, deploy a new version, and sign in again.':error.message==='OWNER_SETUP_REQUIRED'?'Owner login is not configured. Open the Apps Script editor, run initializeOwnerAccount once, then sign in again.':'Could not open the owner workspace: '+error.message;$('#app').innerHTML=`<main style="padding:32px"><section class="card"><h1>Workspace unavailable</h1><p class="mut">${esc(message)}</p><button class="btn" onclick="start()">Try again</button> <a class="btn ghost" href="./login.html">Return to sign in</a></section></main>`})}
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 start();
 </script></body></html>
