@@ -219,6 +219,32 @@
     .product-photo{aspect-ratio:4/3;background:#efe8d9}
     .product-category{letter-spacing:.04em;text-transform:uppercase;font-size:10px;font-weight:700}
     .product-price{font-size:15px}
+    .product-view-link{position:relative;display:flex;min-width:0;flex:1;flex-direction:column;color:inherit;text-decoration:none;cursor:zoom-in}
+    .product-view-link:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+    .product-view-hint{position:absolute;top:12px;right:12px;padding:6px 9px;border-radius:999px;background:rgba(255,253,248,.94);color:var(--cocoa);font-size:11px;font-weight:700}
+    .product .product-add{width:calc(100% - 32px);margin:0 16px 16px}
+    .product-dialog{width:min(920px,calc(100vw - 28px));max-height:calc(100dvh - 28px);padding:0;overflow:auto;border:1px solid var(--border);border-radius:20px;background:var(--card);color:var(--text);box-shadow:0 24px 80px rgba(0,0,0,.3)}
+    .product-dialog::backdrop{background:rgba(28,24,20,.72);backdrop-filter:blur(3px)}
+    .product-dialog-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr);gap:24px;padding:24px}
+    .product-gallery{min-width:0}
+    .product-gallery-stage{position:relative;display:grid;place-items:center;min-height:min(60vh,520px);overflow:hidden;border-radius:14px;background:var(--blush)}
+    .product-gallery-stage>img{display:block;width:100%;height:min(60vh,520px);object-fit:contain}
+    .product-gallery-empty{padding:30px;color:var(--muted);text-align:center}
+    .product-gallery-arrow{position:absolute;top:50%;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:rgba(255,253,248,.94);color:var(--cocoa);font-size:25px;line-height:1;transform:translateY(-50%)}
+    .product-gallery-arrow:disabled{opacity:.5}
+    .product-gallery-prev{left:12px}
+    .product-gallery-next{right:12px}
+    .product-gallery-thumbs{display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding:2px 0}
+    .product-gallery-thumb{flex:0 0 64px;width:64px;height:64px;padding:0;overflow:hidden;border:2px solid transparent;border-radius:9px;background:var(--blush)}
+    .product-gallery-thumb[aria-pressed=true]{border-color:var(--rose)}
+    .product-gallery-thumb img{width:100%;height:100%;object-fit:cover}
+    .product-detail-copy{position:relative;align-self:center;padding:34px 8px 20px 0}
+    .product-dialog-close{position:absolute;top:0;right:0;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:var(--card);color:var(--text);font-size:26px}
+    .product-detail-copy h2{margin:8px 0 12px;font-size:clamp(1.7rem,3vw,2.4rem)}
+    .product-detail-price{margin:0 0 12px;color:var(--rose);font-weight:700}
+    .product-gallery-count{margin:12px 0;color:var(--muted);font-size:13px}
+    .product-dialog-add{width:100%;margin-top:8px}
+    @media(max-width:700px){.product .product-add{width:calc(100% - 24px);margin:0 12px 12px}.product-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px);border-radius:16px}.product-dialog-layout{grid-template-columns:1fr;gap:12px;padding:12px}.product-gallery-stage{min-height:min(48vh,390px)}.product-gallery-stage>img{height:min(48vh,390px)}.product-detail-copy{padding:10px 4px 4px}.product-dialog-close{top:8px;right:8px;z-index:1}.product-detail-copy h2{padding-right:48px}}
     .category-tile{border-radius:12px;box-shadow:none;background:var(--cocoa)}
     .category-tile:after{position:absolute;inset:30% 0 0;z-index:-1;background:linear-gradient(transparent,rgba(0,0,0,.62));content:""}
     .category-tile span{background:transparent}
@@ -401,16 +427,36 @@
       <div class="footer-meta">Tasty Base · Baked to order</div>
     </div>
   </footer>
+  <dialog class="product-dialog" id="product-dialog" aria-labelledby="product-dialog-title">
+    <div class="product-dialog-layout">
+      <div class="product-gallery">
+        <div class="product-gallery-stage" id="product-gallery-stage">
+          <button class="product-gallery-arrow product-gallery-prev" id="product-gallery-prev" type="button" aria-label="Previous photo">‹</button>
+          <button class="product-gallery-arrow product-gallery-next" id="product-gallery-next" type="button" aria-label="Next photo">›</button>
+        </div>
+        <div class="product-gallery-thumbs" id="product-gallery-thumbs" role="group" aria-label="Product photos"></div>
+      </div>
+      <section class="product-detail-copy" aria-label="Product details">
+        <button class="product-dialog-close" id="product-dialog-close" type="button" aria-label="Close product details">×</button>
+        <p class="product-category" id="product-dialog-category"></p>
+        <h2 id="product-dialog-title"></h2>
+        <p class="product-detail-price" id="product-dialog-price"></p>
+        <p class="product-gallery-count" id="product-gallery-count" aria-live="polite"></p>
+        <button class="btn product-dialog-add" id="product-dialog-add" type="button"></button>
+      </section>
+    </div>
+  </dialog>
   <button class="basket-fab" type="button" aria-controls="cart-panel" aria-expanded="false" onclick="toggleCart()"><span>Catering basket</span><span class="basket-count" id="basket-fab-count">0</span></button>
   <a class="whatsapp-fab" id="whatsapp-fab" href="https://wa.me/233249567102" target="_blank" rel="noopener noreferrer" aria-label="Chat with Tasty Base on WhatsApp" title="Chat on WhatsApp">
     <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.02 3.2a12.68 12.68 0 0 0-10.9 19.17L3.5 28.8l6.58-1.72A12.68 12.68 0 1 0 16.02 3.2Zm0 22.97c-1.99 0-3.94-.53-5.65-1.54l-.4-.24-3.9 1.02 1.04-3.8-.26-.4a10.33 10.33 0 1 1 9.17 4.96Zm5.67-7.75c-.31-.16-1.84-.91-2.13-1.01-.29-.1-.5-.16-.71.16-.21.31-.82 1.01-1.01 1.22-.18.21-.37.23-.68.08-.31-.16-1.31-.48-2.5-1.52-.92-.82-1.54-1.84-1.72-2.15-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.71-.97-2.34-.26-.61-.52-.53-.71-.54h-.61c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.62s1.13 3.04 1.29 3.25c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.51 1.8.65.76.24 1.45.2 1.99.12.61-.09 1.84-.75 2.1-1.48.26-.73.26-1.36.18-1.49-.08-.13-.29-.21-.6-.37Z"/></svg>
     <span class="whatsapp-fab-label">Chat on WhatsApp</span>
   </a>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbzlFYFbOvS8inLQfzR0RJrmI0THuFqtSEJH8vKEz_i6c-erPNjRcu6K8mZ6SlYTuIylfw/exec';
+    const API='https://script.google.com/macros/s/AKfycbxiKDtqHcQsSDc5jCw04OJviy2gFQAUnYpBBag6M2tPzVjglSlHU4-8uKpPbX0HfTC43w/exec';
     const $=selector=>document.querySelector(selector);
     const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
+    const safeProductPhotos=photos=>Array.isArray(photos)?photos.map(safeImage).filter((image,index,all)=>image&&all.indexOf(image)===index).slice(0,5):[];
     const mainPhotos={
       cake:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=960&q=82',
       cupcake:'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=960&q=82',
@@ -419,7 +465,7 @@
     };
     const DEFAULT_INSTAGRAM_URL='https://www.instagram.com/tasty_base/';
     const DEFAULT_TIKTOK_URL='https://vm.tiktok.com/ZS9fvnMVD5RvE-58FDS/';
-    let store={businessName:'Tasty Base',currency:'GH₵ ',phone:'0201814174',whatsapp:'0249567102',location:'Adenta',instagram:DEFAULT_INSTAGRAM_URL,instagramName:'Tasty Base',tiktok:DEFAULT_TIKTOK_URL,categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false,productSearch='';
+    let store={businessName:'Tasty Base',currency:'GH₵ ',phone:'0201814174',whatsapp:'0249567102',location:'Adenta',instagram:DEFAULT_INSTAGRAM_URL,instagramName:'Tasty Base',tiktok:DEFAULT_TIKTOK_URL,productGallery:false,categories:[],items:[]},selectedCategory='All',cart={},catalogExpanded=false,productSearch='',currentProduct=null,currentProductPhotos=[],productPhotoIndex=0,productPhotosCache=new Map();
     const money=value=>store.currency+Number(value||0).toLocaleString(undefined,{maximumFractionDigits:2});
     function whatsappNumber(){
       const digits=String(store.whatsapp||'').replace(/\D/g,'');
@@ -432,7 +478,7 @@
       if(!response.ok)throw new Error('The shop is temporarily unavailable. Please try again later.');
       let result;
       try{result=await response.json()}catch(error){throw new Error('The shop could not read the server response. Please try again later.')}
-      if(!result.ok)throw new Error(result.error==='Unknown action'?'The live Apps Script is out of date. Deploy the workspace Code.gs to connect the customer shop.':result.error||'The request could not be completed.');
+      if(!result.ok)throw new Error(result.error==='Unknown action'?'The live Apps Script is out of date. Deploy the updated Code.gs to enable product galleries.':result.error||'The request could not be completed.');
       return result.data;
     }
     function setSidebar(open){
@@ -457,9 +503,30 @@
       if(button)setCategory(button.dataset.category);
     });
     $('#catalog').addEventListener('click',event=>{
+      const addButton=event.target.closest('button[data-add-item]');
+      if(addButton){changeQuantity(addButton.dataset.addItem,1);return}
+      const productLink=event.target.closest('a[data-product-id]');
+      if(productLink){event.preventDefault();openProductViewer(productLink.dataset.productId);return}
       const button=event.target.closest('button[data-category]');
       if(button)setCategory(button.dataset.category);
     });
+    $('#product-dialog-close').addEventListener('click',()=>$('#product-dialog').close());
+    $('#product-gallery-prev').addEventListener('click',()=>changeProductPhoto(-1));
+    $('#product-gallery-next').addEventListener('click',()=>changeProductPhoto(1));
+    $('#product-gallery-thumbs').addEventListener('click',event=>{
+      const button=event.target.closest('button[data-photo-index]');
+      if(button){productPhotoIndex=Number(button.dataset.photoIndex);renderProductViewer()}
+    });
+    $('#product-dialog-add').addEventListener('click',()=>{
+      if(!currentProduct)return;
+      const id=currentProduct.id;$('#product-dialog').close();changeQuantity(id,1);
+    });
+    $('#product-dialog').addEventListener('click',event=>{if(event.target===event.currentTarget)event.currentTarget.close()});
+    $('#product-dialog').addEventListener('keydown',event=>{
+      if(event.key==='ArrowLeft')changeProductPhoto(-1);
+      if(event.key==='ArrowRight')changeProductPhoto(1);
+    });
+    $('#product-dialog').addEventListener('close',()=>{currentProduct=null;productPhotoIndex=0});
     $('#shop-sidebar').querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',()=>setSidebar(false)));
     document.addEventListener('keydown',event=>{if(event.key==='Escape'&&$('#shop-sidebar').classList.contains('open'))setSidebar(false)});
     function categoryFor(key){
@@ -544,9 +611,9 @@
       const items=store.items.filter(item=>(selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory)&&(!query||`${item.name} ${item.category}`.toLowerCase().includes(query)));
       const visibleItems=selectedCategory==='All'&&!catalogExpanded&&!query?items.slice(0,8):items;
       const productCard=item=>{
-        const image=safeImage(item.image),priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
+        const image=safeImage(item.image),photoCount=Math.max(Number(item.photoCount)||0,image?1:0),photoHint=photoCount?`View ${photoCount} ${photoCount===1?'photo':'photos'}`:'View details',priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
         const photo=image?`<img class="product-photo" src="${esc(image)}" alt="" width="640" height="480" loading="lazy">`:'<div class="photo-placeholder" aria-hidden="true"></div>';
-        return `<article class="product">${photo}<div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p><button class="btn small" type="button" onclick="changeQuantity('${esc(item.id)}',1)">${priced?'Add to basket':'Request a quote'}</button></div></article>`;
+        return `<article class="product"><a class="product-view-link" href="#product-dialog" data-product-id="${esc(item.id)}" aria-label="View photos and details for ${esc(item.name)}">${photo}<span class="product-view-hint">${photoHint}</span><div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p></div></a><button class="btn small product-add" type="button" data-add-item="${esc(item.id)}">${priced?'Add to basket':'Request a quote'}</button></article>`;
       };
       const heading=selectedCategory==='All'?'All treats':selectedCategory;
       const moreButton=selectedCategory==='All'&&!query&&items.length>8?`<div class="view-more-wrap"><button class="btn outline view-more" type="button" aria-expanded="${catalogExpanded}" onclick="toggleCatalogExpanded()">${catalogExpanded?'Show less':'View more'}</button></div>`:'';
@@ -560,6 +627,47 @@
       $('#menu-section').scrollIntoView({behavior:'smooth',block:'start'});
     }
     function toggleCatalogExpanded(){catalogExpanded=!catalogExpanded;renderCatalog()}
+    async function openProductViewer(id){
+      currentProduct=store.items.find(item=>String(item.id)===String(id));
+      if(!currentProduct)return;
+      productPhotoIndex=0;currentProductPhotos=safeProductPhotos(productPhotosCache.get(id)||[currentProduct.image]);
+      renderProductViewer();
+      const dialog=$('#product-dialog');if(!dialog.open)dialog.showModal();
+      $('#product-dialog-close').focus();
+      const expectedProduct=currentProduct,expectedCount=Number(currentProduct.photoCount)||0;
+      if(store.productGallery!==true){$('#product-gallery-count').textContent='Deploy the updated Apps Script to enable product galleries.';return}
+      if(!productPhotosCache.has(id)&&expectedCount>currentProductPhotos.length){
+        $('#product-gallery-count').textContent='Loading photos…';
+        try{
+          const photos=safeProductPhotos(await api('getProductPhotos',id));
+          if(currentProduct!==expectedProduct||!dialog.open)return;
+          currentProductPhotos=photos;
+          productPhotosCache.set(id,photos);
+          productPhotoIndex=0;renderProductViewer();
+        }catch(error){
+          if(currentProduct===expectedProduct&&dialog.open)$('#product-gallery-count').textContent=error.message==='The live Apps Script is out of date. Deploy the updated Code.gs to enable product galleries.'?'Deploy the updated Apps Script to view all product photos.':'Could not load product photos. Please try again.';
+        }
+      }
+    }
+    function renderProductViewer(){
+      if(!currentProduct)return;
+      const photos=currentProductPhotos,priced=currentProduct.price!==''&&Number.isFinite(Number(currentProduct.price))&&Number(currentProduct.price)>0,totalPhotos=Math.max(Number(currentProduct.photoCount)||0,photos.length),stage=$('#product-gallery-stage');
+      $('#product-dialog-category').textContent=currentProduct.category||'';
+      $('#product-dialog-title').textContent=currentProduct.name||'';
+      $('#product-dialog-price').textContent=priced?money(currentProduct.price):'Ask us for a price';
+      $('#product-gallery-count').textContent=photos.length?`${productPhotoIndex+1} of ${totalPhotos} ${totalPhotos===1?'photo':'photos'}${totalPhotos>photos.length?' · loading more…':''}`:'No photos added yet';
+      stage.querySelectorAll('img,.product-gallery-empty').forEach(node=>node.remove());
+      stage.insertAdjacentHTML('afterbegin',photos.length?`<img src="${esc(photos[productPhotoIndex])}" alt="${esc(currentProduct.name)} photo ${productPhotoIndex+1}" width="960" height="960">`:'<div class="product-gallery-empty">Photos will be added soon.</div>');
+      $('#product-gallery-prev').hidden=photos.length<2;
+      $('#product-gallery-next').hidden=photos.length<2;
+      $('#product-gallery-thumbs').hidden=photos.length<2;
+      $('#product-gallery-thumbs').innerHTML=photos.map((image,index)=>`<button class="product-gallery-thumb" type="button" data-photo-index="${index}" aria-label="Show photo ${index+1}" aria-pressed="${index===productPhotoIndex}"><img src="${esc(image)}" alt="" width="64" height="64" loading="lazy"></button>`).join('');
+      $('#product-dialog-add').textContent=priced?'Add to basket':'Request a quote';
+    }
+    function changeProductPhoto(offset){
+      const photos=currentProductPhotos;if(photos.length<2)return;
+      productPhotoIndex=(productPhotoIndex+offset+photos.length)%photos.length;renderProductViewer();
+    }
     document.querySelectorAll('.category-tile').forEach(tile=>tile.addEventListener('click',()=>{
       const category=categoryFor(tile.dataset.category);
       if(category!=='All'){setCategory(category)}

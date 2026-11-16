@@ -2,7 +2,7 @@
 const SHEETS = {
   Settings: ['id', 'key', 'value'],
   Categories: ['id', 'name'],
-  Items: ['id', 'name', 'category', 'price', 'cost', 'active', 'image'],
+  Items: ['id', 'name', 'category', 'price', 'cost', 'active', 'image', 'image2', 'image3', 'image4', 'image5'],
   Sales: ['id', 'date', 'itemId', 'name', 'category', 'qty', 'price', 'cost', 'customer', 'discount', 'receipt'],
   Expenses: ['id', 'date', 'category', 'description', 'amount'],
   Orders: ['id', 'created', 'customer', 'phone', 'details', 'pickup', 'total', 'deposit', 'status', 'cost', 'revenueDate']
@@ -28,13 +28,13 @@ function doPost(e) {
   let out;
   try {
     const request = JSON.parse(e.postData.contents || '{}');
-    const publicActions = { getPublicStore, submitPublicOrder, loginOwner };
+    const publicActions = { getPublicStore, getProductPhotos, submitPublicOrder, loginOwner };
     if (Object.prototype.hasOwnProperty.call(publicActions, request.fn)) {
       out = { ok: true, data: publicActions[request.fn](...(request.args || [])) };
       return ContentService.createTextOutput(JSON.stringify(out))
         .setMimeType(ContentService.MimeType.JSON);
     }
-    const actions = { getAll, getOrders, save, saveMany, remove, changeOwnerCredentials, logoutOwner };
+    const actions = { getAll, getItemPhotos, getOrders, save, saveMany, remove, changeOwnerCredentials, logoutOwner };
     if (!Object.prototype.hasOwnProperty.call(actions, request.fn)) throw new Error('Unknown action');
     if (request.fn === 'logoutOwner') {
       out = { ok: true, data: logoutOwner(request.token || '') };
@@ -91,7 +91,7 @@ function seed_() {
 
 function getAll() {
   const timezone = Session.getScriptTimeZone();
-  const output = { _meta: { orderFinance: true } };
+  const output = { _meta: { orderFinance: true, productGallery: true } };
   Object.keys(SHEETS).forEach(name => {
     const sheet = sheet_(name), headers = SHEETS[name];
     if (name === 'Settings') seed_();
@@ -102,6 +102,13 @@ function getAll() {
         header,
         row[index] instanceof Date ? Utilities.formatDate(row[index], timezone, 'yyyy-MM-dd') : row[index]
       ])));
+    if (name === 'Items') {
+      output[name] = output[name].map(item => {
+        const photos = itemPhotos_(item);
+        const { image2, image3, image4, image5, ...visibleItem } = item;
+        return { ...visibleItem, image: photos[0] || '', photoCount: photos.length };
+      });
+    }
   });
   return output;
 }
@@ -151,7 +158,8 @@ function getPublicStore() {
         name: item.name,
         category: item.category || 'Other',
         price: item.price === '' || item.price === null || !Number.isFinite(price) || price <= 0 ? '' : price,
-        image: item.image || ''
+        image: item.image || '',
+        photoCount: itemPhotos_(item).length
       };
     });
   const categories = [...new Set(items.map(item => item.category))];
@@ -166,9 +174,32 @@ function getPublicStore() {
     instagramName: setting('instagramName') || DEFAULT_SETTINGS_.instagramName,
     tiktok: setting('tiktok') || DEFAULT_SETTINGS_.tiktok,
     reviews: setting('reviews') || '',
+    productGallery: true,
     categories,
     items
   };
+}
+
+function getProductPhotos(id) {
+  const item = sheetRecords_('Items').find(candidate =>
+    String(candidate.id) === String(id) &&
+    candidate.active !== false &&
+    String(candidate.active).toLowerCase() !== 'false' &&
+    String(candidate.category || '').toLowerCase() !== 'add-ons'
+  );
+  if (!item) throw new Error('Product not found');
+  return itemPhotos_(item);
+}
+
+function getItemPhotos(id) {
+  const item = sheetRecords_('Items').find(candidate => String(candidate.id) === String(id));
+  if (!item) throw new Error('Item not found');
+  return itemPhotos_(item);
+}
+
+function itemPhotos_(item) {
+  return [item.image, item.image2, item.image3, item.image4, item.image5]
+    .filter(photo => typeof photo === 'string' && photo);
 }
 
 function submitPublicOrder(payload) {
@@ -280,8 +311,13 @@ function put_(name, record) {
     if (lastRow > 1) {
       const index = sheet.getRange(2, 1, lastRow - 1, 1).getValues().flat().indexOf(record.id);
       if (index > -1) {
-        sheet.getRange(index + 2, 1, 1, headers.length).setValues([headers.map(header => record[header] ?? '')]);
-        return record;
+        const row = index + 2;
+        const values = sheet.getRange(row, 1, 1, headers.length).getValues()[0];
+        const savedRecord = name === 'Items'
+          ? { ...Object.fromEntries(headers.map((header, column) => [header, values[column]])), ...record }
+          : record;
+        sheet.getRange(row, 1, 1, headers.length).setValues([headers.map(header => savedRecord[header] ?? '')]);
+        return savedRecord;
       }
     }
   }
