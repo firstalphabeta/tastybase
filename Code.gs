@@ -129,6 +129,64 @@ function clearProductsForManualSetup() {
   });
 }
 
+function missingPriceValue_(value) {
+  if (value === '' || value === null || value === undefined) return true;
+  const number = Number(value);
+  return !Number.isFinite(number) || number <= 0;
+}
+
+function csvCell_(value) {
+  let text = value === null || value === undefined ? '' : String(value);
+  if (/^[=+\-@]/.test(text)) text = "'" + text;
+  return '"' + text.replace(/"/g, '""') + '"';
+}
+
+/**
+ * Creates a CSV in Google Drive containing Items rows with no valid cost price,
+ * selling price, or both. Run this manually from the Apps Script editor.
+ * This report is intentionally not exposed through the website or API.
+ */
+function createMissingPricesReport() {
+  return locked_(() => {
+    const missing = sheetRecords_('Items').filter(item =>
+      missingPriceValue_(item.cost) || missingPriceValue_(item.price)
+    ).map(item => ({
+      id: item.id,
+      name: item.name,
+      category: item.category,
+      cost: item.cost,
+      sellingPrice: item.price,
+      missingCost: missingPriceValue_(item.cost) ? 'Yes' : 'No',
+      missingSellingPrice: missingPriceValue_(item.price) ? 'Yes' : 'No',
+      active: item.active
+    }));
+
+    const headers = ['ID', 'Item Name', 'Category', 'Cost Price', 'Selling Price',
+      'Missing Cost Price', 'Missing Selling Price', 'Active'];
+    const rows = missing.map(item => [
+      item.id,
+      item.name,
+      item.category,
+      item.cost,
+      item.sellingPrice,
+      item.missingCost,
+      item.missingSellingPrice,
+      item.active
+    ]);
+    const csv = [headers, ...rows].map(row => row.map(csvCell_).join(',')).join('\r\n');
+    const date = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    const file = DriveApp.createFile(
+      'Missing Cost or Selling Prices - ' + date + '.csv',
+      csv,
+      MimeType.CSV
+    );
+
+    Logger.log('Created %s with %s item(s). URL: %s',
+      file.getName(), missing.length, file.getUrl());
+    return { fileName: file.getName(), fileUrl: file.getUrl(), itemCount: missing.length };
+  });
+}
+
 function sheetRecords_(name) {
   const sheet = sheet_(name), headers = SHEETS[name], lastRow = sheet.getLastRow();
   if (lastRow < 2) return [];

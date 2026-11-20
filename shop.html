@@ -452,10 +452,12 @@
     <span class="whatsapp-fab-label">Chat on WhatsApp</span>
   </a>
   <script>
-    const API='https://script.google.com/macros/s/AKfycbxiKDtqHcQsSDc5jCw04OJviy2gFQAUnYpBBag6M2tPzVjglSlHU4-8uKpPbX0HfTC43w/exec';
+    const API='https://script.google.com/macros/s/AKfycbzTdTWgmX51AendUu1zcehdkaaTqQOuFiWIChKQ-ZPe8b9FkPjAX6SiKXXBey2PJO1p/exec';
     const $=selector=>document.querySelector(selector);
     const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-    const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')?image:'';
+    const PRODUCT_IMAGE_FALLBACKS={};
+    const safeImage=image=>/^data:image\/(?:png|jpeg|webp|gif);base64,/i.test(image||'')||/^https:\/\//i.test(image||'')||Object.values(PRODUCT_IMAGE_FALLBACKS).includes(image)?image:'';
+    const productImage=item=>safeImage(item.image)||PRODUCT_IMAGE_FALLBACKS[String(item.id)]||'';
     const safeProductPhotos=photos=>Array.isArray(photos)?photos.map(safeImage).filter((image,index,all)=>image&&all.indexOf(image)===index).slice(0,5):[];
     const mainPhotos={
       cake:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=960&q=82',
@@ -611,7 +613,7 @@
       const items=store.items.filter(item=>(selectedCategory==='All'?item.category.toLowerCase()!=='add-ons':item.category===selectedCategory)&&(!query||`${item.name} ${item.category}`.toLowerCase().includes(query)));
       const visibleItems=selectedCategory==='All'&&!catalogExpanded&&!query?items.slice(0,8):items;
       const productCard=item=>{
-        const image=safeImage(item.image),photoCount=Math.max(Number(item.photoCount)||0,image?1:0),photoHint=photoCount?`View ${photoCount} ${photoCount===1?'photo':'photos'}`:'View details',priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
+        const image=productImage(item),photoCount=Math.max(Number(item.photoCount)||0,image?1:0),photoHint=photoCount?`View ${photoCount} ${photoCount===1?'photo':'photos'}`:'View details',priced=item.price!==''&&Number.isFinite(Number(item.price))&&Number(item.price)>0;
         const photo=image?`<img class="product-photo" src="${esc(image)}" alt="" width="640" height="480" loading="lazy">`:'<div class="photo-placeholder" aria-hidden="true"></div>';
         return `<article class="product"><a class="product-view-link" href="#product-dialog" data-product-id="${esc(item.id)}" aria-label="View photos and details for ${esc(item.name)}">${photo}<span class="product-view-hint">${photoHint}</span><div class="product-body"><p class="product-category">${esc(item.category)}</p><h3>${esc(item.name)}</h3><p class="product-price">${priced?money(item.price):'Ask us for a price'}</p></div></a><button class="btn small product-add" type="button" data-add-item="${esc(item.id)}">${priced?'Add to basket':'Request a quote'}</button></article>`;
       };
@@ -630,7 +632,7 @@
     async function openProductViewer(id){
       currentProduct=store.items.find(item=>String(item.id)===String(id));
       if(!currentProduct)return;
-      productPhotoIndex=0;currentProductPhotos=safeProductPhotos(productPhotosCache.get(id)||[currentProduct.image]);
+      productPhotoIndex=0;      currentProductPhotos=safeProductPhotos(productPhotosCache.get(id)||[productImage(currentProduct)]);
       renderProductViewer();
       const dialog=$('#product-dialog');if(!dialog.open)dialog.showModal();
       $('#product-dialog-close').focus();
